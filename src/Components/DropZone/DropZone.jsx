@@ -1,8 +1,10 @@
 //Modules
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useContext } from "react";
 import { useDropzone } from "react-dropzone";
 //CSS
 import "./dropzone.css";
+//Context
+import { imageContext } from "../../Context/imageContext";
 
 const baseStyle = {
 	display: "flex",
@@ -30,10 +32,15 @@ const rejectStyle = {
 	borderColor: "#ff1744",
 };
 
-export default function DropZone() {
-	const onDrop = useCallback((acceptedFiles, fileRejections) => {
-		console.log("Accepted files:", acceptedFiles);
-		console.log("Rejected files:", fileRejections);
+function DropZone() {
+    const { setValidImages } = useContext(imageContext)
+
+
+    //Pass the uploaded images to the wrapper component state
+	const onDrop = useCallback((acceptedFiles) => {
+        acceptedFiles.forEach((file) => {
+            setValidImages((prevState) => [...prevState, file]);
+        })
 	});
 
 	const {
@@ -51,6 +58,7 @@ export default function DropZone() {
 		},
 	});
 
+    //Varible to store the styles
 	const style = useMemo(
 		() => ({
 			...baseStyle,
@@ -60,8 +68,6 @@ export default function DropZone() {
 		}),
 		[isDragActive, isDragReject, isDragAccept],
 	);
-    console.log(acceptedFiles);
-    console.log(fileRejections);
 
 	return (
 		<section>
@@ -77,6 +83,7 @@ export default function DropZone() {
 				)}
 			</div>
 
+            {/* Baisc feedback about the loaded files */}
 			<aside>
 				<h4>Files:</h4>
 				<ul>
@@ -92,3 +99,5 @@ export default function DropZone() {
 		</section>
 	);
 }
+
+export default DropZone;
