@@ -2,14 +2,14 @@
 import React from "react";
 //Components
 import DropZone from "../DropZone/DropZone";
+//Css
+import "./homepage.css"
 
 export default function HomePage () {
     return (
-        <>
-            <h1>Hello from the HomePage Component</h1>
+        <div className="container">
             <DropZone />
-        </>
+        </div>
     )
 }
 
-// https://www.digitalocean.com/community/tutorials/react-react-dropzone

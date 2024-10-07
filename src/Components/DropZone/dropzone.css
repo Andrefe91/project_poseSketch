@@ -1,0 +1,30 @@
+.baseStyle {
+    display: 'flex';
+    flex-direction: 'column';
+    align-items: 'center';
+    padding: '20px';
+    border-width: 2;
+    border-radius: 2;
+    border-color: '#eeeeee';
+    border-style: 'dashed';
+    background-color: '#fafafa';
+    color: '#bdbdbd';
+    transition: 'border .3s ease-in-out'
+}
+
+.activeStyle {
+    border-color: #2196f3;
+}
+
+.acceptStyle {
+    border-color: #00e676;
+}
+
+.rejectStyle {
+    border-color: #ff1744;
+}
+
+.test {
+    width: 25rem;
+    height: 10rem;
+}

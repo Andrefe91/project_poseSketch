@@ -1,20 +1,94 @@
 //Modules
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 //CSS
-import "./dropzone.css"
+import "./dropzone.css";
+
+const baseStyle = {
+	display: "flex",
+	flexDirection: "column",
+	alignItems: "center",
+	padding: "20px",
+	borderWidth: 2,
+	borderRadius: 2,
+	borderColor: "#eeeeee",
+	borderStyle: "dashed",
+	// backgroundColor: "#fafafa",
+	color: "#bdbdbd",
+	transition: "border .3s ease-in-out",
+};
+
+const activeStyle = {
+	borderColor: "#2196f3",
+};
+
+const acceptStyle = {
+	borderColor: "#00e676",
+};
+
+const rejectStyle = {
+	borderColor: "#ff1744",
+};
 
 export default function DropZone() {
-    const onDrop = useCallback(acceptedFiles => {
-        console.log("Received files:", acceptedFiles);
-    }, [])
+	const onDrop = useCallback((acceptedFiles, fileRejections) => {
+		console.log("Accepted files:", acceptedFiles);
+		console.log("Rejected files:", fileRejections);
+	});
 
-    const { getRootProps, getInputProps } = useDropzone({onDrop})
+	const {
+		getRootProps,
+		getInputProps,
+		isDragActive,
+		isDragAccept,
+		isDragReject,
+		acceptedFiles,
+		fileRejections,
+	} = useDropzone({
+		onDrop,
+		accept: {
+			"image/*": [".jpeg", ".png"],
+		},
+	});
 
-    return (
-        <div {...getRootProps()}>
-            <input {...getInputProps()} />
-            <div>Drag and drop images here</div>
-        </div>
-    )
+	const style = useMemo(
+		() => ({
+			...baseStyle,
+			...(isDragActive ? activeStyle : {}),
+			...(isDragAccept ? acceptStyle : {}),
+			...(isDragReject ? rejectStyle : {}),
+		}),
+		[isDragActive, isDragReject, isDragAccept],
+	);
+    console.log(acceptedFiles);
+    console.log(fileRejections);
+
+	return (
+		<section>
+			<div {...getRootProps({ style })} className="test">
+				<input {...getInputProps()} />
+			</div>
+
+			<div>
+				{isDragAccept && <p>All files are valid</p>}
+				{isDragReject && <p>Some files are not images (.png or .jpg)</p>}
+				{!isDragActive && (
+					<p>Drag and drop images here or click to select files</p>
+				)}
+			</div>
+
+			<aside>
+				<h4>Files:</h4>
+				<ul>
+                    {acceptedFiles.length > 0 && (
+                        <li>{acceptedFiles.length} images are loaded and valid</li>
+                    )}
+
+                    {fileRejections.length > 0 && (
+                        <li>{fileRejections.length} files are not valid (only PNG and JPG are allowed)</li>
+                    )}
+                </ul>
+			</aside>
+		</section>
+	);
 }
