@@ -1,6 +1,7 @@
 //Modules
 import React, {useContext, useEffect} from "react";
 import { useNavigate, Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 //Components
 import CollectionItem from "../CollectionItem/CollectionItem";
 //CSS
@@ -27,9 +28,11 @@ function Collection() {
 
     return (
         <>
-            <Link to={"/"} className="main-links">
-                <ArrowBackIcon /> Go Back
-            </Link>
+            <Button >
+                <Link to={"/"} className="main-links">
+                    <ArrowBackIcon /> Go Back
+                </Link>
+            </Button>
 
             <div className="collection-container">
                 {imageGrid}

@@ -1,5 +1,5 @@
 .collection-item {
-	border: 2px solid var(--secondary);
+	border: 2px solid;
 	padding: 0.5rem;
 	border-radius: 0.5rem;
     position: relative;
@@ -36,4 +36,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+
 }
