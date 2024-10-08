@@ -27,17 +27,19 @@ function Collection() {
     ))
 
     return (
-        <>
-            <Button >
-                <Link to={"/"} className="main-links">
-                    <ArrowBackIcon /> Go Back
-                </Link>
-            </Button>
+        <div className="page-container">
+            <div>
+                <Button startIcon={<ArrowBackIcon />}>
+                    <Link to={"/"} className="main-links">
+                        Go Back
+                    </Link>
+                </Button>
 
-            <div className="collection-container">
-                {imageGrid}
+                <div className="collection-container">
+                    {imageGrid}
+                </div>
             </div>
-        </>
+        </div>
     )
 }
 
