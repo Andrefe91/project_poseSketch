@@ -29,3 +29,10 @@ the following features:
 - [ ] Make a randomizating algorithm for image selection.
 - [ ] Show each of the loaded images in the list with a timer.
 - [ ] System for pause, stop and resume of the practice.
+
+### Information:
+
+- [ ] Add the information about the app
+    - [ ] About
+    - [ ] FAQ
+    - [ ] Changelog
