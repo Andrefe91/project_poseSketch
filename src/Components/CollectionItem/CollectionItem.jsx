@@ -8,8 +8,8 @@ import "./collectionitem.css"
 function CollectionItem({imageFile, number}) {
     let imageName = imageFile.name.split(".")[0][0].toUpperCase() + imageFile.name.toLowerCase().split(".")[0].slice(1);
 
-    if (imageName.length > 15) {
-        imageName = imageName.slice(0, 15).trim() + "...";  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add
+    if (imageName.length > 12) {
+        imageName = imageName.slice(0, 12).trim() + "...";  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add
     }
 
 
