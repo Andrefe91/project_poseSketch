@@ -1,1 +1,6 @@
 /* CSS for the Root Component */
+:root {
+    --primary: red;
+    --secondary: rgb(196, 196, 196);
+    --accents: purple;
+}

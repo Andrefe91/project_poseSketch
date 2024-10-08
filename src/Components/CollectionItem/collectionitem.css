@@ -1,0 +1,15 @@
+.collection-item {
+	border: 2px solid var(--secondary);
+	padding: 1rem;
+	border-radius: 0.5rem;
+}
+
+.image-display {
+	width: 15rem;
+}
+
+.image-display img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}

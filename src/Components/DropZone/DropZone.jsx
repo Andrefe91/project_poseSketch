@@ -35,7 +35,6 @@ const rejectStyle = {
 function DropZone() {
     const { setValidImages } = useContext(imageContext)
 
-
     //Pass the uploaded images to the wrapper component state
 	const onDrop = useCallback((acceptedFiles) => {
         acceptedFiles.forEach((file) => {
