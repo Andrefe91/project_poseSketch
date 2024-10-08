@@ -8,9 +8,10 @@ import { imageContext } from "../../Context/imageContext";
 
 function Root () {
     const [validImages, setValidImages] = useState([])
+    const [ invalidImages, setInvalidImages] = useState([])
 
     return (
-        <imageContext.Provider value={{validImages, setValidImages}}>
+        <imageContext.Provider value={{validImages, setValidImages, invalidImages, setInvalidImages}}>
             <Outlet />
         </imageContext.Provider>
     )

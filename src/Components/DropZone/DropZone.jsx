@@ -33,12 +33,16 @@ const rejectStyle = {
 };
 
 function DropZone() {
-    const { setValidImages } = useContext(imageContext)
+    const { validImages, setValidImages, invalidImages, setInvalidImages } = useContext(imageContext)
 
     //Pass the uploaded images to the wrapper component state
-	const onDrop = useCallback((acceptedFiles) => {
+	const onDrop = useCallback((acceptedFiles, fileRejections) => {
         acceptedFiles.forEach((file) => {
             setValidImages((prevState) => [...prevState, file]);
+        })
+
+        fileRejections.forEach((file) => {
+            setInvalidImages((prevState) => [...prevState, file]);
         })
 	});
 
@@ -48,8 +52,6 @@ function DropZone() {
 		isDragActive,
 		isDragAccept,
 		isDragReject,
-		acceptedFiles,
-		fileRejections,
 	} = useDropzone({
 		onDrop,
 		accept: {
@@ -86,12 +88,12 @@ function DropZone() {
 			<aside>
 				<h4>Files:</h4>
 				<ul>
-                    {acceptedFiles.length > 0 && (
-                        <li>{acceptedFiles.length} images are loaded and valid</li>
+                    {validImages.length > 0 && (
+                        <li>{validImages.length} images are loaded and valid</li>
                     )}
 
-                    {fileRejections.length > 0 && (
-                        <li>{fileRejections.length} files are not valid (only PNG and JPG are allowed)</li>
+                    {invalidImages.length > 0 && (
+                        <li>{invalidImages.length} files are not valid (only PNG and JPG are allowed)</li>
                     )}
                 </ul>
 			</aside>

@@ -1,12 +1,14 @@
 //Modules
 import React, {useContext, useEffect} from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 //Components
 import CollectionItem from "../CollectionItem/CollectionItem";
 //CSS
 import "./collection.css"
 //Context
 import { imageContext } from "../../Context/imageContext";
+//Icons
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function Collection() {
     const { validImages } = useContext(imageContext) //Get the images from the context
@@ -20,13 +22,19 @@ function Collection() {
     }, [validImages])
 
     const imageGrid = validImages.map((file, index) => (
-        <CollectionItem key={index} imageFile={file} />
+        <CollectionItem key={index} imageFile={file} number={index}/>
     ))
 
     return (
-        <div className="collection-container">
-            {imageGrid}
-        </div>
+        <>
+            <Link to={"/"} className="main-links">
+                <ArrowBackIcon /> Go Back
+            </Link>
+
+            <div className="collection-container">
+                {imageGrid}
+            </div>
+        </>
     )
 }
 

@@ -5,14 +5,21 @@ import { PropTypes } from "prop-types";
 import "./collectionitem.css"
 
 
-function CollectionItem({imageFile}) {
+function CollectionItem({imageFile, number}) {
+    const imageName = imageFile.name.toLowerCase();
+    const imageNameCapitalize = imageName.split(".")[0][0].toUpperCase() + imageName.split(".")[0].slice(1);
+
     return (
         <>
             <div className="collection-item">
                 <div className="image-display">
-                    <img src={URL.createObjectURL(imageFile)} alt={imageFile.name} />
+                    <img src={URL.createObjectURL(imageFile)} alt={imageNameCapitalize} />
                 </div>
-                {console.log(imageFile)}
+
+                <div className="image-details">
+                    <p>{imageNameCapitalize}</p>
+                    <p>#{number + 1}</p>
+                </div>
             </div>
         </>
     )
@@ -20,7 +27,8 @@ function CollectionItem({imageFile}) {
 
 
 CollectionItem.propTypes = {
-    imageFile: PropTypes.object.isRequired
+    imageFile: PropTypes.object.isRequired,
+    number: PropTypes.number.isRequired
 }
 
 export default CollectionItem;

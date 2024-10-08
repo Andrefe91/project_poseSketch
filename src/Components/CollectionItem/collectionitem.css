@@ -1,15 +1,29 @@
 .collection-item {
 	border: 2px solid var(--secondary);
-	padding: 1rem;
+	padding: 0.5rem;
 	border-radius: 0.5rem;
+    position: relative;
 }
 
 .image-display {
-	width: 15rem;
+	width: 10rem;
+    display: flex;
 }
 
 .image-display img {
 	width: 100%;
 	height: 100%;
 	object-fit: contain;
+    border-radius: 0.25rem;
+}
+
+.image-details {
+    width: 100%;
+    padding: 0 1rem 0 1rem;
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0;
+
+    display: flex;
+    justify-content: space-between;
 }
