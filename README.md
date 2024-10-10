@@ -14,6 +14,7 @@ the following features:
 - Connection to the main cloud storage services for personal repositories.
 - Optional track of personal practice time.
 - Ensure Accesibility of the whole application.
+- Localization for Spanish and Portuguese.
 
 ## Pages
 

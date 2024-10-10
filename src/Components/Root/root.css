@@ -85,3 +85,7 @@ h6 {
 	--secondary: rgb(196, 196, 196);
 	--accents: purple;
 }
+
+.no-selection {
+    user-select: none;
+}

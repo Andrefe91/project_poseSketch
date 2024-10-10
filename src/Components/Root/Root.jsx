@@ -7,35 +7,38 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import { imageContext } from "../../Context/imageContext";
 
 const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#e2cd0d',
+    palette: {
+      primary: {
+        main: '#e2cd0d',
+      },
+      secondary: {
+        main: '#FF8A65',
+      },
+      background: {
+        default: '#242424',
+        paper: '#242424',
+      },
+      text: {
+        primary: '#FFFFFF',
+      },
     },
-    secondary: {
-      main: '#FF8A65',
-    },
-    background: {
-      default: '#242424',
-    },
-    text: {
-      primary: '#FFFFFF',
-    },
-  }
-})
+  });
+
 
 function Root() {
 	const [validImages, setValidImages] = useState([]);
 	const [invalidImages, setInvalidImages] = useState([]);
 
 	return (
-		<ThemeProvider theme={theme}>
-			<CssBaseline />
-			<imageContext.Provider
-				value={{ validImages, setValidImages, invalidImages, setInvalidImages }}
-			>
-				<Outlet />
-			</imageContext.Provider>
-		</ThemeProvider>
+    <>
+      <CssBaseline />
+      <imageContext.Provider
+        value={{ validImages, setValidImages, invalidImages, setInvalidImages }}
+      >
+        <Outlet />
+      </imageContext.Provider>
+
+    </>
 	);
 }
 

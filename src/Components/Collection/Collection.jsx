@@ -1,47 +1,60 @@
 //Modules
-import React, {useContext, useEffect} from "react";
-import { useNavigate, Link } from "react-router-dom";
-import Button from "@mui/material/Button";
+import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Fab, Typography, Box } from "@mui/material";
 //Components
 import CollectionItem from "../CollectionItem/CollectionItem";
+import CollectionAB from "../CollectionAB/CollectionAB";
 //CSS
-import "./collection.css"
+import "./collection.css";
 //Context
 import { imageContext } from "../../Context/imageContext";
 //Icons
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 function Collection() {
-    const { validImages } = useContext(imageContext) //Get the images from the context
-    const navigate = useNavigate();
+	const { validImages } = useContext(imageContext); //Get the images from the context
+	const navigate = useNavigate();
 
-    useEffect(() => {
-        //In case there are no images, redirect to HomePage
-        if (validImages.length === 0) {
-            navigate('/')
-        }
-    }, [validImages])
+	useEffect(() => {
+		//In case there are no images, redirect to HomePage
+		if (validImages.length === 0) {
+			navigate("/");
+		}
+	}, [validImages]);
 
-    const imageGrid = validImages.map((file, index) => (
-        <CollectionItem key={index} imageFile={file} number={index}/>
-    ))
+	const imageGrid = validImages.map((file, index) => (
+		<CollectionItem key={index} imageFile={file} number={index} />
+	));
 
-    return (
-        <div className="page-container">
-            <div>
-                <Button startIcon={<ArrowBackIcon />}>
-                    <Link to={"/"} className="main-links">
-                        Go Back
-                    </Link>
-                </Button>
+	return (
+		<>
+			<div className="page-container">
+                <Box sx={{width: "100%"}}>
+                    <CollectionAB />
+                    <div className="collection-container">{imageGrid}</div>
+                </Box>
 
-                <div className="collection-container">
-                    {imageGrid}
-                </div>
-            </div>
-        </div>
-    )
+				<Fab
+					color="primary"
+					aria-label="start"
+					className="start-theater"
+					onClick={() => navigate("/theater")}
+					variant="extended"
+					sx={{ position: "fixed", bottom: "20px", right: "20px" }}
+				>
+					<PlayArrowIcon sx={{ mr: 0.5 }} fontSize="large" />
+					<Typography
+						variant="body1"
+						component="h2"
+						sx={{ fontWeight: 700, letterSpacing: ".1rem" }}
+					>
+						Start
+					</Typography>
+				</Fab>
+			</div>
+		</>
+	);
 }
-
 
 export default Collection;

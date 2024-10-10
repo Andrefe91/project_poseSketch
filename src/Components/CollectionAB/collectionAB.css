@@ -1,0 +1,5 @@
+.navbar-button {
+    &:hover {
+        text-decoration: underline;
+    }
+}
