@@ -162,12 +162,12 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 								<Select
 									labelId="study-format-setting-label"
 									id="study-format-setting"
-									value={"Default 1"}
+									value={"30 minutes"}
 									label="Preset"
 								>
-									<MenuItem value={"Default 1"}>Default 1</MenuItem>
-									<MenuItem value={"Default 2"}>Default 2</MenuItem>
-									<MenuItem value={"Default 3"}>Default 3</MenuItem>
+									<MenuItem value={"30 minutes"}>30 minutes</MenuItem>
+									<MenuItem value={"default_2"}>Default 2</MenuItem>
+									<MenuItem value={"default_3"}>Default 3</MenuItem>
 								</Select>
 							</FormControl>
 

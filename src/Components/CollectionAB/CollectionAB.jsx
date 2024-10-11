@@ -19,7 +19,6 @@ export default function CollectionAB() {
 	const navigate = useNavigate();
 
 	function toggleDrawer(event) {
-        console.log("toggleDrawer");
 		if (
 			event.type === "keydown" &&
 			(event.key === "Tab" || event.key === "Shift")
