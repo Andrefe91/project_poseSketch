@@ -1,5 +1,5 @@
 //Modules
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
 	Box,
@@ -20,9 +20,10 @@ import {
 	Select,
 	MenuItem,
 } from "@mui/material";
-
 //CSS
 import "./collection-drawer.css";
+//Context
+import { settingsContext } from "../../Context/settingsContext";
 //Icons
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
@@ -32,6 +33,36 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 	const [openSelectionSettings, setOpenSelectionSettings] = useState(true);
 	const [openStudySettings, setOpenStudySettings] = useState(false);
 	const [openEffectsSettings, setOpenEffectsSettings] = useState(false);
+	const [saveOptions, setSaveOptions] = useState(false);
+
+	//Settings of the whole application, obtained from a context
+	const { settings, setSettings } = useContext(settingsContext);
+
+	//From settings, handle options change
+	let options = settings.options;
+
+	function handleOptionChange(event) {
+		const name = event.target.name;
+		const value = event.target?.value;
+
+		//Only set option value y name and value exist and are defined
+		if (name && value) {
+			options[name] = value;
+		}
+
+		// Update the options in the App Settings
+		setSettings((prevSettings) => ({
+			...prevSettings,
+			options: options,
+		}));
+
+		console.log(settings);
+	}
+
+	//Allow to save options
+	function handleSaveOptions() {
+		setSaveOptions(true);
+	}
 
 	//Handle open state of Setting Menus
 	function handleOpenSelectionSettings() {
@@ -62,7 +93,10 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 		<Drawer
 			anchor={anchor}
 			open={drawerState}
-			onClose={() => toggleDrawerFunc(false)}
+			onClose={() => {
+				toggleDrawerFunc(false);
+				setSaveOptions(false);
+			}}
 		>
 			<Box
 				sx={{
@@ -114,8 +148,9 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 								<RadioGroup
 									row
 									aria-labelledby="selection-order-options"
-									defaultValue="random"
-									name="selection-order-buttons-group"
+									defaultValue={options.order}
+									name="order"
+									onChange={handleSaveOptions}
 								>
 									<Tooltip
 										title={
@@ -127,7 +162,6 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 											value="random"
 											control={<Radio />}
 											label="Random"
-											onClick={() => console.log("Random")}
 										/>
 									</Tooltip>
 
@@ -141,7 +175,6 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 											value="sequential"
 											control={<Radio />}
 											label="Sequential"
-											onClick={() => console.log("Sequential")}
 										/>
 									</Tooltip>
 								</RadioGroup>
@@ -201,26 +234,25 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 								<RadioGroup
 									row
 									aria-labelledby="image-information-options"
-									defaultValue="hide"
-									name="image-information-buttons-group"
+									defaultValue={options.image_information}
+									onChange={handleSaveOptions}
+									name="image_information"
 								>
 									<FormControlLabel
 										value="hide"
 										control={<Radio />}
 										label="Hide"
-										onClick={() => console.log("Hide")}
 									/>
 
 									<FormControlLabel
 										value="show"
 										control={<Radio />}
 										label="Show"
-										onClick={() => console.log("Show")}
 									/>
 								</RadioGroup>
 							</FormControl>
 
-							<Divider variant="inset" sx={{mt:"0.5rem", mb:"0.5rem"}}/>
+							<Divider variant="inset" sx={{ mt: "0.5rem", mb: "0.5rem" }} />
 							{/* ----------------------------------------------------------------------------------- */}
 							<FormControl>
 								<FormLabel
@@ -233,26 +265,25 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 								<RadioGroup
 									row
 									aria-labelledby="timer-visibility-options"
-									defaultValue="constant"
-									name="timer-visibility-buttons-group"
+									defaultValue={options.timer_visibility}
+									onChange={handleSaveOptions}
+									name="timer_visibility"
 								>
 									<FormControlLabel
 										value="constant"
 										control={<Radio />}
 										label="Constant"
-										onClick={() => console.log("Constant")}
 									/>
 
 									<FormControlLabel
 										value="fade"
 										control={<Radio />}
 										label="Fade"
-										onClick={() => console.log("Fade")}
 									/>
 								</RadioGroup>
 							</FormControl>
 
-							<Divider variant="inset" sx={{mt:"0.5rem", mb:"0.5rem"}}/>
+							<Divider variant="inset" sx={{ mt: "0.5rem", mb: "0.5rem" }} />
 							{/* ----------------------------------------------------------------------------------- */}
 							<FormControl>
 								<FormLabel
@@ -264,40 +295,43 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 
 								<RadioGroup
 									aria-labelledby="timer-beeps-options"
-									defaultValue={3}
-									name="timer-beeps-buttons-group"
+									defaultValue={options.timer_beeps}
+									onChange={handleSaveOptions}
+									name="timer_beeps"
 								>
+									<FormControlLabel
+										value={0}
+										control={<Radio />}
+										label="Deactivated"
+									/>
+
 									<FormControlLabel
 										value={3}
 										control={<Radio />}
 										label="3 Seconds"
-										onClick={() => console.log("3 Seconds")}
 									/>
 
 									<FormControlLabel
 										value={5}
 										control={<Radio />}
 										label="5 Seconds"
-										onClick={() => console.log("5 Seconds")}
 									/>
 
 									<FormControlLabel
 										value={10}
 										control={<Radio />}
 										label="10 Seconds"
-										onClick={() => console.log("10 Seconds")}
 									/>
 
 									<FormControlLabel
 										value={15}
 										control={<Radio />}
 										label="15 Seconds"
-										onClick={() => console.log("15 Seconds")}
 									/>
 								</RadioGroup>
 							</FormControl>
 
-							<Divider variant="inset" sx={{mt:"0.5rem", mb:"0.5rem"}}/>
+							<Divider variant="inset" sx={{ mt: "0.5rem", mb: "0.5rem" }} />
 							{/* ----------------------------------------------------------------------------------- */}
 							<FormControl>
 								<FormLabel
@@ -310,27 +344,35 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 								<RadioGroup
 									row
 									aria-labelledby="pause-control-options"
-									defaultValue="allow"
-									name="pause-control-buttons-group"
+									defaultValue={options.pause_controls}
+									onChange={handleSaveOptions}
+									name="pause_control"
 								>
 									<FormControlLabel
 										value="allow"
 										control={<Radio />}
 										label="Allow"
-										onClick={() => console.log("Allow")}
 									/>
 
 									<FormControlLabel
 										value="dont_allow"
 										control={<Radio />}
 										label="Don't Allow"
-										onClick={() => console.log("Dont Allow")}
 									/>
 								</RadioGroup>
 							</FormControl>
 						</Box>
 					</Collapse>
 				</List>
+
+				<Box sx={{ display: "flex", justifyContent: "flex-end", pr: "1rem" }}>
+					<Button variant="contained" disableElevation disabled={!saveOptions}>
+						Save
+					</Button>
+					<Button variant="contained" disableElevation sx={{ ml: "0.2rem" }}>
+						Cancel
+					</Button>
+				</Box>
 			</Box>
 		</Drawer>
 	);
