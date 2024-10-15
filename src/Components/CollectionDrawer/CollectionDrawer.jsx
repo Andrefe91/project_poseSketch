@@ -1,5 +1,5 @@
 //Modules
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import {
 	Box,
@@ -24,6 +24,8 @@ import {
 import "./collection-drawer.css";
 //Context
 import { settingsContext } from "../../Context/settingsContext";
+//Components
+import AddPreset from "./AddPreset/AddPreset";
 //Icons
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
@@ -34,34 +36,70 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 	const [openStudySettings, setOpenStudySettings] = useState(false);
 	const [openEffectsSettings, setOpenEffectsSettings] = useState(false);
 	const [saveOptions, setSaveOptions] = useState(false);
+	const [addingPreset, setAddingPreset] = useState(false);
+	const [newPreset, setNewPreset] = useState({});
 
 	//Settings of the whole application, obtained from a context
 	const { settings, setSettings } = useContext(settingsContext);
+	const [updatedOptions, setUpdatedOptions] = useState(settings.options);
 
-	//From settings, handle options change
-	let options = settings.options;
-
-	function handleOptionChange(event) {
-		const name = event.target.name;
-		const value = event.target?.value;
-
-		//Only set option value y name and value exist and are defined
-		if (name && value) {
-			options[name] = value;
+	//Register the options for study format and selected preset, along with adding presets.
+	function changeSelectedPreset(event) {
+		//Change the selected study format preset
+		if (event.target?.value) {
+			setUpdatedOptions((prevSettings) => ({
+				...prevSettings,
+				selected_study_format: event.target.value,
+			}));
 		}
 
+		//Allow to save the selected Preset
+		handleSaveOptions();
+	}
+
+	function handleSaveSettings() {
 		// Update the options in the App Settings
 		setSettings((prevSettings) => ({
 			...prevSettings,
-			options: options,
+			options: { ...updatedOptions },
 		}));
 
-		console.log(settings);
+		//Close the drawer
+		toggleDrawerFunc(false);
+	}
+
+	function registerChange(event) {
+		//Then, register the change in settings
+		let name = event.target?.name;
+		let value = event.target?.value;
+
+		if (name && value) {
+			setUpdatedOptions((prevSettings) => ({
+				...prevSettings,
+				[name]: value,
+			}));
+		}
+		//Then, check if Saving Options is required
+		handleSaveOptions();
+		console.log(updatedOptions);
+	}
+
+	function handleCancelSettings() {
+		toggleDrawerFunc(false);
+		setSaveOptions(false);
 	}
 
 	//Allow to save options
 	function handleSaveOptions() {
 		setSaveOptions(true);
+		//[TODO] only update the appSettings if detected change
+		// if (JSON.stringify({...options}) !== JSON.stringify({...updatedOptions})) {
+		// 	setSaveOptions(true);
+		// 	console.log("Can Save")
+		// } else {
+		// 	setSaveOptions(false);
+		//     console.log("Cannot Save")
+		// }
 	}
 
 	//Handle open state of Setting Menus
@@ -89,6 +127,11 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 		setOpenEffectsSettings(true);
 	}
 
+	function setPreset() {
+		console.log("Added New Preset");
+		setAddingPreset(false);
+	}
+
 	return (
 		<Drawer
 			anchor={anchor}
@@ -100,7 +143,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 		>
 			<Box
 				sx={{
-					width: 300,
+					width: 320,
 					borderRight: 1,
 					borderColor: "divider",
 				}}
@@ -136,7 +179,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 						{openSelectionSettings ? <ExpandLess /> : <ExpandMore />}
 					</ListItemButton>
 					<Collapse in={openSelectionSettings} timeout="auto" unmountOnExit>
-						<Box sx={{ pl: "2rem", mt: "1rem", pr: "1rem" }}>
+						<Box sx={{ pl: "2rem", mt: "0.2rem", pr: "1rem" }}>
 							<FormControl>
 								<FormLabel
 									id="selection-order-options"
@@ -148,9 +191,9 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 								<RadioGroup
 									row
 									aria-labelledby="selection-order-options"
-									defaultValue={options.order}
+									value={updatedOptions.order}
 									name="order"
-									onChange={handleSaveOptions}
+									onChange={registerChange}
 								>
 									<Tooltip
 										title={
@@ -190,27 +233,62 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 					</ListItemButton>
 					<Collapse in={openStudySettings} timeout="auto" unmountOnExit>
 						<Box sx={{ pl: "2rem", mt: "1rem", pr: "1rem" }}>
-							<FormControl sx={{ minWidth: 220 }}>
+							<FormControl sx={{ display: "flex" }}>
 								<InputLabel id="study-format-setting-label">Preset</InputLabel>
 								<Select
 									labelId="study-format-setting-label"
 									id="study-format-setting"
-									value={"30 minutes"}
+									value={updatedOptions.selected_study_format}
 									label="Preset"
+									onChange={(e) => changeSelectedPreset(e)}
+									//Disable the Select if adding a new Preset.
+									disabled={addingPreset}
 								>
-									<MenuItem value={"30 minutes"}>30 minutes</MenuItem>
-									<MenuItem value={"default_2"}>Default 2</MenuItem>
-									<MenuItem value={"default_3"}>Default 3</MenuItem>
+									{/* List all the saved presets */}
+									{Object.keys(updatedOptions.study_format).map((preset) => {
+										return (
+											<MenuItem key={preset} value={preset}>
+												{preset}
+											</MenuItem>
+										);
+									})}
 								</Select>
 							</FormControl>
 
-							<Button
-								size="small"
-								sx={{ mt: "0.2rem", mb: "0.2rem" }}
-								startIcon={<AddIcon />}
-							>
-								Add Preset
-							</Button>
+							{/* Activate the option to Add a Preset */}
+							{!addingPreset && (
+								<Button
+									size="small"
+									sx={{ mt: "0.2rem", mb: "0.2rem" }}
+									startIcon={<AddIcon />}
+									onClick={() => {
+										setAddingPreset(true);
+
+										//If the Effects Tab is open, close it.
+										if (openEffectsSettings) {
+											handleOpenEffectsSettings();
+										}
+
+										//If the Selection Tab is open, close it.
+										if (openSelectionSettings) {
+                                            handleOpenSelectionSettings();
+                                        }
+
+
+									}}
+								>
+									Add Preset
+								</Button>
+							)}
+
+							{/* Activate an "Add a Preset component" */}
+							{addingPreset && (
+								<AddPreset
+									setAddingPreset={setAddingPreset}
+									preset={newPreset}
+									setPreset={setPreset}
+								/>
+							)}
 						</Box>
 					</Collapse>
 
@@ -234,8 +312,8 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 								<RadioGroup
 									row
 									aria-labelledby="image-information-options"
-									defaultValue={options.image_information}
-									onChange={handleSaveOptions}
+									value={updatedOptions.image_information}
+									onChange={registerChange}
 									name="image_information"
 								>
 									<FormControlLabel
@@ -265,8 +343,8 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 								<RadioGroup
 									row
 									aria-labelledby="timer-visibility-options"
-									defaultValue={options.timer_visibility}
-									onChange={handleSaveOptions}
+									value={updatedOptions.timer_visibility}
+									onChange={registerChange}
 									name="timer_visibility"
 								>
 									<FormControlLabel
@@ -295,8 +373,8 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 
 								<RadioGroup
 									aria-labelledby="timer-beeps-options"
-									defaultValue={options.timer_beeps}
-									onChange={handleSaveOptions}
+									value={updatedOptions.timer_beeps}
+									onChange={registerChange}
 									name="timer_beeps"
 								>
 									<FormControlLabel
@@ -344,9 +422,9 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 								<RadioGroup
 									row
 									aria-labelledby="pause-control-options"
-									defaultValue={options.pause_controls}
-									onChange={handleSaveOptions}
-									name="pause_control"
+									value={updatedOptions.pause_controls}
+									onChange={registerChange}
+									name="pause_controls"
 								>
 									<FormControlLabel
 										value="allow"
@@ -366,10 +444,24 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 				</List>
 
 				<Box sx={{ display: "flex", justifyContent: "flex-end", pr: "1rem" }}>
-					<Button variant="contained" disableElevation disabled={!saveOptions}>
+					<Button
+						variant="contained"
+						disableElevation
+						disabled={!saveOptions}
+						onClick={handleSaveSettings}
+					>
 						Save
 					</Button>
-					<Button variant="contained" disableElevation sx={{ ml: "0.2rem" }}>
+
+					<Button
+						variant="outlined"
+						disableElevation
+						sx={{ ml: "0.2rem" }}
+						onClick={() => {
+							handleCancelSettings();
+							// setAddingPreset(false);
+						}}
+					>
 						Cancel
 					</Button>
 				</Box>
