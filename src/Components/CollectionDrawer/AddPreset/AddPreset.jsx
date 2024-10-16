@@ -28,9 +28,14 @@ function AddPreset({ setAddingPreset, preset, setPreset }) {
 		setPresetName(event.target?.value);
 	}
 
-	//Handle the number of sections and breaks a Preset is going to have
+	//Increase the number of sections in the Preset
 	function increaseSectionInPreset() {
 		setPresetBody((prevBody) => [...prevBody, [1, "30s"]]);
+	}
+
+	//Increase the number of Breaks in the Preset
+	function increaseBreakInPreset() {
+		setPresetBody((prevBody) => [...prevBody, ["b", "30s"]]);
 	}
 
 	//Handle deletion of a Section within the Preset
@@ -86,6 +91,7 @@ function AddPreset({ setAddingPreset, preset, setPreset }) {
 						sx={{ ml: "0.2rem" }}
 						startIcon={<FreeBreakfastIcon />}
 						disableElevation
+						onClick={increaseBreakInPreset}
 					>
 						+ Break
 					</Button>

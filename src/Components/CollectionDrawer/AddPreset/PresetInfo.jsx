@@ -44,21 +44,36 @@ function PresetItem({
 		<>
 			<FormControl>
 				<Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-					<TextField
-						id={`Section-${index}-repetition`}
-						type="number"
-						required
-						name="repetition"
-						value={repetition}
-						onChange={(e) => modifySection(e)}
-						slotProps={{
-							input: {
-								startAdornment: (
-									<InputAdornment position="start">#</InputAdornment>
-								),
-							},
-						}}
-					/>
+					{repetition != "b" ? (
+						// When is a Study Section
+						<TextField
+							id={`Section-${index}-repetition`}
+							type="number"
+							required
+							name="repetition"
+							value={repetition}
+							onChange={(e) => modifySection(e)}
+							slotProps={{
+								input: {
+									startAdornment: (
+										<InputAdornment position="start">#</InputAdornment>
+									),
+								},
+							}}
+							sx={{width: "80%"}}
+						/>
+					) : (
+						// When is a Break Section
+						<TextField
+							disabled
+							id={`Section-${index}-repetition`}
+							type="text"
+							required
+							name="repetition"
+							defaultValue="Break"
+							sx={{width: "80%"}}
+						/>
+					)}
 
 					<div>-</div>
 
