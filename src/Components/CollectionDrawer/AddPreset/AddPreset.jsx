@@ -12,30 +12,32 @@ import BrushIcon from "@mui/icons-material/Brush";
 import FreeBreakfastIcon from "@mui/icons-material/FreeBreakfast";
 
 function AddPreset({ setAddingPreset, preset, setPreset }) {
-	const [presetName, setPresetName] = useState(
-		Object.keys(preset).length > 0 ? Object.keys(preset)[0] : "Meaningful Name",
-	);
+	const [presetName, setPresetName] = useState(preset[0]);
 
 	//Get the data from the Preset Body, if it exist. If not, create a new Preset Section
 	const [presetBody, setPresetBody] = useState(
-		Object.keys(preset).length > 0
-			? preset[Object.keys(preset)[0]]
-			: [[1, "30s"]],
+		preset[1].length > 0 ? preset[1] : [[1, "30"]],
 	);
 
 	//Handle the change of the Preset Name
 	function handleChangePresetName(event) {
-		setPresetName(event.target?.value);
+		let name = event.target?.value;
+
+		if (name.length <= 20) {
+			setPresetName(name);
+		} else {
+			return;
+		}
 	}
 
 	//Increase the number of sections in the Preset
 	function increaseSectionInPreset() {
-		setPresetBody((prevBody) => [...prevBody, [1, "30s"]]);
+		setPresetBody((prevBody) => [...prevBody, [1, "30"]]);
 	}
 
 	//Increase the number of Breaks in the Preset
 	function increaseBreakInPreset() {
-		setPresetBody((prevBody) => [...prevBody, ["b", "30s"]]);
+		setPresetBody((prevBody) => [...prevBody, ["b", "30"]]);
 	}
 
 	//Handle deletion of a Section within the Preset
@@ -139,7 +141,7 @@ function AddPreset({ setAddingPreset, preset, setPreset }) {
 							variant="contained"
 							disableElevation
 							type="submit"
-							onClick={() => setPreset()}
+							onClick={() => setPreset(presetName, presetBody)}
 						>
 							Save
 						</Button>
@@ -164,6 +166,6 @@ export default AddPreset;
 
 AddPreset.propTypes = {
 	setAddingPreset: PropTypes.func.isRequired,
-	preset: PropTypes.object.isRequired,
+	preset: PropTypes.array.isRequired,
 	setPreset: PropTypes.func.isRequired,
 };

@@ -1,5 +1,5 @@
 //Modules
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
 	Box,
@@ -19,6 +19,8 @@ import {
 	InputLabel,
 	Select,
 	MenuItem,
+	IconButton
+
 } from "@mui/material";
 //CSS
 import "./collection-drawer.css";
@@ -26,10 +28,13 @@ import "./collection-drawer.css";
 import { settingsContext } from "../../Context/settingsContext";
 //Components
 import AddPreset from "./AddPreset/AddPreset";
+//Scripts
+import presetBodyConvert from "../../scripts/presetBodyConvert.js";
 //Icons
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
+import EditIcon from '@mui/icons-material/Edit';
 
 function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 	const [openSelectionSettings, setOpenSelectionSettings] = useState(true);
@@ -37,11 +42,17 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 	const [openEffectsSettings, setOpenEffectsSettings] = useState(false);
 	const [saveOptions, setSaveOptions] = useState(false);
 	const [addingPreset, setAddingPreset] = useState(false);
-	const [newPreset, setNewPreset] = useState({});
+	const [newPreset, setNewPreset] = useState(["Meaningfull Name", []]);
 
 	//Settings of the whole application, obtained from a context
 	const { settings, setSettings } = useContext(settingsContext);
 	const [updatedOptions, setUpdatedOptions] = useState(settings.options);
+
+	//Reset the updatedOptions to the saved settings. This means, that unless the settings are "Saved"
+	//in the settings pannel, the object used in the panel will return to the previous saved state
+	useEffect(() => {
+		setUpdatedOptions({ ...settings.options });
+	}, [drawerState]);
 
 	//Register the options for study format and selected preset, along with adding presets.
 	function changeSelectedPreset(event) {
@@ -66,6 +77,8 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 
 		//Close the drawer
 		toggleDrawerFunc(false);
+		//And disabled the Save Button
+		setSaveOptions(false);
 	}
 
 	function registerChange(event) {
@@ -81,7 +94,6 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 		}
 		//Then, check if Saving Options is required
 		handleSaveOptions();
-		console.log(updatedOptions);
 	}
 
 	function handleCancelSettings() {
@@ -127,8 +139,16 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 		setOpenEffectsSettings(true);
 	}
 
-	function setPreset() {
-		console.log("Added New Preset");
+	//This function updates the "updatedOptions" object with the new preset before saving to settings
+	function setPreset(title, body) {
+		setUpdatedOptions((prevSettings) => ({
+			...prevSettings,
+			study_format: {
+				...prevSettings.study_format,
+				[title]: presetBodyConvert(body),
+			},
+		}));
+
 		setAddingPreset(false);
 	}
 
@@ -235,24 +255,34 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 						<Box sx={{ pl: "2rem", mt: "1rem", pr: "1rem" }}>
 							<FormControl sx={{ display: "flex" }}>
 								<InputLabel id="study-format-setting-label">Preset</InputLabel>
-								<Select
-									labelId="study-format-setting-label"
-									id="study-format-setting"
-									value={updatedOptions.selected_study_format}
-									label="Preset"
-									onChange={(e) => changeSelectedPreset(e)}
-									//Disable the Select if adding a new Preset.
-									disabled={addingPreset}
-								>
-									{/* List all the saved presets */}
-									{Object.keys(updatedOptions.study_format).map((preset) => {
-										return (
-											<MenuItem key={preset} value={preset}>
-												{preset}
-											</MenuItem>
-										);
-									})}
-								</Select>
+								<Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+									<Select
+										labelId="study-format-setting-label"
+										id="study-format-setting"
+										value={updatedOptions.selected_study_format}
+										label="Preset"
+										onChange={(e) => changeSelectedPreset(e)}
+										//Disable the Select if adding a new Preset.
+										disabled={addingPreset}
+										sx={{ display: "flex", flex: "1"}}
+									>
+										{/* List all the saved presets */}
+										{Object.keys(updatedOptions.study_format).map((preset) => {
+											return (
+												<MenuItem key={preset} value={preset}>
+													{preset}
+												</MenuItem>
+											);
+										})}
+									</Select>
+
+									<IconButton
+										aria-label="delete preset"
+									>
+										<EditIcon fontSize="small"/>
+									</IconButton>
+
+								</Box>
 							</FormControl>
 
 							{/* Activate the option to Add a Preset */}
@@ -271,10 +301,8 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 
 										//If the Selection Tab is open, close it.
 										if (openSelectionSettings) {
-                                            handleOpenSelectionSettings();
-                                        }
-
-
+											handleOpenSelectionSettings();
+										}
 									}}
 								>
 									Add Preset
@@ -477,3 +505,5 @@ CollectionDrawer.propTypes = {
 };
 
 export default CollectionDrawer;
+
+

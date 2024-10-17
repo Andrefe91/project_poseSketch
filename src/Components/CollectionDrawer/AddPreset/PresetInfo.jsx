@@ -14,6 +14,14 @@ function PresetItem({
 	presetBodyLenght,
 }) {
 	let [repetition, time] = section;
+	let timePatter = /^\d+(s|m)?$/;
+
+	//Convert to text time for User commodity
+	if (time % 60 == 0) {
+		time = Math.floor(time / 60) + "m";
+	} else {
+		time = time + "s";
+	}
 
 	function modifySection(e) {
 		let name = e.target.name;
@@ -21,14 +29,17 @@ function PresetItem({
 		let newSection = [];
 
 		if (name == "repetition" && value < 1) {
-			console.log(value);
 			value = 1;
 		}
 
 		if (name == "repetition") {
 			newSection = [value, section[1]];
 		} else if (name == "time") {
-			newSection = [section[0], value];
+
+			//Only allow the patter defined for a time in minutes or seconds
+			if (timePatter.test(value) || value == "") {
+				newSection = [section[0], value];
+			} else { return }
 		} else {
 			return;
 		}
@@ -60,7 +71,7 @@ function PresetItem({
 									),
 								},
 							}}
-							sx={{width: "80%"}}
+							sx={{ width: "80%" }}
 						/>
 					) : (
 						// When is a Break Section
@@ -70,8 +81,8 @@ function PresetItem({
 							type="text"
 							required
 							name="repetition"
-							defaultValue="Break"
-							sx={{width: "80%"}}
+							value="Break"
+							sx={{ width: "80%" }}
 						/>
 					)}
 
