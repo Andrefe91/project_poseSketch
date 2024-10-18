@@ -68,6 +68,17 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 		handleSaveOptions();
 	}
 
+	//The function handles the edit option for the Study Preset
+	function handleEditPreset() {
+		//organize the information
+		let presetName = updatedOptions.selected_study_format;
+		let presetBody = updatedOptions.study_format[presetName];
+
+		//Update the preset and activate the Create Component
+		setNewPreset(() => ([presetName, presetBody]))
+		setAddingPreset(true);
+	}
+
 	function handleSaveSettings() {
 		// Update the options in the App Settings
 		setSettings((prevSettings) => ({
@@ -278,6 +289,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 
 									<IconButton
 										aria-label="delete preset"
+										onClick={handleEditPreset}
 									>
 										<EditIcon fontSize="small"/>
 									</IconButton>
@@ -292,6 +304,10 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 									sx={{ mt: "0.2rem", mb: "0.2rem" }}
 									startIcon={<AddIcon />}
 									onClick={() => {
+										//Set a new empty Preset
+										setNewPreset(["Meaningfull Name", []])
+
+										//And activate the component
 										setAddingPreset(true);
 
 										//If the Effects Tab is open, close it.

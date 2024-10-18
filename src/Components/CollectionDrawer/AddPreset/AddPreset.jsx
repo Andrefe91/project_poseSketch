@@ -14,6 +14,9 @@ import FreeBreakfastIcon from "@mui/icons-material/FreeBreakfast";
 function AddPreset({ setAddingPreset, preset, setPreset }) {
 	const [presetName, setPresetName] = useState(preset[0]);
 
+	//Define verb for the preset action
+	const presetAction = preset[1].length > 0 ? "Edit" : "New";
+
 	//Get the data from the Preset Body, if it exist. If not, create a new Preset Section
 	const [presetBody, setPresetBody] = useState(
 		preset[1].length > 0 ? preset[1] : [[1, "30"]],
@@ -60,7 +63,7 @@ function AddPreset({ setAddingPreset, preset, setPreset }) {
 	return (
 		<div>
 			<Box sx={{ mt: "0.5rem" }}>
-				New Preset:
+				{`${presetAction} Preset: `}
 				{/* <Divider variant="inset" sx={{ mt: "0.5rem", mb: "0.5rem" }} /> */}
 				<Box
 					sx={{
