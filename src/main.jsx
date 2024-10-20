@@ -8,6 +8,7 @@ import Root from './Components/Root/Root'
 import HomePage from './Components/HomePage/HomePage'
 import ErrorPage from './Components/Error/errorPage'
 import Collection from './Components/Collection/Collection'
+import Theater from './Components/Theater/Theater'
 //Loaders
 
 const router = createBrowserRouter([
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: 'collection',
         element: <Collection />
+      },
+      {
+        path: '/theater',
+        element: <Theater />
       }
     ],
   }
