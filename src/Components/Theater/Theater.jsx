@@ -7,6 +7,8 @@ import { settingsContext } from "../../Context/settingsContext";
 import { imageContext } from "../../Context/imageContext";
 //Scripts
 import generateOrder from "../../scripts/generateOrder";
+//Components
+import TheaterImage from "../TheaterImage/TheaterImage";
 
 export default function Theater() {
 	//Settings of the whole application, obtained from a context
@@ -31,11 +33,13 @@ export default function Theater() {
 		}
 	}, [validImages]);
 
+	let file = validImages[0];
+
 	return (
 		<>
-			<Box sx={{ width: "100vw", height: "100vh", bgcolor: 'red' }}>
-				<Container>
-					
+			<Box sx={{ width: "100vw", height: "100vh", bgcolor: 'red'}}>
+				<Container sx={{height: "100vh"}}>
+					<TheaterImage imageFile={file}/>
 				</Container>
 			</Box>
 		</>

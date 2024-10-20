@@ -1,0 +1,12 @@
+.theater-image {
+	height: 100%;
+    display: flex;
+    padding: 1rem;
+    justify-content: center;
+}
+
+.theater-image img {
+	height: 100%;
+	object-fit: contain;
+    border-radius: 1rem;
+}
