@@ -159,6 +159,9 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 				[title]: presetBodyConvert(body),
 			},
 		}));
+		
+		//Allow to save the selected Preset
+		handleSaveOptions();
 
 		setAddingPreset(false);
 	}

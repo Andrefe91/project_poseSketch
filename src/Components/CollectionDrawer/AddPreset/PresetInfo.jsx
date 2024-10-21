@@ -11,17 +11,18 @@ function PresetItem({
 	section,
 	deleteSection,
 	handleChangePresetBody,
-	presetBodyLenght,
+	presetBodyLenght
 }) {
 	let [repetition, time] = section;
 	let timePatter = /^\d+(s|m)?$/;
 
+	// [TODO]: Find how to do this...
 	//Convert to text time for User commodity
-	if (time % 60 == 0) {
-		time = Math.floor(time / 60) + "m";
-	} else {
-		time = time + "s";
-	}
+	// if (time % 60 == 0) {
+	// 	time = Math.floor(time / 60) + "m";
+	// } else {
+	// 	time = time + "s";
+	// }
 
 	function modifySection(e) {
 		let name = e.target.name;

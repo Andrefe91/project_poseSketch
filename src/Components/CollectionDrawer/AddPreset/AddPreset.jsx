@@ -14,6 +14,7 @@ import FreeBreakfastIcon from "@mui/icons-material/FreeBreakfast";
 function AddPreset({ setAddingPreset, preset, setPreset }) {
 	const [presetName, setPresetName] = useState(preset[0]);
 
+
 	//Define verb for the preset action
 	const presetAction = preset[1].length > 0 ? "Edit" : "New";
 
@@ -155,6 +156,7 @@ function AddPreset({ setAddingPreset, preset, setPreset }) {
 							sx={{ ml: "0.2rem" }}
 							onClick={() => setAddingPreset(false)}
 							disableElevation
+
 						>
 							Cancel
 						</Button>

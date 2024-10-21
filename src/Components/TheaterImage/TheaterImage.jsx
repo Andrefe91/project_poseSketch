@@ -5,10 +5,13 @@ import { PropTypes } from "prop-types";
 import "./theaterImage.css";
 
 function TheaterImage({ imageFile }) {
+	//Check if the image exists
+	if (!imageFile) { return }
+
     //Get the image name from the file
     let imageName =
-    imageFile.name.split(".")[0][0].toUpperCase() +
-    imageFile.name.toLowerCase().split(".")[0].slice(1);
+    imageFile?.name.split(".")[0][0].toUpperCase() +
+    imageFile?.name.toLowerCase().split(".")[0].slice(1);
 
 	return (
 		<>
@@ -20,7 +23,7 @@ function TheaterImage({ imageFile }) {
 }
 
 TheaterImage.propTypes = {
-	imageFile: PropTypes.object.isRequired,
+	imageFile: PropTypes.object,
 };
 
 export default TheaterImage;
