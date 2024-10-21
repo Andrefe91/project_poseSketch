@@ -12,6 +12,8 @@ import trackTimeOrder from "../../scripts/trackTimeOrder";
 import useInterval from "../../Hooks/useInterval";
 //Components
 import TheaterImage from "../TheaterImage/TheaterImage";
+//Filters
+import "../../assets/noise.svg"
 
 export default function Theater() {
 	//Settings of the whole application, obtained from a context
@@ -31,6 +33,8 @@ export default function Theater() {
 	const [imageTimer, setImageTimer] = useState(1000);
 	//Used to track the number of completed images
 	const [imageNumber, setImageNumber] = useState(0);
+	//Timer for the current image
+	const [timer, setTimer] = useState(0);
 
 	//This function handles the time blocks for the images
 	const timeBlocks =
@@ -55,19 +59,34 @@ export default function Theater() {
 			setImageIndex(imageIndex + 1);
 		}
 		console.log(trackingText);
-		setImageTimer(time*1000)
+		setImageTimer(time * 1000);
+		//Reset the timer of the current image
+		setTimer(0);
 	}
 
 	//Set the interval for displaying the next image
 	useInterval(() => handleNextImage(), imageTimer);
-
-	//Log the generated order of images for debugging purposes
-	// console.log(imagesOrder);
+	//Set the timer for the current image
+	useInterval(() => setTimer(timer + 1), 1000);
+	console.log(timer);
 
 	return (
 		<>
-			<Box sx={{ width: "100vw", height: "100vh", bgcolor: "red" }}>
-				<Container sx={{ height: "100vh" }}>
+			<Box
+				sx={{
+					width: "100vw",
+					height: "100vh",
+					bgcolor: "#111111",
+				}}
+			>
+				<Container
+					sx={{
+						height: "100vh",
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "center",
+					}}
+				>
 					<TheaterImage imageFile={validImages[imagesOrder[imageIndex]]} />
 				</Container>
 			</Box>
