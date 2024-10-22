@@ -1,11 +1,13 @@
 export default function trackTimeOrder(timeBlocks, position) {
 	let passedImages = 0;
 
+
 	for (let i = 0; i < timeBlocks.length; i++) {
 		let blockRepetitions = timeBlocks[i][0];
 		let blockTime = timeBlocks[i][1];
 
-		if (position < blockRepetitions + passedImages) {
+		if (position <= blockRepetitions + passedImages) {
+			console.log(timeBlocks, position, passedImages);
 			return [
 				blockTime,
 				`${position - passedImages } of ${blockRepetitions}`,
