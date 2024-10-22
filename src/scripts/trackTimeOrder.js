@@ -7,7 +7,6 @@ export default function trackTimeOrder(timeBlocks, position) {
 		let blockTime = timeBlocks[i][1];
 
 		if (position <= blockRepetitions + passedImages) {
-			console.log(timeBlocks, position, passedImages);
 			return [
 				blockTime,
 				`${position - passedImages } of ${blockRepetitions}`,
@@ -16,4 +15,6 @@ export default function trackTimeOrder(timeBlocks, position) {
 			passedImages += blockRepetitions;
 		}
 	}
+
+	return [0, "End of Study"];
 }

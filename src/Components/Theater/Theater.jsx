@@ -40,6 +40,11 @@ export default function Theater() {
 	const timeBlocks =
 		settings.options.study_format[settings.options.selected_study_format];
 	let [time, trackingText] = trackTimeOrder(timeBlocks, imageNumber);
+
+	//Check if it's the end of the study session
+	if (trackingText == "End of Study") {
+		handleEndOfStudy();
+	}
 	//Used to track the timer of a given image or image block
 	const [imageTimer, setImageTimer] = useState(time);
 	//In case there are no images, redirect to HomePage
@@ -51,6 +56,7 @@ export default function Theater() {
 
 	//This function handles the change of index for the images
 	function handleNextImage() {
+		//If not end of the study session, handle the next image
 		setImageNumber(imageNumber + 1);
 
 		if (imageIndex + 1 >= imagesOrder.length) {
@@ -64,12 +70,19 @@ export default function Theater() {
 		setTimer(0);
 	}
 
+	//This functions handles the case where there are no next images - End of study
+	function handleEndOfStudy() {
+		navigate("/collection");
+	}
+
 	//Set the interval for displaying the next image
 	useInterval(() => handleNextImage(), imageTimer);
 	//Set the timer for the current image
-	useInterval(() => setTimer(timer + 1), 1000);
-	// console.log(timer);
+	// useInterval(() => {
+	// 	setTimer(timer + 1);
+	// }, 1000);
 
+	console.log(time, timer);
 	return (
 		<>
 			<Box
@@ -91,8 +104,12 @@ export default function Theater() {
 				>
 					<TheaterImage imageFile={validImages[imagesOrder[imageIndex]]} />
 				</Container>
-				<TimerInfo timer={timer} imageTimer= {imageTimer} practiceBlock={trackingText} />
-
+				<TimerInfo
+					timer={timer}
+					setTimer={setTimer}
+					imageTimer={imageTimer}
+					practiceBlock={trackingText}
+				/>
 			</Box>
 		</>
 	);
