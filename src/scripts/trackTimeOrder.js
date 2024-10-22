@@ -8,7 +8,7 @@ export default function trackTimeOrder(timeBlocks, position) {
 		if (position < blockRepetitions + passedImages) {
 			return [
 				blockTime,
-				`${position - passedImages + 1} of ${blockRepetitions}`,
+				`${position - passedImages } of ${blockRepetitions}`,
 			];
 		} else {
 			passedImages += blockRepetitions;

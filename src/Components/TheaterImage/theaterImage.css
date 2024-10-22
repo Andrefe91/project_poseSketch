@@ -4,12 +4,24 @@
     padding-top: 1rem;
     padding-bottom: 1rem;
     justify-content: center;
+    position: relative;
 }
 
 .theater-image img {
 	max-width: 100%;
     height: auto;
-    max-height: calc(100vh - 2rem);
+    max-height: calc(100vh - 7rem);
 	object-fit: contain;
     border-radius: 1rem;
+    z-index: 5;
+
+}
+
+
+
+#blur-effect {
+    content: "";
+    position: absolute;
+    filter: blur(10px) opacity(50%);
+    z-index: 1;
 }

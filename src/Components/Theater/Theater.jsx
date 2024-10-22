@@ -12,8 +12,9 @@ import trackTimeOrder from "../../scripts/trackTimeOrder";
 import useInterval from "../../Hooks/useInterval";
 //Components
 import TheaterImage from "../TheaterImage/TheaterImage";
+import TimerInfo from "../TimerInfo/TimerInfo";
 //Filters
-import "../../assets/noise.svg"
+import "../../assets/noise.svg";
 
 export default function Theater() {
 	//Settings of the whole application, obtained from a context
@@ -29,8 +30,7 @@ export default function Theater() {
 	);
 	//Track the index of the displayed image within the list generated, starting with the first
 	const [imageIndex, setImageIndex] = useState(0);
-	//Used to track the timer of a given image or image block
-	const [imageTimer, setImageTimer] = useState(1000);
+
 	//Used to track the number of completed images
 	const [imageNumber, setImageNumber] = useState(0);
 	//Timer for the current image
@@ -40,7 +40,8 @@ export default function Theater() {
 	const timeBlocks =
 		settings.options.study_format[settings.options.selected_study_format];
 	let [time, trackingText] = trackTimeOrder(timeBlocks, imageNumber);
-
+	//Used to track the timer of a given image or image block
+	const [imageTimer, setImageTimer] = useState(time);
 	//In case there are no images, redirect to HomePage
 	useEffect(() => {
 		if (validImages.length === 0) {
@@ -58,7 +59,6 @@ export default function Theater() {
 		} else {
 			setImageIndex(imageIndex + 1);
 		}
-		console.log(trackingText);
 		setImageTimer(time * 1000);
 		//Reset the timer of the current image
 		setTimer(0);
@@ -68,12 +68,14 @@ export default function Theater() {
 	useInterval(() => handleNextImage(), imageTimer);
 	//Set the timer for the current image
 	useInterval(() => setTimer(timer + 1), 1000);
-	console.log(timer);
+	// console.log(timer);
 
 	return (
 		<>
 			<Box
 				sx={{
+					display: "flex",
+					flexDirection: "column",
 					width: "100vw",
 					height: "100vh",
 					bgcolor: "#111111",
@@ -89,6 +91,8 @@ export default function Theater() {
 				>
 					<TheaterImage imageFile={validImages[imagesOrder[imageIndex]]} />
 				</Container>
+				<TimerInfo timer={timer} imageTimer= {imageTimer} practiceBlock={trackingText} />
+
 			</Box>
 		</>
 	);

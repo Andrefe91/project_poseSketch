@@ -19,7 +19,8 @@ function TheaterImage({ imageFile }) {
 		<>
 			<div className="theater-image">
 				<img src={URL.createObjectURL(imageFile)} alt={imageName} />
-				
+				{/* [TODO] Decide if i leave this effect active or change it with another thing */}
+				{/* <img src={URL.createObjectURL(imageFile)} alt={imageName} id="blur-effect"/> */}
 			</div>
 		</>
 	);
