@@ -32,7 +32,7 @@ export default function Theater() {
 	const [imageIndex, setImageIndex] = useState(0);
 
 	//Used to track the number of completed images
-	const [imageNumber, setImageNumber] = useState(0);
+	const [imageNumber, setImageNumber] = useState(1);
 
 
 	//This function handles the time blocks for the images

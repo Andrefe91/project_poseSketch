@@ -7,6 +7,7 @@ export default function trackTimeOrder(timeBlocks, position) {
 		let blockTime = timeBlocks[i][1];
 
 		if (position <= blockRepetitions + passedImages) {
+			console.log(position, passedImages, position - passedImages)
 			return [
 				blockTime,
 				`${position - passedImages } of ${blockRepetitions}`,
