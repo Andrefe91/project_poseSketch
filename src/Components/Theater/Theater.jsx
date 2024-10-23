@@ -33,8 +33,7 @@ export default function Theater() {
 
 	//Used to track the number of completed images
 	const [imageNumber, setImageNumber] = useState(0);
-	//Timer for the current image
-	const [timer, setTimer] = useState(0);
+
 
 	//This function handles the time blocks for the images
 	const timeBlocks =
@@ -46,7 +45,7 @@ export default function Theater() {
 		handleEndOfStudy();
 	}
 	//Used to track the timer of a given image or image block
-	const [imageTimer, setImageTimer] = useState(time);
+	const [imageTimer, setImageTimer] = useState(time * 1000);
 	//In case there are no images, redirect to HomePage
 	useEffect(() => {
 		if (validImages.length === 0) {
@@ -56,6 +55,7 @@ export default function Theater() {
 
 	//This function handles the change of index for the images
 	function handleNextImage() {
+		setInterval( () => (2+2), 2000)
 		//If not end of the study session, handle the next image
 		setImageNumber(imageNumber + 1);
 
@@ -67,7 +67,6 @@ export default function Theater() {
 		}
 		setImageTimer(time * 1000);
 		//Reset the timer of the current image
-		setTimer(0);
 	}
 
 	//This functions handles the case where there are no next images - End of study
@@ -77,12 +76,7 @@ export default function Theater() {
 
 	//Set the interval for displaying the next image
 	useInterval(() => handleNextImage(), imageTimer);
-	//Set the timer for the current image
-	// useInterval(() => {
-	// 	setTimer(timer + 1);
-	// }, 1000);
 
-	console.log(time, timer);
 	return (
 		<>
 			<Box
@@ -105,8 +99,6 @@ export default function Theater() {
 					<TheaterImage imageFile={validImages[imagesOrder[imageIndex]]} />
 				</Container>
 				<TimerInfo
-					timer={timer}
-					setTimer={setTimer}
 					imageTimer={imageTimer}
 					practiceBlock={trackingText}
 				/>
