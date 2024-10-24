@@ -1,5 +1,5 @@
 //Modules
-import React, { useContext, useMemo, useEffect, useState, useRef } from "react";
+import React, { useContext, useMemo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Container } from "@mui/material";
 //Context
@@ -8,12 +8,15 @@ import { imageContext } from "../../Context/imageContext";
 //Scripts
 import generateOrder from "../../scripts/generateOrder";
 import trackTimeOrder from "../../scripts/trackTimeOrder";
+
 //Components
 import TheaterImage from "../TheaterImage/TheaterImage";
 import TimerInfo from "../TimerInfo/TimerInfo";
 import TheaterTop from "../TheaterTop/TheaterTop";
 //Filters
 import "../../assets/noise.svg";
+//Hooks
+
 
 export default function Theater() {
 	const navigate = useNavigate();
@@ -119,6 +122,7 @@ export default function Theater() {
 					imageTimer={time}
 					practiceBlock={trackingText}
 					handleNextImage={handleNextImage}
+					timerBeeps={settings.options.timer_beeps}
 				/>
 			</Box>
 		</>
