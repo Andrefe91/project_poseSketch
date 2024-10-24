@@ -8,8 +8,6 @@ import { imageContext } from "../../Context/imageContext";
 //Scripts
 import generateOrder from "../../scripts/generateOrder";
 import trackTimeOrder from "../../scripts/trackTimeOrder";
-//Hooks
-import useInterval from "../../Hooks/useInterval";
 //Components
 import TheaterImage from "../TheaterImage/TheaterImage";
 import TimerInfo from "../TimerInfo/TimerInfo";
@@ -21,6 +19,13 @@ export default function Theater() {
 	const { settings } = useContext(settingsContext);
 	//Loaded images, obtained from a context
 	const { validImages } = useContext(imageContext);
+	//In case there are no images, redirect to HomePage
+	useEffect(() => {
+		if (validImages.length === 0) {
+			navigate("/");
+		}
+	}, [validImages]);
+
 	const navigate = useNavigate();
 	//The order of images, generated from the settings and loaded images number
 	const random = settings.options.order == "random" ? true : false;
@@ -34,7 +39,6 @@ export default function Theater() {
 	//Used to track the number of completed images
 	const [imageNumber, setImageNumber] = useState(1);
 
-
 	//This function handles the time blocks for the images
 	const timeBlocks =
 		settings.options.study_format[settings.options.selected_study_format];
@@ -44,18 +48,9 @@ export default function Theater() {
 	if (trackingText == "End of Study") {
 		handleEndOfStudy();
 	}
-	//Used to track the timer of a given image or image block
-	const [imageTimer, setImageTimer] = useState(time * 1000);
-	//In case there are no images, redirect to HomePage
-	useEffect(() => {
-		if (validImages.length === 0) {
-			navigate("/");
-		}
-	}, [validImages]);
 
 	//This function handles the change of index for the images
 	function handleNextImage() {
-		setInterval( () => (2+2), 2000)
 		//If not end of the study session, handle the next image
 		setImageNumber(imageNumber + 1);
 
@@ -65,17 +60,12 @@ export default function Theater() {
 		} else {
 			setImageIndex(imageIndex + 1);
 		}
-		setImageTimer(time * 1000);
-		//Reset the timer of the current image
 	}
 
 	//This functions handles the case where there are no next images - End of study
 	function handleEndOfStudy() {
 		navigate("/collection");
 	}
-
-	//Set the interval for displaying the next image
-	useInterval(() => handleNextImage(), imageTimer);
 
 	return (
 		<>
@@ -99,8 +89,9 @@ export default function Theater() {
 					<TheaterImage imageFile={validImages[imagesOrder[imageIndex]]} />
 				</Container>
 				<TimerInfo
-					imageTimer={imageTimer}
+					imageTimer={time}
 					practiceBlock={trackingText}
+					handleNextImage={handleNextImage}
 				/>
 			</Box>
 		</>

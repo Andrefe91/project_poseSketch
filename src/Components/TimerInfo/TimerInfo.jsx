@@ -8,24 +8,23 @@ import TimerBlock from "../TimerBlock/TimerBlock";
 //Css
 import "./theaterInfo.css";
 
-function TimerInfo({ imageTimer, practiceBlock }) {
+function TimerInfo({ imageTimer, practiceBlock, handleNextImage }) {
 	//Timer for the current image
 	const [timer, setTimer] = useState(0);
 
-	if (timer > imageTimer / 1000 - 1) {
+	if (timer > imageTimer - 1) {
+		handleNextImage();
 		setTimer(0);
 	}
-
 	// Set the timer for the current image
 	useInterval(() => {
 		setTimer(timer + 1);
 	}, 1000);
 
-    console.log(timer)
 	return (
 		<div className="timer-info">
 			<p>
-				<TimerBlock time={timer + 1} /> / <TimerBlock time={imageTimer / 1000} />
+				<TimerBlock time={timer} /> / <TimerBlock time={imageTimer} />
 			</p>
 			<p>{practiceBlock}</p>
 		</div>
@@ -35,6 +34,7 @@ function TimerInfo({ imageTimer, practiceBlock }) {
 TimerInfo.propTypes = {
 	practiceBlock: PropTypes.string.isRequired,
 	imageTimer: PropTypes.number.isRequired,
+	handleNextImage: PropTypes.func.isRequired,
 };
 
 export default TimerInfo;
