@@ -1,5 +1,5 @@
 //Modules
-import React, { useContext, useMemo, useEffect, useState } from "react";
+import React, { useContext, useMemo, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Container } from "@mui/material";
 //Context
@@ -11,10 +11,13 @@ import trackTimeOrder from "../../scripts/trackTimeOrder";
 //Components
 import TheaterImage from "../TheaterImage/TheaterImage";
 import TimerInfo from "../TimerInfo/TimerInfo";
+import TheaterTop from "../TheaterTop/TheaterTop";
 //Filters
 import "../../assets/noise.svg";
 
 export default function Theater() {
+	const navigate = useNavigate();
+
 	//Settings of the whole application, obtained from a context
 	const { settings } = useContext(settingsContext);
 	//Loaded images, obtained from a context
@@ -26,7 +29,10 @@ export default function Theater() {
 		}
 	}, [validImages]);
 
-	const navigate = useNavigate();
+	//Get Optiosn from settings
+	const showOptions =
+		settings.options.image_information == "hide" ? false : true;
+
 	//The order of images, generated from the settings and loaded images number
 	const random = settings.options.order == "random" ? true : false;
 	const imagesOrder = useMemo(
@@ -39,6 +45,21 @@ export default function Theater() {
 	//Used to track the number of completed images
 	const [imageNumber, setImageNumber] = useState(1);
 
+	//Detect the keydown and act accordingly
+	useEffect(() => {
+		document.addEventListener("keydown", keyDownActions);
+	}, []);
+
+	function keyDownActions(e) {
+		switch (e.keyCode) {
+			case 27: // Escape Key
+				navigate("/collection"); //Navigate back to the collection
+				break;
+			default:
+				console.log("Key:", e.keyCode);
+				return;
+		}
+	}
 	//This function handles the time blocks for the images
 	const timeBlocks =
 		settings.options.study_format[settings.options.selected_study_format];
@@ -78,6 +99,11 @@ export default function Theater() {
 					bgcolor: "#111111",
 				}}
 			>
+				<TheaterTop
+					imageTitle={validImages[imagesOrder[imageIndex]].name}
+					showTitle={showOptions}
+				/>
+
 				<Container
 					sx={{
 						height: "100vh",
@@ -88,6 +114,7 @@ export default function Theater() {
 				>
 					<TheaterImage imageFile={validImages[imagesOrder[imageIndex]]} />
 				</Container>
+
 				<TimerInfo
 					imageTimer={time}
 					practiceBlock={trackingText}

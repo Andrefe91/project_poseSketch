@@ -1,0 +1,25 @@
+.imageTitle-top {
+    display: flex;
+    height: 1rem;
+}
+
+.imageTitle-top > p {
+    font-size: 1.5rem;
+    color: white;
+    margin: 0;
+    user-select: none;
+}
+
+#back-button {
+    position: absolute;
+    left: 20px;
+    cursor: pointer;
+
+    &:hover {
+        color: #008296;
+    }
+}
+
+#back-button > p {
+    display: inherit;
+}

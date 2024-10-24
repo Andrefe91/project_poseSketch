@@ -1,27 +1,25 @@
 .theater-image {
-    display: flex;
-    width: auto;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    justify-content: center;
-    position: relative;
+	display: flex;
+	width: auto;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	justify-content: center;
+	position: relative;
 }
 
 .theater-image img {
 	max-width: 100%;
-    height: auto;
-    max-height: calc(100vh - 7rem);
+	height: auto;
+	max-height: calc(100vh - 7rem);
 	object-fit: contain;
-    border-radius: 1rem;
-    z-index: 5;
+	border-radius: 1rem;
+	z-index: 5;
 
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
-
-
 #blur-effect {
-    content: "";
-    position: absolute;
-    filter: blur(10px) opacity(50%);
-    z-index: 1;
+	position: absolute;
+	filter: blur(3px) opacity(50%);
+	z-index: 1;
 }
