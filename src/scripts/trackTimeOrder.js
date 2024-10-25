@@ -20,5 +20,5 @@ export default function trackTimeOrder(timeBlocks, position) {
 		}
 	}
 
-	return [0, "End of Study"];
+	return [1, "End of Study"];
 }

@@ -3,6 +3,7 @@
     justify-content: space-around;
     padding: 0.5rem;
     background-color: inherit;
+    align-items: flex-end;
 
 }
 

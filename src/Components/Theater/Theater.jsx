@@ -11,16 +11,16 @@ import trackTimeOrder from "../../scripts/trackTimeOrder";
 
 //Components
 import TheaterImage from "../TheaterImage/TheaterImage";
-import TimerInfo from "../TimerInfo/TimerInfo";
+import TheaterControl from "../TheaterControl/TheaterControl";
 import TheaterTop from "../TheaterTop/TheaterTop";
 //Filters
 import "../../assets/noise.svg";
 //Hooks
 
+//This functions handles the case where there are no next images - End of study
 
 export default function Theater() {
 	const navigate = useNavigate();
-
 	//Settings of the whole application, obtained from a context
 	const { settings } = useContext(settingsContext);
 	//Loaded images, obtained from a context
@@ -48,34 +48,22 @@ export default function Theater() {
 	//Used to track the number of completed images
 	const [imageNumber, setImageNumber] = useState(1);
 
-	//Detect the keydown and act accordingly
-	useEffect(() => {
-		document.addEventListener("keydown", keyDownActions);
-	}, []);
-
-	function keyDownActions(e) {
-		switch (e.keyCode) {
-			case 27: // Escape Key
-				navigate("/collection"); //Navigate back to the collection
-				break;
-			default:
-				console.log("Key:", e.keyCode);
-				return;
-		}
-	}
 	//This function handles the time blocks for the images
 	const timeBlocks =
 		settings.options.study_format[settings.options.selected_study_format];
 	let [time, trackingText] = trackTimeOrder(timeBlocks, imageNumber);
+
+	function handleEndOfStudy() {
+		navigate("/collection");
+	}
 
 	//Check if it's the end of the study session
 	if (trackingText == "End of Study") {
 		handleEndOfStudy();
 	}
 
-	//This function handles the change of index for the images
+	//This function handles the change for the next image
 	function handleNextImage() {
-		//If not end of the study session, handle the next image
 		setImageNumber(imageNumber + 1);
 
 		if (imageIndex + 1 >= imagesOrder.length) {
@@ -86,9 +74,21 @@ export default function Theater() {
 		}
 	}
 
-	//This functions handles the case where there are no next images - End of study
-	function handleEndOfStudy() {
-		navigate("/collection");
+	//This function handles the change for the previous image
+	function handlePreviousImage() {
+		//ImageNumber can go less than 0
+		if (imageNumber - 1 <= 0) {
+			setImageNumber(0);
+		} else {
+			setImageNumber(imageNumber - 1);
+		}
+
+		if (imageIndex - 1 < 0) {
+			//If the current image is the first one, reset the index to the last
+			setImageIndex(imagesOrder.length - 1);
+		} else {
+			setImageIndex(imageIndex - 1);
+		}
 	}
 
 	return (
@@ -118,10 +118,12 @@ export default function Theater() {
 					<TheaterImage imageFile={validImages[imagesOrder[imageIndex]]} />
 				</Container>
 
-				<TimerInfo
+				<TheaterControl
+					imageIndex={imageIndex}
 					imageTimer={time}
 					practiceBlock={trackingText}
 					handleNextImage={handleNextImage}
+					handlePreviousImage={handlePreviousImage}
 					timerBeeps={settings.options.timer_beeps}
 				/>
 			</Box>
