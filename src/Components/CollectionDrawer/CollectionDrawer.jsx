@@ -159,7 +159,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 				[title]: presetBodyConvert(body),
 			},
 		}));
-		
+
 		//Allow to save the selected Preset
 		handleSaveOptions();
 
@@ -474,13 +474,13 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 									name="pause_controls"
 								>
 									<FormControlLabel
-										value="allow"
+										value={true}
 										control={<Radio />}
 										label="Allow"
 									/>
 
 									<FormControlLabel
-										value="dont_allow"
+										value= {false}
 										control={<Radio />}
 										label="Don't Allow"
 									/>

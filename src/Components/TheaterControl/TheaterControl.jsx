@@ -24,6 +24,7 @@ function TheaterControl({
 	handleNextImage,
 	handlePreviousImage,
 	timerBeeps,
+	allowPause,
 }) {
 	const navigate = useNavigate();
 	//Timer for the current image
@@ -77,7 +78,9 @@ function TheaterControl({
 				handlePausePlay();
 				break;
 			case 40: //Down arrow key
-				handlePausePlay();
+				if (allowPause == "true") {
+					handlePausePlay();
+				}
 				break;
 			default:
 				console.log("Key:", e.keyCode);
@@ -116,10 +119,10 @@ function TheaterControl({
 						<ArrowBackIosIcon />
 					</Button>
 
-					<Button onClick={() => handlePausePlay()}>
+					{allowPause == "true" && <Button onClick={() => handlePausePlay()}>
 						{timerInterval && <PauseIcon />}
 						{!timerInterval && <PlayArrowIcon />}
-					</Button>
+					</Button>}
 
 					<Button
 						onClick={() => {
@@ -144,6 +147,7 @@ TheaterControl.propTypes = {
 	handleNextImage: PropTypes.func.isRequired,
 	handlePreviousImage: PropTypes.func.isRequired,
 	timerBeeps: PropTypes.string.isRequired,
+	allowPause: PropTypes.bool.isRequired,
 };
 
 export default TheaterControl;

@@ -27,7 +27,7 @@ let appSettings = {
         image_information: "hide",
         timer_visibility: "constant",
         timer_beeps: "3",
-        pause_controls: "allow"
+        pause_controls: "true",
 	},
 };
 
