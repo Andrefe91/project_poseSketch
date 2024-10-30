@@ -15,9 +15,7 @@ import generateBeep from "../../scripts/generateBeep";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import PauseIcon from "@mui/icons-material/Pause";
-import CachedIcon from "@mui/icons-material/Cached";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-
 
 function TheaterControl({
 	imageIndex,
@@ -25,7 +23,7 @@ function TheaterControl({
 	practiceBlock,
 	handleNextImage,
 	handlePreviousImage,
-	timerBeeps
+	timerBeeps,
 }) {
 	const navigate = useNavigate();
 	//Timer for the current image
@@ -33,18 +31,16 @@ function TheaterControl({
 	const [timerInterval, setTimerInterval] = useState(1000);
 	//Declaring the constant variable for navigation
 
-
 	if (timer > imageTimer - 1) {
-		console.log("Timer", timer)
 		handleNextImage();
 		setTimer(0);
 	}
 
 	// Generate beep sound when timer reaches value less than timerBeeps
 	if (timerBeeps != 0) {
-		//If timer is 0, the options got deactivated
+		//If timer is 0, the options gets deactivated
 		if (timer >= imageTimer - timerBeeps) {
-			generateBeep(80, 800, 20);
+			generateBeep(80, 650, 5);
 		}
 	}
 
@@ -53,31 +49,48 @@ function TheaterControl({
 		setTimer(timer + 1);
 	}, timerInterval);
 
+	// Detect the keydown and act accordingly
+	useEffect(() => {
+		// Add the event listener
+		document.addEventListener("keydown", keyDownActions);
+
+		// Remove the event listener on cleanup
+		return () => {
+			document.removeEventListener("keydown", keyDownActions);
+		};
+	}, [imageIndex, timerInterval]); // Update the keyDownActions closure function with every change of the imageIndex.
+
+	const keyDownActions = (e) => {
+		switch (e.keyCode) {
+			case 27: // Escape Key
+				navigate("/collection"); // Navigate back to the collection
+				break;
+			case 39: // Right Arrow Key
+				handleNextImage();
+				setTimer(0);
+				break;
+			case 37: // Left Arrow Key
+				setTimer(0);
+				handlePreviousImage();
+				break;
+			case 32: //Space KeyBoard
+				handlePausePlay();
+				break;
+			case 40: //Down arrow key
+			    handlePausePlay();
+				break;
+			default:
+				console.log("Key:", e.keyCode);
+				return;
+		}
+	};
+
 	// Function to handle the pause/play button
 	function handlePausePlay() {
 		if (timerInterval === 1000) {
 			setTimerInterval(null);
 		} else {
 			setTimerInterval(1000);
-		}
-	}
-
-	// Detect the keydown and act accordingly
-	useEffect(() => {
-		document.addEventListener("keydown", keyDownActions);
-	}, []);
-
-	function keyDownActions(e) {
-		switch (e.keyCode) {
-			case 27: // Escape Key
-				navigate("/collection"); //Navigate back to the collection
-				break;
-			case 39: // Right Arrow Key
-				handleNextImage();
-				break;
-			default:
-				console.log("Key:", e.keyCode);
-				return;
 		}
 	}
 
@@ -102,13 +115,12 @@ function TheaterControl({
 					>
 						<ArrowBackIosIcon />
 					</Button>
-					<Button>
-						<CachedIcon />
-					</Button>
+
 					<Button onClick={() => handlePausePlay()}>
 						{timerInterval && <PauseIcon />}
 						{!timerInterval && <PlayArrowIcon />}
 					</Button>
+
 					<Button
 						onClick={() => {
 							handleNextImage();
