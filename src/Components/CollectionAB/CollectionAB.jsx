@@ -1,5 +1,5 @@
 //Modules
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -18,21 +18,44 @@ export default function CollectionAB() {
 	const [drawerState, setDrawerState] = useState(false);
 	const navigate = useNavigate();
 
-	function toggleDrawer(event) {
-		if (
-			event.type === "keydown" &&
-			(event.key === "Tab" || event.key === "Shift")
-		) {
-			return;
+	function toggleDrawer() {
+		if (drawerState) {
+			setDrawerState(false);
+		} else {
+			setDrawerState(true);
 		}
-		setDrawerState(true);
 	}
+
+	// Detect the keydown and act accordingly
+	useEffect(() => {
+		// Add the event listener
+		document.addEventListener("keydown", keyDownActions);
+
+		// Remove the event listener on cleanup
+		return () => {
+			document.removeEventListener("keydown", keyDownActions);
+		};
+	}, [drawerState]); // Update the keyDownActions closure function.
+
+	const keyDownActions = (e) => {
+		switch (e.keyCode) {
+			case 87: // w Key
+				navigate("/theater");
+				break;
+			case 83: // s Key
+				toggleDrawer();
+				break;
+			default:
+				console.log("Key:", e);
+				return;
+		}
+	};
 
 	return (
 		<>
 			<AppBar position="sticky" sx={{ marginBottom: "1rem" }}>
 				<Container maxWidth="xxl">
-					<Box sx={{ flexGrow: 1, display: "flex"}}>
+					<Box sx={{ flexGrow: 1, display: "flex" }}>
 						<Tooltip title="Go back to Home Page" arrow>
 							<Button
 								startIcon={<ArrowBackIcon />}
@@ -68,7 +91,7 @@ export default function CollectionAB() {
 								color: "inherit",
 							}}
 							className="navbar-button"
-							onClick={(e) => toggleDrawer(e)}
+							onClick={toggleDrawer}
 						>
 							Settings
 						</Button>
@@ -76,7 +99,11 @@ export default function CollectionAB() {
 				</Container>
 			</AppBar>
 
-            <CollectionDrawer anchor="right" drawerState={drawerState} toggleDrawerFunc={setDrawerState}/>
+			<CollectionDrawer
+				anchor="right"
+				drawerState={drawerState}
+				toggleDrawerFunc={setDrawerState}
+			/>
 		</>
 	);
 }

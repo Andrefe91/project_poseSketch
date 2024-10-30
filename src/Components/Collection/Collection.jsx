@@ -30,10 +30,10 @@ function Collection() {
 	return (
 		<>
 			<div className="page-container">
-                <Box sx={{width: "100%"}}>
-                    <CollectionAB />
-                    <div className="collection-container">{imageGrid}</div>
-                </Box>
+				<Box sx={{ width: "100%" }}>
+					<CollectionAB />
+					<div className="collection-container">{imageGrid}</div>
+				</Box>
 
 				<Fab
 					color="primary"
