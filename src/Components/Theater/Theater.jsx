@@ -78,7 +78,7 @@ export default function Theater() {
 	function handlePreviousImage() {
 		//ImageNumber can go less than 0
 		if (imageNumber - 1 <= 0) {
-			setImageNumber(0);
+			return
 		} else {
 			setImageNumber(imageNumber - 1);
 		}
