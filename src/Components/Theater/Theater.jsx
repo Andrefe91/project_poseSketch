@@ -42,11 +42,14 @@ export default function Theater() {
 		() => generateOrder(random, validImages.length),
 		[settings],
 	);
-	//Track the index of the displayed image within the list generated, starting with the first
+	//Track the index of the displayed image within the list generated. This index tracks the succession of the images
 	const [imageIndex, setImageIndex] = useState(0);
 
 	//Used to track the number of completed images
 	const [imageNumber, setImageNumber] = useState(1);
+
+	//Used to track the Breaks
+	const [studyBreak, setStudyBreak] = useState(false);
 
 	//This function handles the time blocks for the images
 	const timeBlocks =
@@ -62,15 +65,27 @@ export default function Theater() {
 		handleEndOfStudy();
 	}
 
+	useEffect(() => {
+		//This inform the TheaterImage component if the section is a Study Break
+		if (trackingText == "Break") {
+			setStudyBreak(true);
+		} else {
+			setStudyBreak(false);
+		}
+	}, [imageNumber]);
+
 	//This function handles the change for the next image
 	function handleNextImage() {
 		setImageNumber(imageNumber + 1);
 
-		if (imageIndex + 1 >= imagesOrder.length) {
-			//If the current image is the last one, reset the index to the first
-			setImageIndex(0);
-		} else {
-			setImageIndex(imageIndex + 1);
+		//Dont advance index if next block is a Study Break
+		if (trackingText != "Break") {
+			if (imageIndex + 1 >= imagesOrder.length) {
+				//If the current image is the last one, reset the index to the first
+				setImageIndex(0); //The index controls the progress of the study
+			} else {
+				setImageIndex(imageIndex + 1);
+			}
 		}
 	}
 
@@ -78,16 +93,19 @@ export default function Theater() {
 	function handlePreviousImage() {
 		//ImageNumber can go less than 0
 		if (imageNumber - 1 <= 0) {
-			return
+			return;
 		} else {
 			setImageNumber(imageNumber - 1);
 		}
 
-		if (imageIndex - 1 < 0) {
-			//If the current image is the first one, reset the index to the last
-			setImageIndex(imagesOrder.length - 1);
-		} else {
-			setImageIndex(imageIndex - 1);
+		//Dont advance index if previous block is a Study Break
+		if (trackingText != "Break") {
+			if (imageIndex - 1 < 0) {
+				//If the current image is the first one, reset the index to the last
+				setImageIndex(imagesOrder.length - 1);
+			} else {
+				setImageIndex(imageIndex - 1);
+			}
 		}
 	}
 
@@ -115,11 +133,14 @@ export default function Theater() {
 						justifyContent: "center",
 					}}
 				>
-					<TheaterImage imageFile={validImages[imagesOrder[imageIndex]]} />
+					<TheaterImage
+						imageFile={validImages[imagesOrder[imageIndex]]}
+						studyBreak={studyBreak}
+					/>
 				</Container>
 
 				<TheaterControl
-					imageIndex={imageIndex}
+					imageNumber={imageNumber}
 					imageTimer={time}
 					practiceBlock={trackingText}
 					handleNextImage={handleNextImage}

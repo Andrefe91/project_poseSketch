@@ -1,10 +1,12 @@
 //Modules
 import React from "react";
 import { PropTypes } from "prop-types";
+//Assets
+import restIcon from "../../assets/Rest_Icon.svg";
 //Css
 import "./theaterImage.css";
 
-function TheaterImage({ imageFile }) {
+function TheaterImage({ imageFile, studyBreak }) {
 	//Check if the image exists
 	if (!imageFile) {
 		return;
@@ -18,7 +20,16 @@ function TheaterImage({ imageFile }) {
 	return (
 		<>
 			<div className="theater-image">
-				<img src={URL.createObjectURL(imageFile)} alt={imageName} />
+				{!studyBreak && (
+					<img
+						src={URL.createObjectURL(imageFile)}
+						alt={imageName}
+						className="shadowed"
+					/>
+				)}
+
+				{/* If the section is a break, display the icon */}
+				{studyBreak && <img src={restIcon} alt="Rest" />}
 				{/* [TODO] Decide if i leave this effect active or change it with another thing */}
 				{/* <img src={URL.createObjectURL(imageFile)} alt={imageName} id="blur-effect"/> */}
 			</div>
@@ -27,7 +38,8 @@ function TheaterImage({ imageFile }) {
 }
 
 TheaterImage.propTypes = {
-	imageFile: PropTypes.object,
+	imageFile: PropTypes.object.isRequired,
+	studyBreak: PropTypes.bool.isRequired,
 };
 
 export default TheaterImage;

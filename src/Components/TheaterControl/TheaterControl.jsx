@@ -18,7 +18,7 @@ import PauseIcon from "@mui/icons-material/Pause";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 function TheaterControl({
-	imageIndex,
+	imageNumber,
 	imageTimer,
 	practiceBlock,
 	handleNextImage,
@@ -58,7 +58,7 @@ function TheaterControl({
 		return () => {
 			document.removeEventListener("keydown", keyDownActions);
 		};
-	}, [imageIndex, timerInterval]); // Update the keyDownActions closure function with every change of the imageIndex.
+	}, [imageNumber, timerInterval]); // Update the keyDownActions closure function with every change of the imageNumber.
 
 	const keyDownActions = (e) => {
 		switch (e.keyCode) {
@@ -77,7 +77,7 @@ function TheaterControl({
 				handlePausePlay();
 				break;
 			case 40: //Down arrow key
-			    handlePausePlay();
+				handlePausePlay();
 				break;
 			default:
 				console.log("Key:", e.keyCode);
@@ -111,7 +111,7 @@ function TheaterControl({
 							handlePreviousImage();
 							setTimer(0);
 						}}
-						disabled={imageIndex === 0}
+						disabled={imageNumber === 1}
 					>
 						<ArrowBackIosIcon />
 					</Button>
@@ -138,7 +138,7 @@ function TheaterControl({
 }
 
 TheaterControl.propTypes = {
-	imageIndex: PropTypes.number.isRequired,
+	imageNumber: PropTypes.number.isRequired,
 	practiceBlock: PropTypes.string.isRequired,
 	imageTimer: PropTypes.number.isRequired,
 	handleNextImage: PropTypes.func.isRequired,
