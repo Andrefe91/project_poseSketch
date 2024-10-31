@@ -1,15 +1,36 @@
 .timer-info {
-    display: flex;
-    justify-content: space-around;
-    padding: 0.5rem;
-    background-color: inherit;
-    align-items: flex-end;
-
+	display: flex;
+	justify-content: space-around;
+	padding: 0.5rem;
+	background-color: inherit;
+	align-items: flex-end;
 }
 
 .timer-info p {
-    font-size: 1.5rem;
-    color: white;
-    margin: 0;
-    user-select: none;
+	font-size: 1.5rem;
+	color: white;
+	margin: 0;
+	user-select: none;
+}
+
+.fade {
+    -webkit-animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) 1s both;
+	animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) 1s both;
+}
+
+@-webkit-keyframes fade-in {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+@keyframes fade-in {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 }

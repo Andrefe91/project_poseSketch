@@ -25,22 +25,33 @@ function TheaterControl({
 	handlePreviousImage,
 	timerBeeps,
 	allowPause,
+	timerVisibilityOption,
 }) {
 	const navigate = useNavigate();
 	//Timer for the current image
 	const [timer, setTimer] = useState(0);
 	const [timerInterval, setTimerInterval] = useState(1000);
-	//Declaring the constant variable for navigation
 
+	// Control the visibility of the timer
+	const [timerVisibility, setTimerVisibility] = useState(timerVisibilityOption);
+
+	// Set next image by timer
 	if (timer > imageTimer - 1) {
 		handleNextImage();
 		setTimer(0);
+
+		if (timerVisibilityOption == "fade") {
+			setTimerVisibility("fade"); //Fade the timer if selected the option
+		}
 	}
 
 	// Generate beep sound when timer reaches value less than timerBeeps
 	if (timerBeeps != 0) {
 		//If timer is 0, the options gets deactivated
 		if (timer >= imageTimer - timerBeeps) {
+			if (timerVisibility == "fade") {
+				setTimerVisibility("constant"); //Show timer when beeping
+			}
 			generateBeep(80, 650, 5);
 		}
 	}
@@ -69,13 +80,23 @@ function TheaterControl({
 			case 39: // Right Arrow Key
 				handleNextImage();
 				setTimer(0);
+
+				//Timer visibility Management
+				setTimerVisibility("constant");
+				hideTimer();
 				break;
 			case 37: // Left Arrow Key
-				setTimer(0);
 				handlePreviousImage();
+				setTimer(0);
+
+				//Timer visibility Management
+				setTimerVisibility("constant");
+				hideTimer();
 				break;
 			case 32: //Space KeyBoard
-				handlePausePlay();
+				if (allowPause == "true") {
+					handlePausePlay();
+				}
 				break;
 			case 40: //Down arrow key
 				if (allowPause == "true") {
@@ -91,15 +112,26 @@ function TheaterControl({
 	// Function to handle the pause/play button
 	function handlePausePlay() {
 		if (timerInterval === 1000) {
+			setTimerVisibility("constant");
 			setTimerInterval(null);
 		} else {
+			setTimerVisibility("fade");
 			setTimerInterval(1000);
 		}
 	}
 
+	function hideTimer() {
+		//Hide the timer again if the option is selected
+		setTimeout(() => {
+			if (timerVisibilityOption == "fade") {
+				setTimerVisibility("fade");
+			}
+		}, 1000);
+	}
+
 	return (
 		<div className="timer-info">
-			<p>
+			<p className={timerVisibility}>
 				<TimerBlock time={timer} /> / <TimerBlock time={imageTimer} />
 			</p>
 
@@ -113,21 +145,31 @@ function TheaterControl({
 						onClick={() => {
 							handlePreviousImage();
 							setTimer(0);
+
+							//Timer visibility Management
+							setTimerVisibility("constant");
+							hideTimer();
 						}}
 						disabled={imageNumber === 1}
 					>
 						<ArrowBackIosIcon />
 					</Button>
 
-					{allowPause == "true" && <Button onClick={() => handlePausePlay()}>
-						{timerInterval && <PauseIcon />}
-						{!timerInterval && <PlayArrowIcon />}
-					</Button>}
+					{allowPause == "true" && (
+						<Button onClick={() => handlePausePlay()}>
+							{timerInterval && <PauseIcon />}
+							{!timerInterval && <PlayArrowIcon />}
+						</Button>
+					)}
 
 					<Button
 						onClick={() => {
 							handleNextImage();
 							setTimer(0);
+
+							//Timer visibility Management
+							setTimerVisibility("constant");
+							hideTimer();
 						}}
 					>
 						<ArrowForwardIosIcon />
@@ -147,7 +189,8 @@ TheaterControl.propTypes = {
 	handleNextImage: PropTypes.func.isRequired,
 	handlePreviousImage: PropTypes.func.isRequired,
 	timerBeeps: PropTypes.string.isRequired,
-	allowPause: PropTypes.bool.isRequired,
+	allowPause: PropTypes.string.isRequired,
+	timerVisibilityOption: PropTypes.string.isRequired,
 };
 
 export default TheaterControl;

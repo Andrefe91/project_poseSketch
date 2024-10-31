@@ -147,6 +147,7 @@ export default function Theater() {
 					handlePreviousImage={handlePreviousImage}
 					timerBeeps={settings.options.timer_beeps}
 					allowPause = {settings.options.pause_controls}
+					timerVisibilityOption={settings.options.timer_visibility}
 				/>
 			</Box>
 		</>
