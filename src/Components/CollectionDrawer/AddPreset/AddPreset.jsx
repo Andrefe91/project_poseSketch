@@ -10,10 +10,11 @@ import PresetItem from "./PresetInfo";
 //Icons
 import BrushIcon from "@mui/icons-material/Brush";
 import FreeBreakfastIcon from "@mui/icons-material/FreeBreakfast";
+import DeleteIcon from "@mui/icons-material/Delete";
+import SaveIcon from "@mui/icons-material/Save";
 
-function AddPreset({ setAddingPreset, preset, setPreset }) {
+function AddPreset({ setAddingPreset, preset, setPreset, openDeleteDialog }) {
 	const [presetName, setPresetName] = useState(preset[0]);
-
 
 	//Define verb for the preset action
 	const presetAction = preset[1].length > 0 ? "Edit" : "New";
@@ -134,11 +135,25 @@ function AddPreset({ setAddingPreset, preset, setPreset }) {
 					<Box
 						sx={{
 							display: "flex",
-							justifyContent: "flex-end",
+							justifyContent:
+								presetAction == "Edit" ? "space-between" : "flex-end",
 							mb: "0.5rem",
 							mt: "0.5rem",
 						}}
 					>
+						{presetAction == "Edit" && (
+							<Button
+								size="small"
+								color="secondary"
+								variant="outlined"
+								disableElevation
+								onClick={() => openDeleteDialog()}
+								startIcon={<DeleteIcon />}
+							>
+								Delete
+							</Button>
+						)}
+
 						<Button
 							size="small"
 							color="primary"
@@ -146,20 +161,22 @@ function AddPreset({ setAddingPreset, preset, setPreset }) {
 							disableElevation
 							type="submit"
 							onClick={() => setPreset(presetName, presetBody)}
+							startIcon={<SaveIcon />}
 						>
 							Save
 						</Button>
 
-						<Button
-							size="small"
-							variant="outlined"
-							sx={{ ml: "0.2rem" }}
-							onClick={() => setAddingPreset(false)}
-							disableElevation
-
-						>
-							Cancel
-						</Button>
+						{presetAction == "New" && (
+							<Button
+								size="small"
+								variant="outlined"
+								sx={{ ml: "0.2rem" }}
+								onClick={() => setAddingPreset(false)}
+								disableElevation
+							>
+								Cancel
+							</Button>
+						)}
 					</Box>
 				</FormControl>
 			</Box>
@@ -173,4 +190,5 @@ AddPreset.propTypes = {
 	setAddingPreset: PropTypes.func.isRequired,
 	preset: PropTypes.array.isRequired,
 	setPreset: PropTypes.func.isRequired,
+	openDeleteDialog: PropTypes.func.isRequired,
 };

@@ -39,7 +39,8 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import CloseIcon from "@mui/icons-material/Close";
+import SaveIcon from "@mui/icons-material/Save";
 
 function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 	const [openSelectionSettings, setOpenSelectionSettings] = useState(true);
@@ -174,6 +175,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 				...prevSettings.study_format,
 				[title]: presetBodyConvert(body),
 			},
+			selected_study_format: `${title}`
 		}));
 
 		//Allow to save the selected Preset
@@ -240,7 +242,11 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 					<Button onClick={closeDeleteDialog} color="primary" autoFocus>
 						Cancel
 					</Button>
-					<Button onClick={handleDeletePreset} color="secondary" variant="outlined">
+					<Button
+						onClick={handleDeletePreset}
+						color="secondary"
+						variant="outlined"
+					>
 						Delete
 					</Button>
 				</DialogActions>
@@ -396,18 +402,13 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 												</IconButton>
 											)}
 
-											{/* Delete the Preset */}
+											{/* Close the Preset */}
 											{addingPreset && (
 												<IconButton
-													aria-label="delete preset"
-													onClick={openDeleteDialog}
-													//Disable the button if the preset it's just been created or it's the only remaining
-													disabled={
-														!(newPreset[1].length > 0) ||
-														Object.keys(updatedOptions.study_format).length == 1
-													}
+													aria-label="close preset"
+													onClick={() => setAddingPreset(false)}
 												>
-													<DeleteIcon fontSize="small" />
+													<CloseIcon fontSize="small" />
 												</IconButton>
 											)}
 										</Box>
@@ -448,6 +449,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 										setAddingPreset={setAddingPreset}
 										preset={newPreset}
 										setPreset={setPreset}
+										openDeleteDialog={openDeleteDialog}
 									/>
 								)}
 							</Box>
@@ -608,8 +610,9 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 						<Button
 							variant="contained"
 							disableElevation
-							disabled={!saveOptions}
+							disabled={!saveOptions || addingPreset}
 							onClick={handleSaveSettings}
+							startIcon={<SaveIcon />}
 						>
 							Save
 						</Button>
