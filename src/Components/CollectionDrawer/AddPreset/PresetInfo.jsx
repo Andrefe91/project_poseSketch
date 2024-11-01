@@ -96,6 +96,13 @@ function PresetItem({
 						name="time"
 						onChange={(e) => modifySection(e)}
 						value={time}
+						slotProps={{
+							input: {
+								endAdornment: (
+									<InputAdornment position="end">seg</InputAdornment>
+								),
+							},
+						}}
 					/>
 
 					<IconButton
