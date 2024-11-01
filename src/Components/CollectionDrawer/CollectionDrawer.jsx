@@ -19,8 +19,7 @@ import {
 	InputLabel,
 	Select,
 	MenuItem,
-	IconButton
-
+	IconButton,
 } from "@mui/material";
 //CSS
 import "./collection-drawer.css";
@@ -34,7 +33,8 @@ import presetBodyConvert from "../../scripts/presetBodyConvert.js";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
-import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 	const [openSelectionSettings, setOpenSelectionSettings] = useState(true);
@@ -74,8 +74,18 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 		let presetName = updatedOptions.selected_study_format;
 		let presetBody = updatedOptions.study_format[presetName];
 
+		//If the Effects Tab is open, close it.
+		if (openEffectsSettings) {
+			handleOpenEffectsSettings();
+		}
+
+		//If the Selection Tab is open, close it.
+		if (openSelectionSettings) {
+			handleOpenSelectionSettings();
+		}
+
 		//Update the preset and activate the Create Component
-		setNewPreset(() => ([presetName, presetBody]))
+		setNewPreset(() => [presetName, presetBody]);
 		setAddingPreset(true);
 	}
 
@@ -164,6 +174,35 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 		handleSaveOptions();
 
 		setAddingPreset(false);
+	}
+
+	//This function handles the deletion of the Selected Preset
+	function handleDeletePreset() {
+		//First, close the Edit Preset Component
+		setAddingPreset(false);
+
+		//Call the presets and the selected to be removed
+		const presetToDelete = updatedOptions.selected_study_format;
+		const presetsAsArray = Object.entries(updatedOptions.study_format);
+
+		// Filter out the preset to be removed
+		const remainingPresetsArray = presetsAsArray.filter(
+			([key]) => key !== presetToDelete,
+		);
+
+		const remainingPresetsObject = Object.fromEntries(remainingPresetsArray);
+
+		// Get the first preset remaining
+		const firstRemainingPresetName = remainingPresetsArray[0][0];
+
+		// Update the updatedOptions with the remaining presets
+		setUpdatedOptions((prevSettings) => ({
+			...prevSettings,
+			study_format: { ...remainingPresetsObject },
+			selected_study_format: `${firstRemainingPresetName}`,
+		}));
+		//Allow to save the selected Preset
+		handleSaveOptions();
 	}
 
 	return (
@@ -269,7 +308,9 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 						<Box sx={{ pl: "2rem", mt: "1rem", pr: "1rem" }}>
 							<FormControl sx={{ display: "flex" }}>
 								<InputLabel id="study-format-setting-label">Preset</InputLabel>
-								<Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+								<Box
+									sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+								>
 									<Select
 										labelId="study-format-setting-label"
 										id="study-format-setting"
@@ -278,7 +319,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 										onChange={(e) => changeSelectedPreset(e)}
 										//Disable the Select if adding a new Preset.
 										disabled={addingPreset}
-										sx={{ display: "flex", flex: "1"}}
+										sx={{ display: "flex", flex: "1" }}
 									>
 										{/* List all the saved presets */}
 										{Object.keys(updatedOptions.study_format).map((preset) => {
@@ -290,13 +331,38 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 										})}
 									</Select>
 
-									<IconButton
-										aria-label="delete preset"
-										onClick={handleEditPreset}
+									<Box
+										sx={{
+											display: "flex",
+											flexDirection: "column",
+											gap: "0.5rem",
+										}}
 									>
-										<EditIcon fontSize="small"/>
-									</IconButton>
+										{/* Edit the Preset */}
+										{!addingPreset && (
+											<IconButton
+												aria-label="edit preset"
+												onClick={handleEditPreset}
+											>
+												<EditIcon fontSize="small" />
+											</IconButton>
+										)}
 
+										{/* Delete the Preset */}
+										{addingPreset && (
+											<IconButton
+												aria-label="delete preset"
+												onClick={handleDeletePreset}
+												//Disable the button if the preset it's just been created or it's the only remaining
+												disabled={
+													!(newPreset[1].length > 0) ||
+													Object.keys(updatedOptions.study_format).length == 1
+												}
+											>
+												<DeleteIcon fontSize="small" />
+											</IconButton>
+										)}
+									</Box>
 								</Box>
 							</FormControl>
 
@@ -308,7 +374,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 									startIcon={<AddIcon />}
 									onClick={() => {
 										//Set a new empty Preset
-										setNewPreset(["Meaningfull Name", []])
+										setNewPreset(["Meaningfull Name", []]);
 
 										//And activate the component
 										setAddingPreset(true);
@@ -480,7 +546,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 									/>
 
 									<FormControlLabel
-										value= {false}
+										value={false}
 										control={<Radio />}
 										label="Don't Allow"
 									/>
@@ -524,5 +590,3 @@ CollectionDrawer.propTypes = {
 };
 
 export default CollectionDrawer;
-
-
