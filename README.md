@@ -1,10 +1,13 @@
 # Project PoseSketch
+
 This is the repository for PoseSketch, an interactive tool designed to help artists practice gesture drawing by displaying dynamic reference images. Built with care using React.
 
 # Short term Objectives
+
 Give the app basic functionality, that is, allow to load and display of images for visualization in a Collection Page and with basic timing functions in the Theater.
 
 # Long term Objective:
+
 The app must have an interesting styling with the Materials UI Design System, also with
 the following features:
 
@@ -19,21 +22,27 @@ the following features:
 ## Pages
 
 ### HomePage:
-- [X] Drop Zone Functionality trough the React DropZone package.
+
+- [x] Drop Zone Functionality trough the React DropZone package.
 - [ ] Styling
 
 ### Collection:
-- [X] Collection Page for showing preview of all the images in the list.
+
+- [x] Collection Page for showing preview of all the images in the list.
 - [ ] Basic Settings system in the Collection used for the Theater Display.
 
+#### Optional Settings to add:
+
+- [ ] Flip Image by Vertical or Horizontal Axis for All images or at Random
+
 ### Theater:
-- [ ] Make a randomizating algorithm for image selection.
-- [ ] Show each of the loaded images in the list with a timer.
-- [ ] System for pause, stop and resume of the practice.
+
+- [x] Make a randomizating algorithm for image selection.
+- [x] System for pause, stop and resume of the practice.
 
 ### Information:
 
 - [ ] Add the information about the app
-    - [ ] About
-    - [ ] FAQ
-    - [ ] Changelog
+  - [ ] About
+  - [ ] FAQ
+  - [ ] Changelog

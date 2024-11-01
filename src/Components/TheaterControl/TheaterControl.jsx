@@ -115,7 +115,9 @@ function TheaterControl({
 			setTimerVisibility("constant");
 			setTimerInterval(null);
 		} else {
-			setTimerVisibility("fade");
+			if (timerVisibilityOption == "fade") {
+				setTimerVisibility("fade");
+			}
 			setTimerInterval(1000);
 		}
 	}
