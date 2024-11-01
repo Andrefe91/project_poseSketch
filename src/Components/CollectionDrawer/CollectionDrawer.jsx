@@ -20,7 +20,12 @@ import {
 	Select,
 	MenuItem,
 	IconButton,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogContentText,
 } from "@mui/material";
+
 //CSS
 import "./collection-drawer.css";
 //Context
@@ -43,6 +48,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 	const [saveOptions, setSaveOptions] = useState(false);
 	const [addingPreset, setAddingPreset] = useState(false);
 	const [newPreset, setNewPreset] = useState(["Meaningfull Name", []]);
+	const [openDeletePresetConfirm, setOpenDeletePresetConfirm] = useState(false);
 
 	//Settings of the whole application, obtained from a context
 	const { settings, setSettings } = useContext(settingsContext);
@@ -178,8 +184,9 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 
 	//This function handles the deletion of the Selected Preset
 	function handleDeletePreset() {
-		//First, close the Edit Preset Component
+		//First, close the Edit Preset Component and the Confirm Delete Dialog
 		setAddingPreset(false);
+		closeDeleteDialog();
 
 		//Call the presets and the selected to be removed
 		const presetToDelete = updatedOptions.selected_study_format;
@@ -205,381 +212,423 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 		handleSaveOptions();
 	}
 
+	//This code handles the Dialog to confirm the deletion of the Preset
+	function openDeleteDialog() {
+		setOpenDeletePresetConfirm(true);
+	}
+
+	function closeDeleteDialog() {
+		setOpenDeletePresetConfirm(false);
+	}
+
 	return (
-		<Drawer
-			anchor={anchor}
-			open={drawerState}
-			onClose={() => {
-				toggleDrawerFunc(false);
-				setSaveOptions(false);
-			}}
-		>
-			<Box
-				sx={{
-					width: 320,
-					borderRight: 1,
-					borderColor: "divider",
+		<>
+			<Dialog
+				open={openDeletePresetConfirm}
+				onClose={closeDeleteDialog}
+				aria-labelledby="alert-dialog-delete-preset"
+				aria-describedby="alert-dialog-confirm-delete-preset"
+			>
+				<DialogContent>
+					<DialogContentText id="alert-dialog-delete-preset-description">
+						Are you sure you want to delete this preset ? Once Saved, the preset
+						can be recovered.
+					</DialogContentText>
+				</DialogContent>
+
+				<DialogActions>
+					<Button onClick={closeDeleteDialog} color="primary" autoFocus>
+						Cancel
+					</Button>
+					<Button onClick={handleDeletePreset} color="secondary" variant="outlined">
+						Delete
+					</Button>
+				</DialogActions>
+			</Dialog>
+
+			<Drawer
+				anchor={anchor}
+				open={drawerState}
+				onClose={() => {
+					toggleDrawerFunc(false);
+					setSaveOptions(false);
 				}}
 			>
-				<List
-					sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-					component="nav"
-					aria-labelledby="nested-list-subheader"
+				<Box
+					sx={{
+						width: 320,
+						borderRight: 1,
+						borderColor: "divider",
+					}}
 				>
-					<Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-						<Button
-							size="small"
-							onClick={handleCollapseAllSettings}
-							sx={{ mr: "0.5rem" }}
-						>
-							Collapse All
-						</Button>
-						<Divider orientation="vertical" flexItem />
-						<Button
-							size="small"
-							onClick={handleOpenAllSettings}
-							sx={{ mr: "0.5rem", ml: "0.5rem" }}
-						>
-							{" "}
-							Open All
-						</Button>
-					</Box>
-
-					<Divider variant="middle" sx={{ mt: "0.2rem" }} />
-
-					<ListItemButton onClick={handleOpenSelectionSettings}>
-						<ListItemText primary="Selection" />
-						{openSelectionSettings ? <ExpandLess /> : <ExpandMore />}
-					</ListItemButton>
-					<Collapse in={openSelectionSettings} timeout="auto" unmountOnExit>
-						<Box sx={{ pl: "2rem", mt: "0.2rem", pr: "1rem" }}>
-							<FormControl>
-								<FormLabel
-									id="selection-order-options"
-									sx={{ color: "text.primary" }}
-								>
-									Order
-								</FormLabel>
-
-								<RadioGroup
-									row
-									aria-labelledby="selection-order-options"
-									value={updatedOptions.order}
-									name="order"
-									onChange={registerChange}
-								>
-									<Tooltip
-										title={
-											"Every selection is unique and random for all the list. Not two same images will be selected"
-										}
-										placement="left"
-									>
-										<FormControlLabel
-											value="random"
-											control={<Radio />}
-											label="Random"
-										/>
-									</Tooltip>
-
-									<Tooltip
-										title={
-											"The first image in the list will be selected, then the next one, and so on until you finish the whole list."
-										}
-										placement="top-start"
-									>
-										<FormControlLabel
-											value="sequential"
-											control={<Radio />}
-											label="Sequential"
-										/>
-									</Tooltip>
-								</RadioGroup>
-							</FormControl>
+					<List
+						sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+						component="nav"
+						aria-labelledby="nested-list-subheader"
+					>
+						<Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+							<Button
+								size="small"
+								onClick={handleCollapseAllSettings}
+								sx={{ mr: "0.5rem" }}
+							>
+								Collapse All
+							</Button>
+							<Divider orientation="vertical" flexItem />
+							<Button
+								size="small"
+								onClick={handleOpenAllSettings}
+								sx={{ mr: "0.5rem", ml: "0.5rem" }}
+							>
+								{" "}
+								Open All
+							</Button>
 						</Box>
-					</Collapse>
 
-					<Divider variant="middle" />
+						<Divider variant="middle" sx={{ mt: "0.2rem" }} />
 
-					<ListItemButton onClick={handleOpenStudySettings}>
-						<ListItemText primary="Study Format" />
-						{openStudySettings ? <ExpandLess /> : <ExpandMore />}
-					</ListItemButton>
-					<Collapse in={openStudySettings} timeout="auto" unmountOnExit>
-						<Box sx={{ pl: "2rem", mt: "1rem", pr: "1rem" }}>
-							<FormControl sx={{ display: "flex" }}>
-								<InputLabel id="study-format-setting-label">Preset</InputLabel>
-								<Box
-									sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
-								>
-									<Select
-										labelId="study-format-setting-label"
-										id="study-format-setting"
-										value={updatedOptions.selected_study_format}
-										label="Preset"
-										onChange={(e) => changeSelectedPreset(e)}
-										//Disable the Select if adding a new Preset.
-										disabled={addingPreset}
-										sx={{ display: "flex", flex: "1" }}
+						<ListItemButton onClick={handleOpenSelectionSettings}>
+							<ListItemText primary="Selection" />
+							{openSelectionSettings ? <ExpandLess /> : <ExpandMore />}
+						</ListItemButton>
+						<Collapse in={openSelectionSettings} timeout="auto" unmountOnExit>
+							<Box sx={{ pl: "2rem", mt: "0.2rem", pr: "1rem" }}>
+								<FormControl>
+									<FormLabel
+										id="selection-order-options"
+										sx={{ color: "text.primary" }}
 									>
-										{/* List all the saved presets */}
-										{Object.keys(updatedOptions.study_format).map((preset) => {
-											return (
-												<MenuItem key={preset} value={preset}>
-													{preset}
-												</MenuItem>
-											);
-										})}
-									</Select>
+										Order
+									</FormLabel>
 
+									<RadioGroup
+										row
+										aria-labelledby="selection-order-options"
+										value={updatedOptions.order}
+										name="order"
+										onChange={registerChange}
+									>
+										<Tooltip
+											title={
+												"Every selection is unique and random for all the list. Not two same images will be selected"
+											}
+											placement="left"
+										>
+											<FormControlLabel
+												value="random"
+												control={<Radio />}
+												label="Random"
+											/>
+										</Tooltip>
+
+										<Tooltip
+											title={
+												"The first image in the list will be selected, then the next one, and so on until you finish the whole list."
+											}
+											placement="top-start"
+										>
+											<FormControlLabel
+												value="sequential"
+												control={<Radio />}
+												label="Sequential"
+											/>
+										</Tooltip>
+									</RadioGroup>
+								</FormControl>
+							</Box>
+						</Collapse>
+
+						<Divider variant="middle" />
+
+						<ListItemButton onClick={handleOpenStudySettings}>
+							<ListItemText primary="Study Format" />
+							{openStudySettings ? <ExpandLess /> : <ExpandMore />}
+						</ListItemButton>
+						<Collapse in={openStudySettings} timeout="auto" unmountOnExit>
+							<Box sx={{ pl: "2rem", mt: "1rem", pr: "1rem" }}>
+								<FormControl sx={{ display: "flex" }}>
+									<InputLabel id="study-format-setting-label">
+										Preset
+									</InputLabel>
 									<Box
 										sx={{
 											display: "flex",
-											flexDirection: "column",
+											alignItems: "center",
 											gap: "0.5rem",
 										}}
 									>
-										{/* Edit the Preset */}
-										{!addingPreset && (
-											<IconButton
-												aria-label="edit preset"
-												onClick={handleEditPreset}
-											>
-												<EditIcon fontSize="small" />
-											</IconButton>
-										)}
+										<Select
+											labelId="study-format-setting-label"
+											id="study-format-setting"
+											value={updatedOptions.selected_study_format}
+											label="Preset"
+											onChange={(e) => changeSelectedPreset(e)}
+											//Disable the Select if adding a new Preset.
+											disabled={addingPreset}
+											sx={{ display: "flex", flex: "1" }}
+										>
+											{/* List all the saved presets */}
+											{Object.keys(updatedOptions.study_format).map(
+												(preset) => {
+													return (
+														<MenuItem key={preset} value={preset}>
+															{preset}
+														</MenuItem>
+													);
+												},
+											)}
+										</Select>
 
-										{/* Delete the Preset */}
-										{addingPreset && (
-											<IconButton
-												aria-label="delete preset"
-												onClick={handleDeletePreset}
-												//Disable the button if the preset it's just been created or it's the only remaining
-												disabled={
-													!(newPreset[1].length > 0) ||
-													Object.keys(updatedOptions.study_format).length == 1
-												}
-											>
-												<DeleteIcon fontSize="small" />
-											</IconButton>
-										)}
+										<Box
+											sx={{
+												display: "flex",
+												flexDirection: "column",
+												gap: "0.5rem",
+											}}
+										>
+											{/* Edit the Preset */}
+											{!addingPreset && (
+												<IconButton
+													aria-label="edit preset"
+													onClick={handleEditPreset}
+												>
+													<EditIcon fontSize="small" />
+												</IconButton>
+											)}
+
+											{/* Delete the Preset */}
+											{addingPreset && (
+												<IconButton
+													aria-label="delete preset"
+													onClick={openDeleteDialog}
+													//Disable the button if the preset it's just been created or it's the only remaining
+													disabled={
+														!(newPreset[1].length > 0) ||
+														Object.keys(updatedOptions.study_format).length == 1
+													}
+												>
+													<DeleteIcon fontSize="small" />
+												</IconButton>
+											)}
+										</Box>
 									</Box>
-								</Box>
-							</FormControl>
+								</FormControl>
 
-							{/* Activate the option to Add a Preset */}
-							{!addingPreset && (
-								<Button
-									size="small"
-									sx={{ mt: "0.2rem", mb: "0.2rem" }}
-									startIcon={<AddIcon />}
-									onClick={() => {
-										//Set a new empty Preset
-										setNewPreset(["Meaningfull Name", []]);
+								{/* Activate the option to Add a Preset */}
+								{!addingPreset && (
+									<Button
+										size="small"
+										sx={{ mt: "0.2rem", mb: "0.2rem" }}
+										startIcon={<AddIcon />}
+										onClick={() => {
+											//Set a new empty Preset
+											setNewPreset(["Meaningfull Name", []]);
 
-										//And activate the component
-										setAddingPreset(true);
+											//And activate the component
+											setAddingPreset(true);
 
-										//If the Effects Tab is open, close it.
-										if (openEffectsSettings) {
-											handleOpenEffectsSettings();
-										}
+											//If the Effects Tab is open, close it.
+											if (openEffectsSettings) {
+												handleOpenEffectsSettings();
+											}
 
-										//If the Selection Tab is open, close it.
-										if (openSelectionSettings) {
-											handleOpenSelectionSettings();
-										}
-									}}
-								>
-									Add Preset
-								</Button>
-							)}
+											//If the Selection Tab is open, close it.
+											if (openSelectionSettings) {
+												handleOpenSelectionSettings();
+											}
+										}}
+									>
+										Add Preset
+									</Button>
+								)}
 
-							{/* Activate an "Add a Preset component" */}
-							{addingPreset && (
-								<AddPreset
-									setAddingPreset={setAddingPreset}
-									preset={newPreset}
-									setPreset={setPreset}
-								/>
-							)}
-						</Box>
-					</Collapse>
-
-					<Divider variant="middle" />
-
-					<ListItemButton onClick={handleOpenEffectsSettings}>
-						<ListItemText primary="Effects" />
-						{openEffectsSettings ? <ExpandLess /> : <ExpandMore />}
-					</ListItemButton>
-					<Collapse in={openEffectsSettings} timeout="auto" unmountOnExit>
-						<Box sx={{ pl: "2rem", pr: "1rem" }}>
-							{/* ----------------------------------------------------------------------------------- */}
-							<FormControl>
-								<FormLabel
-									id="image-information-options"
-									sx={{ color: "text.primary" }}
-								>
-									Image Information:
-								</FormLabel>
-
-								<RadioGroup
-									row
-									aria-labelledby="image-information-options"
-									value={updatedOptions.image_information}
-									onChange={registerChange}
-									name="image_information"
-								>
-									<FormControlLabel
-										value="hide"
-										control={<Radio />}
-										label="Hide"
+								{/* Activate an "Add a Preset component" */}
+								{addingPreset && (
+									<AddPreset
+										setAddingPreset={setAddingPreset}
+										preset={newPreset}
+										setPreset={setPreset}
 									/>
+								)}
+							</Box>
+						</Collapse>
 
-									<FormControlLabel
-										value="show"
-										control={<Radio />}
-										label="Show"
-									/>
-								</RadioGroup>
-							</FormControl>
+						<Divider variant="middle" />
 
-							<Divider variant="inset" sx={{ mt: "0.5rem", mb: "0.5rem" }} />
-							{/* ----------------------------------------------------------------------------------- */}
-							<FormControl>
-								<FormLabel
-									id="timer-visibility-options"
-									sx={{ color: "text.primary" }}
-								>
-									Timer Visibility:
-								</FormLabel>
+						<ListItemButton onClick={handleOpenEffectsSettings}>
+							<ListItemText primary="Effects" />
+							{openEffectsSettings ? <ExpandLess /> : <ExpandMore />}
+						</ListItemButton>
+						<Collapse in={openEffectsSettings} timeout="auto" unmountOnExit>
+							<Box sx={{ pl: "2rem", pr: "1rem" }}>
+								{/* ----------------------------------------------------------------------------------- */}
+								<FormControl>
+									<FormLabel
+										id="image-information-options"
+										sx={{ color: "text.primary" }}
+									>
+										Image Information:
+									</FormLabel>
 
-								<RadioGroup
-									row
-									aria-labelledby="timer-visibility-options"
-									value={updatedOptions.timer_visibility}
-									onChange={registerChange}
-									name="timer_visibility"
-								>
-									<FormControlLabel
-										value="constant"
-										control={<Radio />}
-										label="Constant"
-									/>
+									<RadioGroup
+										row
+										aria-labelledby="image-information-options"
+										value={updatedOptions.image_information}
+										onChange={registerChange}
+										name="image_information"
+									>
+										<FormControlLabel
+											value="hide"
+											control={<Radio />}
+											label="Hide"
+										/>
 
-									<FormControlLabel
-										value="fade"
-										control={<Radio />}
-										label="Fade"
-									/>
-								</RadioGroup>
-							</FormControl>
+										<FormControlLabel
+											value="show"
+											control={<Radio />}
+											label="Show"
+										/>
+									</RadioGroup>
+								</FormControl>
 
-							<Divider variant="inset" sx={{ mt: "0.5rem", mb: "0.5rem" }} />
-							{/* ----------------------------------------------------------------------------------- */}
-							<FormControl>
-								<FormLabel
-									id="timer-beeps-options"
-									sx={{ color: "text.primary" }}
-								>
-									Timer Beeps:
-								</FormLabel>
+								<Divider variant="inset" sx={{ mt: "0.5rem", mb: "0.5rem" }} />
+								{/* ----------------------------------------------------------------------------------- */}
+								<FormControl>
+									<FormLabel
+										id="timer-visibility-options"
+										sx={{ color: "text.primary" }}
+									>
+										Timer Visibility:
+									</FormLabel>
 
-								<RadioGroup
-									aria-labelledby="timer-beeps-options"
-									value={updatedOptions.timer_beeps}
-									onChange={registerChange}
-									name="timer_beeps"
-								>
-									<FormControlLabel
-										value={0}
-										control={<Radio />}
-										label="Deactivated"
-									/>
+									<RadioGroup
+										row
+										aria-labelledby="timer-visibility-options"
+										value={updatedOptions.timer_visibility}
+										onChange={registerChange}
+										name="timer_visibility"
+									>
+										<FormControlLabel
+											value="constant"
+											control={<Radio />}
+											label="Constant"
+										/>
 
-									<FormControlLabel
-										value={3}
-										control={<Radio />}
-										label="3 Seconds"
-									/>
+										<FormControlLabel
+											value="fade"
+											control={<Radio />}
+											label="Fade"
+										/>
+									</RadioGroup>
+								</FormControl>
 
-									<FormControlLabel
-										value={5}
-										control={<Radio />}
-										label="5 Seconds"
-									/>
+								<Divider variant="inset" sx={{ mt: "0.5rem", mb: "0.5rem" }} />
+								{/* ----------------------------------------------------------------------------------- */}
+								<FormControl>
+									<FormLabel
+										id="timer-beeps-options"
+										sx={{ color: "text.primary" }}
+									>
+										Timer Beeps:
+									</FormLabel>
 
-									<FormControlLabel
-										value={10}
-										control={<Radio />}
-										label="10 Seconds"
-									/>
+									<RadioGroup
+										aria-labelledby="timer-beeps-options"
+										value={updatedOptions.timer_beeps}
+										onChange={registerChange}
+										name="timer_beeps"
+									>
+										<FormControlLabel
+											value={0}
+											control={<Radio />}
+											label="Deactivated"
+										/>
 
-									<FormControlLabel
-										value={15}
-										control={<Radio />}
-										label="15 Seconds"
-									/>
-								</RadioGroup>
-							</FormControl>
+										<FormControlLabel
+											value={3}
+											control={<Radio />}
+											label="3 Seconds"
+										/>
 
-							<Divider variant="inset" sx={{ mt: "0.5rem", mb: "0.5rem" }} />
-							{/* ----------------------------------------------------------------------------------- */}
-							<FormControl>
-								<FormLabel
-									id="pause-control-options"
-									sx={{ color: "text.primary" }}
-								>
-									Pause Control:
-								</FormLabel>
+										<FormControlLabel
+											value={5}
+											control={<Radio />}
+											label="5 Seconds"
+										/>
 
-								<RadioGroup
-									row
-									aria-labelledby="pause-control-options"
-									value={updatedOptions.pause_controls}
-									onChange={registerChange}
-									name="pause_controls"
-								>
-									<FormControlLabel
-										value={true}
-										control={<Radio />}
-										label="Allow"
-									/>
+										<FormControlLabel
+											value={10}
+											control={<Radio />}
+											label="10 Seconds"
+										/>
 
-									<FormControlLabel
-										value={false}
-										control={<Radio />}
-										label="Don't Allow"
-									/>
-								</RadioGroup>
-							</FormControl>
-						</Box>
-					</Collapse>
-				</List>
+										<FormControlLabel
+											value={15}
+											control={<Radio />}
+											label="15 Seconds"
+										/>
+									</RadioGroup>
+								</FormControl>
 
-				<Box sx={{ display: "flex", justifyContent: "flex-end", pr: "1rem" }}>
-					<Button
-						variant="contained"
-						disableElevation
-						disabled={!saveOptions}
-						onClick={handleSaveSettings}
-					>
-						Save
-					</Button>
+								<Divider variant="inset" sx={{ mt: "0.5rem", mb: "0.5rem" }} />
+								{/* ----------------------------------------------------------------------------------- */}
+								<FormControl>
+									<FormLabel
+										id="pause-control-options"
+										sx={{ color: "text.primary" }}
+									>
+										Pause Control:
+									</FormLabel>
 
-					<Button
-						variant="outlined"
-						disableElevation
-						sx={{ ml: "0.2rem" }}
-						onClick={() => {
-							handleCancelSettings();
-							// setAddingPreset(false);
-						}}
-					>
-						Cancel
-					</Button>
+									<RadioGroup
+										row
+										aria-labelledby="pause-control-options"
+										value={updatedOptions.pause_controls}
+										onChange={registerChange}
+										name="pause_controls"
+									>
+										<FormControlLabel
+											value={true}
+											control={<Radio />}
+											label="Allow"
+										/>
+
+										<FormControlLabel
+											value={false}
+											control={<Radio />}
+											label="Don't Allow"
+										/>
+									</RadioGroup>
+								</FormControl>
+							</Box>
+						</Collapse>
+					</List>
+
+					<Box sx={{ display: "flex", justifyContent: "flex-end", pr: "1rem" }}>
+						<Button
+							variant="contained"
+							disableElevation
+							disabled={!saveOptions}
+							onClick={handleSaveSettings}
+						>
+							Save
+						</Button>
+
+						<Button
+							variant="outlined"
+							disableElevation
+							sx={{ ml: "0.2rem" }}
+							onClick={() => {
+								handleCancelSettings();
+								setAddingPreset(false);
+							}}
+						>
+							Cancel
+						</Button>
+					</Box>
 				</Box>
-			</Box>
-		</Drawer>
+			</Drawer>
+		</>
 	);
 }
 
