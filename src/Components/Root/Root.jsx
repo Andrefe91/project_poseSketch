@@ -1,5 +1,5 @@
 //Modules
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material";
@@ -8,6 +8,9 @@ import { imageContext } from "../../Context/imageContext";
 import { settingsContext } from "../../Context/settingsContext";
 //Settings
 import appSettings from "../../Settings/appSettings";
+// Scripts
+import { getCache, setCache } from "../../scripts/cacheManagement";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 const theme = createTheme({
 	palette: {
@@ -27,10 +30,33 @@ const theme = createTheme({
 	},
 });
 
+// Explore the cache to fetch the Settings, if not, set a new Cache.
+async function getSettings() {
+
+	// Get settings from the cache
+	const cachedSettings = await getCache("settingsCache");
+
+	if (cachedSettings) {
+		return cachedSettings;
+	}
+
+	// if no settings are cached, set a new Cache
+	setCache("settingsCache", appSettings);
+	return appSettings;
+}
+
 function Root() {
 	const [validImages, setValidImages] = useState([]);
 	const [invalidImages, setInvalidImages] = useState([]);
-	const [settings, setSettings] = useState(appSettings);
+	const [settings, setSettings] = useState(null);
+
+	useEffect(() => {
+		// Fetch settings
+        (async () => {
+            const fetchedSettings = await getSettings();
+            setSettings(fetchedSettings);
+        })();
+	}, [])
 
 	return (
 		<>
