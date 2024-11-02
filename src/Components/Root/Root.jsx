@@ -10,7 +10,6 @@ import { settingsContext } from "../../Context/settingsContext";
 import appSettings from "../../Settings/appSettings";
 // Scripts
 import { getCache, setCache } from "../../scripts/cacheManagement";
-import { ConstructionOutlined } from "@mui/icons-material";
 
 const theme = createTheme({
 	palette: {
@@ -48,7 +47,7 @@ async function getSettings() {
 function Root() {
 	const [validImages, setValidImages] = useState([]);
 	const [invalidImages, setInvalidImages] = useState([]);
-	const [settings, setSettings] = useState(null);
+	const [settings, setSettings] = useState(appSettings);
 
 	useEffect(() => {
 		// Fetch settings

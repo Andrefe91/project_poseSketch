@@ -34,6 +34,7 @@ import { settingsContext } from "../../Context/settingsContext";
 import AddPreset from "./AddPreset/AddPreset";
 //Scripts
 import presetBodyConvert from "../../scripts/presetBodyConvert.js";
+import { setCache } from "../../scripts/cacheManagement.js";
 //Icons
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
@@ -96,12 +97,18 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 		setAddingPreset(true);
 	}
 
-	function handleSaveSettings() {
+	async function handleSaveSettings() {
 		// Update the options in the App Settings
 		setSettings((prevSettings) => ({
 			...prevSettings,
 			options: { ...updatedOptions },
 		}));
+
+		//Save updated settings to cache
+		setCache("settingsCache", {
+			...settings,
+			options: { ...updatedOptions },
+		});
 
 		//Close the drawer
 		toggleDrawerFunc(false);
@@ -175,7 +182,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 				...prevSettings.study_format,
 				[title]: presetBodyConvert(body),
 			},
-			selected_study_format: `${title}`
+			selected_study_format: `${title}`,
 		}));
 
 		//Allow to save the selected Preset

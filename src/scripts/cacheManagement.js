@@ -20,6 +20,7 @@ async function getCache(name) {
             console.log("Cache is empty");
             return null;
         }
+        console.log("Cache retrieved");
         return cache
     } catch (error) {
         console.log(`There was an error getting the cache: ${error}`);
