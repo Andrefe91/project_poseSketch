@@ -38,16 +38,23 @@ export default function CollectionAB() {
 	}, [drawerState]); // Update the keyDownActions closure function.
 
 	const keyDownActions = (e) => {
-		switch (e.keyCode) {
-			case 87: // w Key
-				navigate("/theater");
-				break;
-			case 83: // s Key
-				toggleDrawer();
-				break;
-			default:
-				console.log("Key:", e);
-				return;
+		if (drawerState) {
+			return;
+		} else {
+			switch (e.keyCode) {
+				case 32: // Space Key
+					navigate("/theater");
+					break;
+				case 13: //Enter Key
+					navigate("/theater");
+					break;
+				case 83: // s Key
+					toggleDrawer();
+					break;
+				default:
+					// console.log("Key:", e);
+					return;
+			}
 		}
 	};
 

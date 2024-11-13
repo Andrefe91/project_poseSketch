@@ -56,11 +56,31 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 	const { settings, setSettings } = useContext(settingsContext);
 	const [updatedOptions, setUpdatedOptions] = useState(settings.options);
 
-	//Reset the updatedOptions to the saved settings. This means, that unless the settings are "Saved"
+	//Reset the updatedOptions to the saved settings. This means that, unless the settings are "Saved"
 	//in the settings pannel, the object used in the panel will return to the previous saved state
 	useEffect(() => {
 		setUpdatedOptions({ ...settings.options });
-	}, [drawerState]);
+
+		// Add the event listener
+		document.addEventListener("keydown", keyDownActions);
+
+		// Remove the event listener on cleanup
+		return () => {
+			document.removeEventListener("keydown", keyDownActions);
+		};
+	}, [drawerState, addingPreset]); // Update the keyDownActions closure function.
+
+	const keyDownActions = (e) => {
+		if (addingPreset) {
+			return;
+		} else {
+			switch (e.keyCode) {
+				case 83: // s Key - Close the drawer when open
+					handleCancelSettings();
+					break;
+			}
+		}
+	};
 
 	//Register the options for study format and selected preset, along with adding presets.
 	function changeSelectedPreset(event) {
@@ -134,6 +154,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 	function handleCancelSettings() {
 		toggleDrawerFunc(false);
 		setSaveOptions(false);
+		setAddingPreset(false);
 	}
 
 	//Allow to save options
@@ -265,6 +286,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 				onClose={() => {
 					toggleDrawerFunc(false);
 					setSaveOptions(false);
+					setAddingPreset(false);
 				}}
 			>
 				<Box
