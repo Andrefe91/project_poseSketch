@@ -11,27 +11,19 @@ import appSettings from "../../Settings/appSettings";
 // Scripts
 import { getCache, setCache } from "../../scripts/cacheManagement";
 
-const theme = createTheme({
+const basic = createTheme({
 	palette: {
 		primary: {
-			main: "#e2cd0d",
+			main: "#C80000",
 		},
 		secondary: {
-			main: "#FF8A65",
-		},
-		background: {
-			default: "#242424",
-			paper: "#242424",
-		},
-		text: {
-			primary: "#FFFFFF",
+			main: "#00c8c8",
 		},
 	},
 });
 
 // Explore the cache to fetch the Settings, if not, set a new Cache.
 async function getSettings() {
-
 	// Get settings from the cache
 	const cachedSettings = await getCache("settingsCache");
 
@@ -51,27 +43,29 @@ function Root() {
 
 	useEffect(() => {
 		// Fetch settings
-        (async () => {
-            const fetchedSettings = await getSettings();
-            setSettings(fetchedSettings);
-        })();
-	}, [])
+		(async () => {
+			const fetchedSettings = await getSettings();
+			setSettings(fetchedSettings);
+		})();
+	}, []);
 
 	return (
 		<>
-			<CssBaseline />
-			<settingsContext.Provider value={{ settings, setSettings }}>
-				<imageContext.Provider
-					value={{
-						validImages,
-						setValidImages,
-						invalidImages,
-						setInvalidImages,
-					}}
-				>
-					<Outlet />
-				</imageContext.Provider>
-			</settingsContext.Provider>
+			<ThemeProvider theme={basic}>
+				<CssBaseline />
+				<settingsContext.Provider value={{ settings, setSettings }}>
+					<imageContext.Provider
+						value={{
+							validImages,
+							setValidImages,
+							invalidImages,
+							setInvalidImages,
+						}}
+					>
+						<Outlet />
+					</imageContext.Provider>
+				</settingsContext.Provider>
+			</ThemeProvider>
 		</>
 	);
 }
