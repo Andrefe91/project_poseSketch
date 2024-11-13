@@ -11,7 +11,7 @@ function CollectionItem({ imageFile, number }) {
 		imageFile.name.toLowerCase().split(".")[0].slice(1);
 
 	if (imageName.length > 12) {
-		imageName = imageName.slice(0, 12).trim() + "..."; //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add ellipsis if necessary.  //Limit the image name to 10 characters and add
+		imageName = imageName.slice(0, 12).trim() + "..."; //Limit the image name to 10 characters and add ellipsis if necessary.
 	}
 
 	return (
