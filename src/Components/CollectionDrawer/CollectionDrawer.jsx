@@ -56,6 +56,8 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 	const { settings, setSettings } = useContext(settingsContext);
 	const [updatedOptions, setUpdatedOptions] = useState(settings.options);
 
+	console.log(settings)
+
 	//Reset the updatedOptions to the saved settings. This means that, unless the settings are "Saved"
 	//in the settings pannel, the object used in the panel will return to the previous saved state
 	useEffect(() => {
@@ -68,7 +70,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 		return () => {
 			document.removeEventListener("keydown", keyDownActions);
 		};
-	}, [drawerState, addingPreset]); // Update the keyDownActions closure function.
+	}, [drawerState]); // Update the keyDownActions closure function.
 
 	const keyDownActions = (e) => {
 		if (addingPreset) {
