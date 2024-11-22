@@ -84,6 +84,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 
 	//Register the options for study format and selected preset, along with adding presets.
 	function changeSelectedPreset(event) {
+		console.log(updatedOptions)
 		//Change the selected study format preset
 		if (event.target?.value) {
 			setUpdatedOptions((prevSettings) => ({
