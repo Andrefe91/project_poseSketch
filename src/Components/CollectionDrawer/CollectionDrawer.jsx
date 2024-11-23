@@ -56,12 +56,13 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 	const { settings, setSettings } = useContext(settingsContext);
 	const [updatedOptions, setUpdatedOptions] = useState(settings.options);
 
-	console.log(settings)
-
 	//Reset the updatedOptions to the saved settings. This means that, unless the settings are "Saved"
 	//in the settings pannel, the object used in the panel will return to the previous saved state
 	useEffect(() => {
-		setUpdatedOptions({ ...settings.options });
+		//Only call the saved settings before loading the Collection Drawer, once loaded dont try to load again. 
+		if (!drawerState) {
+			setUpdatedOptions({ ...settings.options });
+		}
 
 		// Add the event listener
 		document.addEventListener("keydown", keyDownActions);
@@ -70,7 +71,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 		return () => {
 			document.removeEventListener("keydown", keyDownActions);
 		};
-	}, [drawerState]); // Update the keyDownActions closure function.
+	}, [drawerState, addingPreset]); // Update the keyDownActions closure function.
 
 	const keyDownActions = (e) => {
 		if (addingPreset) {
@@ -86,7 +87,6 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 
 	//Register the options for study format and selected preset, along with adding presets.
 	function changeSelectedPreset(event) {
-		console.log(updatedOptions)
 		//Change the selected study format preset
 		if (event.target?.value) {
 			setUpdatedOptions((prevSettings) => ({
