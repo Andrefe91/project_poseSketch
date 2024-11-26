@@ -2,7 +2,7 @@
 import {React} from "react";
 import { PropTypes } from "prop-types";
 import { Paper } from "@mui/material";
-import useResizedImage from "../../Hooks/useResizedImage";
+import useImageURL from "../../Hooks/useImageURL";
 //Css
 import "./collectionitem.css";
 
@@ -15,7 +15,7 @@ function CollectionItem({ imageFile, number }) {
 		imageName = imageName.slice(0, 12).trim() + "..."; //Limit the image name to 10 characters and add ellipsis if necessary.
 	}
 
-	const imageURL = useResizedImage(imageFile);
+	const imageURL = useImageURL(imageFile);
 
 	return (
 		<>

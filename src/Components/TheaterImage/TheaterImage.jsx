@@ -1,7 +1,7 @@
 //Modules
 import React from "react";
 import { PropTypes } from "prop-types";
-import useResizedImage from "../../Hooks/useResizedImage";
+import useImageURL from "../../Hooks/useImageURL";
 //Assets
 import restIcon from "../../assets/Rest_Icon.svg";
 //Css
@@ -14,7 +14,7 @@ function TheaterImage({ imageFile, studyBreak }) {
 	}
 
 	//Get the imageURL
-	const imageURL = useResizedImage(imageFile);
+	const imageURL = useImageURL(imageFile);
 
 	//Get the image name from the file
 	let imageName =

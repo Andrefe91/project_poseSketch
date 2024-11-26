@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 // Custom hook to create and manage an Object URL for a given image file
-function useResizedImage(imageFile) {
+function useImageURL(imageFile) {
   const [imageURL, setImageURL] = useState(null);
 
   useEffect(() => {
@@ -20,4 +20,4 @@ function useResizedImage(imageFile) {
   return imageURL;
 }
 
-export default useResizedImage;
+export default useImageURL;
