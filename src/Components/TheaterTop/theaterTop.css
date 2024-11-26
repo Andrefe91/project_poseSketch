@@ -1,25 +1,27 @@
 .imageTitle-top {
-    display: flex;
-    height: 1rem;
+	display: flex;
+	height: 1rem;
+}
+
+.positionReference {
+	position: relative;
 }
 
 .imageTitle-top > p {
-    font-size: 1.5rem;
-    color: white;
-    margin: 0;
-    user-select: none;
+	font-size: 1.5rem;
+	color: white;
+	margin: 0;
+	user-select: none;
 }
 
 #back-button {
-    position: absolute;
-    left: 20px;
-    cursor: pointer;
-
-    &:hover {
-        color: #008296;
-    }
+	position: absolute;
+	right: 20px;
+	z-index: 1;
+    transition: all 0.4s ease;
+    transform: rotate(0deg);
 }
 
-#back-button > p {
-    display: inherit;
+#back-button:hover {
+    transform: rotate(90deg);
 }

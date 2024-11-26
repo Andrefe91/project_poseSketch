@@ -1,19 +1,20 @@
 //Modules
 import React from "react";
-import { Container } from "@mui/material";
+import { Container, IconButton } from "@mui/material";
 import { PropTypes } from "prop-types";
 import { useNavigate } from "react-router-dom";
 //CSS
 import "./theaterTop.css";
 //Icons
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import CancelIcon from '@mui/icons-material/Cancel';
 
 function TheaterTop({ imageTitle, showTitle }) {
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 
-    function backToCollection() {
-        navigate("/collection");
-    }
+	function backToCollection() {
+		navigate("/collection");
+	}
 
 	return (
 		<>
@@ -22,14 +23,14 @@ function TheaterTop({ imageTitle, showTitle }) {
 					display: "flex",
 					justifyContent: "center",
 				}}
+				className="positionReference"
 			>
-				<div className="imageTitle-top">
-					{showTitle && <p>{imageTitle}</p>}
-				</div>
+				<div className="imageTitle-top">{showTitle && <p>{imageTitle}</p>}</div>
 
-				<div className="imageTitle-top" id="back-button" onClick={backToCollection}>
-					<ArrowBackIcon sx={{ color: "white" }} fontSize="large" />{" "}
-					<p>Back</p>
+				<div className="imageTitle-top" >
+					<IconButton id="back-button" onClick={backToCollection}>
+						<CancelIcon color="primary"  fontSize="large" />{" "}
+					</IconButton>
 				</div>
 			</Container>
 		</>
@@ -38,7 +39,7 @@ function TheaterTop({ imageTitle, showTitle }) {
 
 TheaterTop.propTypes = {
 	imageTitle: PropTypes.string.isRequired,
-    showTitle: PropTypes.bool.isRequired,
+	showTitle: PropTypes.bool.isRequired,
 };
 
 export default TheaterTop;

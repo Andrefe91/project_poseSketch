@@ -32,7 +32,7 @@ export default function Theater() {
 		}
 	}, [validImages]);
 
-	//Get Optiosn from settings
+	//Get Options from settings
 	const showOptions =
 		settings.options.image_information == "hide" ? false : true;
 
