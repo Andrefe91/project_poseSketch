@@ -1,42 +1,40 @@
-function resizeImage(file, maxWidth, maxHeight) {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      const url = URL.createObjectURL(file);
+function resizeImage(file, maxWidth, maxHeight, callback) {
+	// Create a FileReader to read the file
+	const reader = new FileReader();
 
-      img.onload = () => {
-        // Calculate new dimensions
-        let width = img.width;
-        let height = img.height;
+	reader.onload = function (event) {
+		const img = new Image();
 
-        if (width > maxWidth || height > maxHeight) {
-          if (width > height) {
-            height = (height * maxWidth) / width;
-            width = maxWidth;
-          } else {
-            width = (width * maxHeight) / height;
-            height = maxHeight;
-          }
-        }
+		img.onload = function () {
+			// Create a canvas to draw the image onto
+			const canvas = document.createElement("canvas");
+			const ctx = canvas.getContext("2d");
 
-        // Create a canvas to resize the image
-        const canvas = document.createElement('canvas');
-        canvas.width = width;
-        canvas.height = height;
+			// Calculate the new dimensions
+			const ratio = Math.min(maxWidth / img.width, maxHeight / img.height);
+			const newWidth = img.width * ratio;
+			const newHeight = img.height * ratio;
 
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, width, height);
+			// Set the canvas dimensions to the new size
+			canvas.width = newWidth;
+			canvas.height = newHeight;
 
-        // Convert the canvas to a Blob or Data URL
-        canvas.toBlob((blob) => {
-          resolve(blob);
-          URL.revokeObjectURL(url); // Free memory
-        }, file.type, 0.8); // Adjust quality if needed
-      };
+			// Draw the resized image onto the canvas
+			ctx.drawImage(img, 0, 0, newWidth, newHeight);
 
-      img.onerror = (err) => {
-        reject(err);
-      };
+			// Convert the canvas to a Blob or Data URL
+			canvas.toBlob(function (blob) {
+				// Call the callback with the resized image Blob
+				callback(blob);
+			}, file.type); // Use the original file type (e.g., image/jpeg)
+		};
 
-      img.src = url;
-    });
-  }
+		// Set the image source to the FileReader result (base64 string)
+		img.src = event.target.result;
+	};
+
+	// Read the image file as a data URL
+	reader.readAsDataURL(file);
+}
+
+export default resizeImage;

@@ -1,12 +1,26 @@
 //Modules
-import {React} from "react";
+import { React, useState, useMemo } from "react";
 import { PropTypes } from "prop-types";
 import { Paper } from "@mui/material";
 import useImageURL from "../../Hooks/useImageURL";
 //Css
 import "./collectionitem.css";
+//Scripts
+import resizeImage from "../../scripts/resizeImage";
 
 function CollectionItem({ imageFile, number }) {
+	const [resizedImageURL, setResizedImageURL] = useState(null);
+
+	//Saving the calculations to improve performance
+	const reduceImage = useMemo(
+		() =>
+			resizeImage(imageFile, 200, 200, function (resizedBlob) {
+				console.log(resizedBlob);
+				setResizedImageURL(resizedBlob);
+			}),
+		[imageFile],
+	);
+
 	let imageName =
 		imageFile.name.split(".")[0][0].toUpperCase() +
 		imageFile.name.toLowerCase().split(".")[0].slice(1);
@@ -15,7 +29,7 @@ function CollectionItem({ imageFile, number }) {
 		imageName = imageName.slice(0, 12).trim() + "..."; //Limit the image name to 10 characters and add ellipsis if necessary.
 	}
 
-	const imageURL = useImageURL(imageFile);
+	const imageURL = useImageURL(resizedImageURL);
 
 	return (
 		<>
