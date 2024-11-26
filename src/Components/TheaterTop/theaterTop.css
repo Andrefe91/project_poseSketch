@@ -16,7 +16,7 @@
 
 #back-button {
 	position: absolute;
-	right: 20px;
+	right: 5px;
 	z-index: 1;
     transition: all 0.4s ease;
     transform: rotate(0deg);

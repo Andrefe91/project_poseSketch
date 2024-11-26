@@ -1,7 +1,8 @@
 //Modules
-import React from "react";
+import {React} from "react";
 import { PropTypes } from "prop-types";
 import { Paper } from "@mui/material";
+import useResizedImage from "../../Hooks/useResizedImage";
 //Css
 import "./collectionitem.css";
 
@@ -14,6 +15,8 @@ function CollectionItem({ imageFile, number }) {
 		imageName = imageName.slice(0, 12).trim() + "..."; //Limit the image name to 10 characters and add ellipsis if necessary.
 	}
 
+	const imageURL = useResizedImage(imageFile);
+
 	return (
 		<>
 			<Paper
@@ -22,7 +25,7 @@ function CollectionItem({ imageFile, number }) {
 				sx={{ bgcolor: "background.default" }}
 			>
 				<div className="image-display">
-					<img src={URL.createObjectURL(imageFile)} alt={imageName} />
+					<img src={imageURL} alt={imageName} />
 				</div>
 
 				<div className="background">
