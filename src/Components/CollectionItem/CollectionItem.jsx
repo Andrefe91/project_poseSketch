@@ -9,17 +9,17 @@ import "./collectionitem.css";
 import resizeImage from "../../scripts/resizeImage";
 
 function CollectionItem({ imageFile, number }) {
-	const [resizedImageURL, setResizedImageURL] = useState(null);
+	// const [resizedImageURL, setResizedImageURL] = useState(null);
 
-	//Saving the calculations to improve performance
-	const reduceImage = useMemo(
-		() =>
-			resizeImage(imageFile, 200, 200, function (resizedBlob) {
-				console.log(resizedBlob);
-				setResizedImageURL(resizedBlob);
-			}),
-		[imageFile],
-	);
+	// [TODO] Fix this - Too expensive to calculate for hundreds of images
+	// Saving the calculations to improve performance
+	// useMemo(
+	// 	() =>
+	// 		resizeImage(imageFile, 300, 300, function (resizedBlob) {
+	// 			setResizedImageURL(resizedBlob);
+	// 		}),
+	// 	[imageFile],
+	// );
 
 	let imageName =
 		imageFile.name.split(".")[0][0].toUpperCase() +
@@ -29,7 +29,7 @@ function CollectionItem({ imageFile, number }) {
 		imageName = imageName.slice(0, 12).trim() + "..."; //Limit the image name to 10 characters and add ellipsis if necessary.
 	}
 
-	const imageURL = useImageURL(resizedImageURL);
+	const imageURL = useImageURL(imageFile);
 
 	return (
 		<>

@@ -6,11 +6,13 @@
 	align-items: flex-end;
 }
 
-.timer-info p {
+.timer-info .text {
 	font-size: 1.5rem;
 	color: white;
 	margin: 0;
 	user-select: none;
+	min-width: 8rem;
+	text-align: center;
 }
 
 .fade {

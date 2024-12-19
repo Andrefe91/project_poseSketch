@@ -13,6 +13,7 @@ function useImageURL(imageFile) {
 
     // Cleanup function to revoke the URL when the component unmounts
     return () => {
+      console.log("destroyed URL")
       URL.revokeObjectURL(url); // Free memory when the component is unmounted or imageFile changes
     };
   }, [imageFile]); // Dependency array to re-run if imageFile changes

@@ -94,24 +94,25 @@ function TheaterControl({
 				hideTimer();
 				break;
 			case 32: //Space KeyBoard
+				console.log(timerInterval);
 				if (allowPause == "true") {
 					handlePausePlay();
 				}
 				break;
 			case 40: //Down arrow key
+				console.log(timerInterval);
 				if (allowPause == "true") {
 					handlePausePlay();
 				}
 				break;
 			default:
-				console.log("Key:", e.keyCode);
 				return;
 		}
 	};
 
 	// Function to handle the pause/play button
 	function handlePausePlay() {
-		if (timerInterval === 1000) {
+		if (timerInterval) {
 			setTimerVisibility("constant");
 			setTimerInterval(null);
 		} else {
@@ -133,9 +134,9 @@ function TheaterControl({
 
 	return (
 		<div className="timer-info">
-			<p className={timerVisibility}>
+			<div className="timerVisibility text">
 				<TimerBlock time={timer} /> / <TimerBlock time={imageTimer} />
-			</p>
+			</div>
 
 			<div>
 				<ButtonGroup
@@ -179,7 +180,7 @@ function TheaterControl({
 				</ButtonGroup>
 			</div>
 
-			<p>{practiceBlock}</p>
+			<div className="text">{practiceBlock}</div>
 		</div>
 	);
 }
