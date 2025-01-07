@@ -93,14 +93,13 @@ function TheaterControl({
 				setTimerVisibility("constant");
 				hideTimer();
 				break;
-			case 32: //Space KeyBoard
-				console.log(timerInterval);
-				if (allowPause == "true") {
-					handlePausePlay();
-				}
-				break;
+			// This case is creating a bug that i can't figure out at the moment
+			// case 32: //Space KeyBoard
+			// 	if (allowPause == "true") {
+			// 		handlePausePlay();
+			// 	}
+			// 	break;
 			case 40: //Down arrow key
-				console.log(timerInterval);
 				if (allowPause == "true") {
 					handlePausePlay();
 				}
@@ -112,6 +111,7 @@ function TheaterControl({
 
 	// Function to handle the pause/play button
 	function handlePausePlay() {
+		console.log("handle Pause Play called")
 		if (timerInterval) {
 			setTimerVisibility("constant");
 			setTimerInterval(null);
