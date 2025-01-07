@@ -26,11 +26,7 @@ export default function Theater() {
 	//Loaded images, obtained from a context
 	const { validImages } = useContext(imageContext);
 	//In case there are no images, redirect to HomePage
-	useEffect(() => {
-		if (validImages.length === 0) {
-			navigate("/");
-		}
-	}, [validImages]);
+	useEffect(() => {}, [validImages]);
 
 	//Get Options from settings
 	const showOptions =
@@ -60,19 +56,24 @@ export default function Theater() {
 		navigate("/collection");
 	}
 
-	//Check if it's the end of the study session
-	if (trackingText == "End of Study") {
-		handleEndOfStudy();
-	}
-
 	useEffect(() => {
+		//If there are no images, redirect to the HomePage
+		if (validImages.length === 0) {
+			navigate("/");
+		}
+
 		//This inform the TheaterImage component if the section is a Study Break
 		if (trackingText == "Break") {
 			setStudyBreak(true);
 		} else {
 			setStudyBreak(false);
 		}
-	}, [imageNumber]);
+
+		//Check if it's the end of the study session
+		if (trackingText == "End of Study") {
+			handleEndOfStudy();
+		}
+	}, [imageNumber, validImages]);
 
 	//This function handles the change for the next image
 	function handleNextImage() {
@@ -146,7 +147,7 @@ export default function Theater() {
 					handleNextImage={handleNextImage}
 					handlePreviousImage={handlePreviousImage}
 					timerBeeps={settings.options.timer_beeps}
-					allowPause = {settings.options.pause_controls}
+					allowPause={settings.options.pause_controls}
 					timerVisibilityOption={settings.options.timer_visibility}
 				/>
 			</Box>

@@ -111,7 +111,6 @@ function TheaterControl({
 
 	// Function to handle the pause/play button
 	function handlePausePlay() {
-		console.log("handle Pause Play called")
 		if (timerInterval) {
 			setTimerVisibility("constant");
 			setTimerInterval(null);
