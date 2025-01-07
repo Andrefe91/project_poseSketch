@@ -35,34 +35,34 @@ function TheaterControl({
 	// Control the visibility of the timer
 	const [timerVisibility, setTimerVisibility] = useState(timerVisibilityOption);
 
-	// Set next image by timer
-	if (timer > imageTimer - 1) {
-		handleNextImage();
-		setTimer(0);
-
-		if (timerVisibilityOption == "fade") {
-			setTimerVisibility("fade"); //Fade the timer if selected the option
-		}
-	}
-
-	// Generate beep sound when timer reaches value less than timerBeeps
-	if (timerBeeps != 0) {
-		//If timer is 0, the options gets deactivated
-		if (timer >= imageTimer - timerBeeps) {
-			if (timerVisibility == "fade") {
-				setTimerVisibility("constant"); //Show timer when beeping
-			}
-			generateBeep(80, 650, 5);
-		}
-	}
-
 	// Set the timer for the current image
 	useInterval(() => {
 		setTimer(timer + 1);
 	}, timerInterval);
 
-	// Detect the keydown and act accordingly
+
 	useEffect(() => {
+		// Set next image by timer
+		if (timer > imageTimer - 1) {
+			handleNextImage();
+			setTimer(0);
+
+			if (timerVisibilityOption == "fade") {
+				setTimerVisibility("fade"); //Fade the timer if selected the option
+			}
+		}
+
+		// Generate beep sound when timer reaches value less than timerBeeps
+		if (timerBeeps != 0) {
+			//If timer is 0, the options gets deactivated
+			if (timer >= imageTimer - timerBeeps) {
+				if (timerVisibility == "fade") {
+					setTimerVisibility("constant"); //Show timer when beeping
+				}
+				generateBeep(80, 650, 5);
+			}
+		}
+
 		// Add the event listener
 		document.addEventListener("keydown", keyDownActions);
 
@@ -70,7 +70,7 @@ function TheaterControl({
 		return () => {
 			document.removeEventListener("keydown", keyDownActions);
 		};
-	}, [imageNumber, timerInterval]); // Update the keyDownActions closure function with every change of the imageNumber.
+	}, [imageNumber, timerInterval, timer]); // Update the keyDownActions closure function with every change of the imageNumber.
 
 	const keyDownActions = (e) => {
 		switch (e.keyCode) {
