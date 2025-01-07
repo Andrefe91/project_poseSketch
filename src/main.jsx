@@ -9,6 +9,8 @@ import HomePage from './Components/HomePage/HomePage'
 import ErrorPage from './Components/Error/errorPage'
 import Collection from './Components/Collection/Collection'
 import Theater from './Components/Theater/Theater'
+import About from './Components/About/About'
+import Faq from './Components/FAQ/Faq'
 //Loaders
 
 const router = createBrowserRouter([
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
       {
         path: '/theater',
         element: <Theater />
+      },
+      {
+        path: '/about',
+        element: <About />,
+      },
+      {
+        path: '/faq',
+        element: <Faq />,
       }
     ],
   }

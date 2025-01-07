@@ -16,7 +16,7 @@ export default function HomePage() {
 
 	return (
 		<>
-			<ResponsiveAppBar />
+			{/* <ResponsiveAppBar /> */}
 			<div className="container">
 				<DropZone />
 				<Button variant="contained" disabled={validImages.length == 0}>
