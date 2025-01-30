@@ -1,10 +1,13 @@
 //Modules
 import React from "react";
+//Components
+import StaticAppBar from "../StaticAppBar/StaticAppBar";
+import FootBar from "../FootBar/FootBar";
 
 function About() {
 	return (
 		<>
-			<h1>About</h1>
+			<StaticAppBar selected="about" />
 			<p>
 				Welcome to [Your App Name], a simple yet powerful tool designed for
 				artists who want to improve their figure drawing skills. Whether you're
@@ -16,6 +19,7 @@ function About() {
 				image display, and customizable practice sets, you can make every
 				session uniquely yours. Let your creativity flow, one sketch at a time!
 			</p>
+			<FootBar />
 		</>
 	);
 }

@@ -32,11 +32,9 @@
 
 	&:hover {
 		box-shadow: #a10000 0px -50px 36px -28px inset;
-		text-decoration: underline;
 	}
 }
 
 .selected {
-	box-shadow: #a10000 0px -50px 36px -28px inset;
 	text-decoration: underline;
 }

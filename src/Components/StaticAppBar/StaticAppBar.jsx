@@ -1,31 +1,33 @@
 //Modules
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 //Css
 import "./Staticappbar.css";
 
-function StaticAppBar({selected}) {
-
+function StaticAppBar({ selected }) {
 	return (
 		<div className="staticappbar">
 			<div className="logo">
-				<h1>Logo</h1>
+				<Link to={"/"}>
+					<h1>Logo</h1>
+				</Link>
 			</div>
 
 			<div className="mainLinks">
-				<a href="/faq" className={selected === "faq" ? "selected" : ""}>
+				<Link to={"/faq"} className={selected === "faq" ? "selected" : ""}>
 					<div>F.A.Q</div>
-				</a>
-				<a href="/about" className={selected === "about" ? "selected" : ""}>
+				</Link>
+				<Link to={"/about"} className={selected === "about" ? "selected" : ""}>
 					<div>About</div>
-				</a>
+				</Link>
 			</div>
 		</div>
 	);
 }
 
 StaticAppBar.propTypes = {
-    selected: PropTypes.string,
+	selected: PropTypes.string,
 };
 
 export default StaticAppBar;
