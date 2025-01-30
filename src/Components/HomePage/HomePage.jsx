@@ -6,6 +6,7 @@ import { useContext } from "react";
 import DropZone from "../DropZone/DropZone";
 import { Link } from "react-router-dom";
 import ResponsiveAppBar from "../AppBar/AppBar";
+import FootBar from "../FootBar/FootBar";
 //Context
 import { imageContext } from "../../Context/imageContext";
 //Css
@@ -22,6 +23,7 @@ export default function HomePage() {
 				<Button variant="contained" disabled={validImages.length == 0}>
 					<Link to={`collection`}>Go to collection</Link>
 				</Button>
+				<FootBar />
 			</div>
 		</>
 	);

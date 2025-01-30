@@ -2,12 +2,22 @@
 import React from "react";
 
 function About() {
-    return (
-        <>
-            <h1>About</h1>
-            <p> This is a simple image gallery app. </p>
-        </>
-    );
+	return (
+		<>
+			<h1>About</h1>
+			<p>
+				Welcome to [Your App Name], a simple yet powerful tool designed for
+				artists who want to improve their figure drawing skills. Whether you're
+				just starting or looking to refine your technique, our platform makes it
+				easy to create personalized practice sessions tailored to your needs.
+				Upload your favorite reference images, organize them into a collection,
+				and use our practice tools to focus on what matters most—enhancing your
+				artistic skills. With features like timed sessions, random or sequential
+				image display, and customizable practice sets, you can make every
+				session uniquely yours. Let your creativity flow, one sketch at a time!
+			</p>
+		</>
+	);
 }
 
 export default About;

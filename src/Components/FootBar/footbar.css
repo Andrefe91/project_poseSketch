@@ -1,0 +1,33 @@
+.footbar {
+    display: flex;
+    justify-content: space-between;
+
+    width: calc(100% - 1rem);
+    height: 3rem;
+    border-radius: 2rem;
+    padding-left: 1.5rem;
+
+    background-color: #C80000;
+    color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.footbar div {
+    display: flex;
+    align-items: center;
+}
+
+.contactIcons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    padding: 0.7rem;
+    width: 8rem;
+}
+
+.contactIcons a {
+    display: flex;
+    /* flex: 1; */
+    height: 1.5rem;
+}

@@ -4,6 +4,12 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+
+}
+
+:root {
+  --main-color: #C80000;
+  --secondary-color: #FFD700;
 }
 
 p {
