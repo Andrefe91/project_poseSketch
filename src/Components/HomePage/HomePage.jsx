@@ -5,8 +5,9 @@ import { useContext } from "react";
 //Components
 import DropZone from "../DropZone/DropZone";
 import { Link } from "react-router-dom";
-import ResponsiveAppBar from "../AppBar/AppBar";
+// import ResponsiveAppBar from "../AppBar/AppBar";
 import FootBar from "../FootBar/FootBar";
+import StaticAppBar from "../StaticAppBar/StaticAppBar";
 //Context
 import { imageContext } from "../../Context/imageContext";
 //Css
@@ -19,10 +20,13 @@ export default function HomePage() {
 		<>
 			{/* <ResponsiveAppBar /> */}
 			<div className="container">
-				<DropZone />
-				<Button variant="contained" disabled={validImages.length == 0}>
-					<Link to={`collection`}>Go to collection</Link>
-				</Button>
+				<StaticAppBar />
+				<div className="mainAction">
+					<DropZone />
+					<Button variant="contained" disabled={validImages.length == 0}>
+						<Link to={`collection`}>Go to collection</Link>
+					</Button>
+				</div>
 				<FootBar />
 			</div>
 		</>
