@@ -10,7 +10,7 @@ function About() {
 			<StaticAppBar selected="about" />
 			<p>
 				Welcome to [Your App Name], a simple yet powerful tool designed for
-				artists who want to improve their figure drawing skills. Whether you're
+				artists who want to improve their figure drawing skills. Whether you re
 				just starting or looking to refine your technique, our platform makes it
 				easy to create personalized practice sessions tailored to your needs.
 				Upload your favorite reference images, organize them into a collection,

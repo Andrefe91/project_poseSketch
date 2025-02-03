@@ -5,7 +5,6 @@ import { useContext } from "react";
 //Components
 import DropZone from "../DropZone/DropZone";
 import { Link } from "react-router-dom";
-// import ResponsiveAppBar from "../AppBar/AppBar";
 import FootBar from "../FootBar/FootBar";
 import StaticAppBar from "../StaticAppBar/StaticAppBar";
 //Context
