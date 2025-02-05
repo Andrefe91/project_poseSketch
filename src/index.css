@@ -1,20 +1,19 @@
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-
+	margin: 0;
+	display: flex;
+	place-items: center;
+	min-width: 320px;
+	min-height: 100vh;
 }
 
 :root {
-  --main-color: #C80000;
-  --secondary-color: #FFD700;
+	--main-color: #c80000;
+	--secondary-color: #ffd700;
 }
 
 p {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 /* @media (prefers-color-scheme: light) {
@@ -29,3 +28,13 @@ p {
     background-color: #f9f9f9;
   }
 } */
+
+.container {
+	width: 100vw;
+	height: calc(100vh - 1rem);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	margin: 1rem 0 0 0;
+}

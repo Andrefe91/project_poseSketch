@@ -5,13 +5,15 @@ import StaticAppBar from "../StaticAppBar/StaticAppBar";
 import FootBar from "../FootBar/FootBar";
 
 function Faq() {
-    return (
-        <>
-            <StaticAppBar selected="faq" />
-            <p> Ok, yes, but why ?. </p>
-            <FootBar />
-        </>
-    );
+	return (
+		<>
+			<div className="container">
+				<StaticAppBar selected="faq" />
+				<p> Ok, yes, but why ?. </p>
+				<FootBar />
+			</div>
+		</>
+	);
 }
 
 export default Faq;

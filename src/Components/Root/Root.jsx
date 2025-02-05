@@ -10,6 +10,8 @@ import { settingsContext } from "../../Context/settingsContext";
 import appSettings from "../../Settings/appSettings";
 // Scripts
 import { getCache, setCache } from "../../scripts/cacheManagement";
+//Css
+import "./root.css";
 
 const basic = createTheme({
 	palette: {
