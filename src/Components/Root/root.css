@@ -9,4 +9,7 @@
 	padding: 1rem 0 0 0;
 }
 
-
+:root {
+	--main-color: #c80000;
+	--secondary-color: #ffd700;
+}

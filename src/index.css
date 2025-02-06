@@ -6,10 +6,7 @@ body {
 	min-height: 100vh;
 }
 
-:root {
-	--main-color: #c80000;
-	--secondary-color: #ffd700;
-}
+
 
 p {
 	margin: 0;
