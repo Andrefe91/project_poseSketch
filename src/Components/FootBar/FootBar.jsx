@@ -16,7 +16,7 @@ function FootBar() {
 				</div>
 
 				<div className="contact">
-					<p>Contact me: </p>
+					<p className="hide">Contact me: </p>
 
 					<div className="contactIcons">
 						<a href="http://www.google.com">

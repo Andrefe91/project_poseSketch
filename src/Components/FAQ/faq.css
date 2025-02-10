@@ -3,8 +3,12 @@
     padding: 1rem 1rem 1rem 1rem;
 }
 
+.container h2 {
+    text-align: center;
+}
+
 .indexContainer {
-    min-width: 25%;
+    min-width: 30%;
     margin-right: 1rem;
 
     position: sticky;
@@ -52,4 +56,32 @@
 
 .indexContainer:hover ~ .questions {
     pointer-events: none;
+}
+
+@media screen and (max-width: 768px) {
+    .faqContent {
+        flex-direction: column;
+    }
+
+    .indexContainer {
+        margin-right: 0;
+        margin-bottom: 1rem;
+        position: relative;
+        top: 0;
+        height: auto;
+
+        background-color: #f0f0f0;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .index {
+        height: auto;
+        overflow-y: hidden;
+    }
+
+    .index li {
+        padding: 0.3rem 0 0.3rem 0;
+        list-style-type: circle;
+    }
 }

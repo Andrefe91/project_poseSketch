@@ -92,6 +92,10 @@ function Faq() {
 							</li>
 						</HashLink>
 
+						<HashLink smooth to="#did_you_use_ai">
+							<li>Did you use AI to create this?</li>
+						</HashLink>
+
 						<HashLink smooth to="#i_have_more_questions">
 							<li>I have more questions...</li>
 						</HashLink>
@@ -268,6 +272,22 @@ function Faq() {
 							that i can add a given functionallity or option, but please feel
 							free to contact me. I will be more than glad to hear your ideas
 							and suggestions.
+						</p>
+					</div>
+
+					<Divider aria-hidden="true" variant="inset" flexItem />
+
+					<div className="question" id="did_you_use_ai">
+						<h3>Did you use AI to create this?</h3>
+						<p>
+							This site is my personal learning project, wouldn&apos;t achieve
+							anything if i were to use AI instead. However i would also be a fool
+							not to use all the tools at my disposal, so i used some AI to help
+							me diagnose bugs and implementation problems. This page is
+							enterely created using React, Material-UI, HTML, CSS, and
+							Javascript. I also used some libraries like react-router and
+							react-dropzone. Believe me, the bugs you might find are enterely
+							my own fault.
 						</p>
 					</div>
 
