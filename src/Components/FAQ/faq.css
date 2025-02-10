@@ -13,20 +13,41 @@
 
 }
 
+.indexHeader {
+    display: flex;
+    align-content: center;
+}
+
+.indexHeader h3 {
+    margin: 0 0 0 0.3rem;
+}
+
 .index {
     padding-right: 1rem;
     padding-left: 2rem;
     padding-bottom: 1rem;
     height: 30rem;
-
     overflow-y: scroll;
+
+    margin-top: 0.3rem;
 }
 
-.index > li {
-    padding: 0.3rem 0 0.3rem 0;
+.index li {
+    padding: 0.3rem 0 0.3rem 0.3rem;
     cursor: pointer;
 
-    list-style-type: decimal;
+    list-style-type: circle;
+
+    &:hover {
+        background-color: #f0f0f0;
+        border-radius: 0.5rem;
+    }
+}
+
+.index > .selectedQuestion {
+    color: var(--main-color);
+    text-decoration: underline;
+    border-radius: 0.5rem;
 }
 
 .indexContainer:hover ~ .questions {

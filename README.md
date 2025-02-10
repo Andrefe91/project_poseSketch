@@ -29,7 +29,7 @@ the following features:
 ### Collection:
 
 - [x] Collection Page for showing preview of all the images in the list.
-- [ ] Basic Settings system in the Collection used for the Theater Display.
+- [x] Basic Settings system in the Collection used for the Theater Display.
 
 #### Optional Settings to add:
 
@@ -43,6 +43,6 @@ the following features:
 ### Information:
 
 - [ ] Add the information about the app
-  - [ ] About
-  - [ ] FAQ
+  - [x] About
+  - [x] FAQ
   - [ ] Changelog

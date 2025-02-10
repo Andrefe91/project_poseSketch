@@ -35,3 +35,8 @@ p {
 	align-items: center;
 	margin: 1rem 0 0 0;
 }
+
+body {
+	--main-color: #c80000;
+	--secondary-color: #ffd700;
+}
