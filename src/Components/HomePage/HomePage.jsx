@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import { useContext } from "react";
 //Components
 import DropZone from "../DropZone/DropZone";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import FootBar from "../FootBar/FootBar";
 import StaticAppBar from "../StaticAppBar/StaticAppBar";
 //Context
@@ -14,6 +14,7 @@ import "./homepage.css";
 
 export default function HomePage() {
 	const { validImages } = useContext(imageContext); //Get the images from the context
+	const navigate = useNavigate(); //Get the navigation function from react-router-dom
 
 	return (
 		<>
@@ -22,8 +23,12 @@ export default function HomePage() {
 				<StaticAppBar />
 				<div className="mainAction">
 					<DropZone />
-					<Button variant="contained" disabled={validImages.length == 0}>
-						<Link to={`collection`}>Go to collection</Link>
+					<Button
+						variant="contained"
+						disabled={validImages.length === 0}
+						onClick={() => {navigate("collection")}}
+					>
+						Go to collection
 					</Button>
 				</div>
 				<FootBar />
