@@ -13,6 +13,7 @@ import CollectionDrawer from "../CollectionDrawer/CollectionDrawer";
 import "./collectionAB.css";
 //Icons
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import SettingsIcon from '@mui/icons-material/Settings';
 
 export default function CollectionAB() {
 	const [drawerState, setDrawerState] = useState(false);
@@ -92,16 +93,19 @@ export default function CollectionAB() {
 							COLLECTION
 						</Typography>
 
-						<Button
-							sx={{
-								fontWeight: 700,
-								color: "inherit",
-							}}
-							className="navbar-button"
-							onClick={toggleDrawer}
-						>
-							Settings
-						</Button>
+						<Tooltip title="Open Settings (S)" arrow>
+							<Button
+								sx={{
+									fontWeight: 700,
+									color: "inherit",
+								}}
+								className="navbar-button"
+								startIcon={<SettingsIcon />}
+								onClick={toggleDrawer}
+							>
+								Settings
+							</Button>
+						</Tooltip>
 					</Box>
 				</Container>
 			</AppBar>

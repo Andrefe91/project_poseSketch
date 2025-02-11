@@ -28,6 +28,7 @@ export default function Theater() {
 	//In case there are no images, redirect to HomePage
 	useEffect(() => {}, [validImages]);
 
+
 	//Get Options from settings
 	const showOptions =
 		settings.options.image_information == "hide" ? false : true;

@@ -133,7 +133,7 @@ function TheaterControl({
 
 	return (
 		<div className="timer-info">
-			<div className="timerVisibility text">
+			<div className={timerVisibility + " text"}>
 				<TimerBlock time={timer} /> / <TimerBlock time={imageTimer} />
 			</div>
 
