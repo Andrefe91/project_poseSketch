@@ -1,7 +1,7 @@
 //Modules
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Fab, Typography, Box } from "@mui/material";
+import { Fab, Typography, Box, Tooltip } from "@mui/material";
 //Components
 import CollectionItem from "../CollectionItem/CollectionItem";
 import CollectionAB from "../CollectionAB/CollectionAB";
@@ -35,23 +35,28 @@ function Collection() {
 					<div className="collection-container">{imageGrid}</div>
 				</Box>
 
-				<Fab
-					color="primary"
-					aria-label="start"
-					className="start-theater"
-					onClick={() => navigate("/theater")}
-					variant="extended"
-					sx={{ position: "fixed", bottom: "20px", right: "20px" }}
+				<Tooltip
+					title={"Start the session in the Theater (Enter)"}
+					placement="top-start"
 				>
-					<PlayArrowIcon sx={{ mr: 0.5 }} fontSize="large" />
-					<Typography
-						variant="body1"
-						component="h2"
-						sx={{ fontWeight: 700, letterSpacing: ".1rem" }}
+					<Fab
+						color="primary"
+						aria-label="start"
+						className="start-theater"
+						onClick={() => navigate("/theater")}
+						variant="extended"
+						sx={{ position: "fixed", bottom: "20px", right: "20px" }}
 					>
-						Start
-					</Typography>
-				</Fab>
+						<PlayArrowIcon sx={{ mr: 0.5 }} fontSize="large" />
+						<Typography
+							variant="body1"
+							component="h2"
+							sx={{ fontWeight: 700, letterSpacing: ".1rem" }}
+						>
+							Start
+						</Typography>
+					</Fab>
+				</Tooltip>
 			</div>
 		</>
 	);

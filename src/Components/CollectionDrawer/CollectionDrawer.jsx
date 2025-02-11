@@ -59,7 +59,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 	//Reset the updatedOptions to the saved settings. This means that, unless the settings are "Saved"
 	//in the settings pannel, the object used in the panel will return to the previous saved state
 	useEffect(() => {
-		//Only call the saved settings before loading the Collection Drawer, once loaded dont try to load again. 
+		//Only call the saved settings before loading the Collection Drawer, once loaded dont try to load again.
 		if (!drawerState) {
 			setUpdatedOptions({ ...settings.options });
 		}
@@ -395,84 +395,98 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 											gap: "0.5rem",
 										}}
 									>
-										<Select
-											labelId="study-format-setting-label"
-											id="study-format-setting"
-											value={updatedOptions.selected_study_format}
-											label="Preset"
-											onChange={(e) => changeSelectedPreset(e)}
-											//Disable the Select if adding a new Preset.
-											disabled={addingPreset}
-											sx={{ display: "flex", flex: "1" }}
+										<Tooltip
+											title={
+												"Select one of the standar presets or create your own"
+											}
+											placement="left"
 										>
-											{/* List all the saved presets */}
-											{Object.keys(updatedOptions.study_format).map(
-												(preset) => {
-													return (
-														<MenuItem key={preset} value={preset}>
-															{preset}
-														</MenuItem>
-													);
-												},
-											)}
-										</Select>
-
-										<Box
-											sx={{
-												display: "flex",
-												flexDirection: "column",
-												gap: "0.5rem",
-											}}
+											<Select
+												labelId="study-format-setting-label"
+												id="study-format-setting"
+												value={updatedOptions.selected_study_format}
+												label="Preset"
+												onChange={(e) => changeSelectedPreset(e)}
+												//Disable the Select if adding a new Preset.
+												disabled={addingPreset}
+												sx={{ display: "flex", flex: "1" }}
+											>
+												{/* List all the saved presets */}
+												{Object.keys(updatedOptions.study_format).map(
+													(preset) => {
+														return (
+															<MenuItem key={preset} value={preset}>
+																{preset}
+															</MenuItem>
+														);
+													},
+												)}
+											</Select>
+										</Tooltip>
+										<Tooltip
+											title={"Open / Close the preset edition"}
+											placement="top-start"
 										>
-											{/* Edit the Preset */}
-											{!addingPreset && (
-												<IconButton
-													aria-label="edit preset"
-													onClick={handleEditPreset}
-												>
-													<EditIcon fontSize="small" />
-												</IconButton>
-											)}
-
-											{/* Close the Preset */}
-											{addingPreset && (
-												<IconButton
-													aria-label="close preset"
-													onClick={() => setAddingPreset(false)}
-												>
-													<CloseIcon fontSize="small" />
-												</IconButton>
-											)}
-										</Box>
+											<Box
+												sx={{
+													display: "flex",
+													flexDirection: "column",
+													gap: "0.5rem",
+												}}
+											>
+												{/* Edit the Preset */}
+												{!addingPreset && (
+													<IconButton
+														aria-label="edit preset"
+														onClick={handleEditPreset}
+													>
+														<EditIcon fontSize="small" />
+													</IconButton>
+												)}
+												{/* Close the Preset */}
+												{addingPreset && (
+													<IconButton
+														aria-label="close preset"
+														onClick={() => setAddingPreset(false)}
+													>
+														<CloseIcon fontSize="small" />
+													</IconButton>
+												)}
+											</Box>
+										</Tooltip>
 									</Box>
 								</FormControl>
 
 								{/* Activate the option to Add a Preset */}
 								{!addingPreset && (
-									<Button
-										size="small"
-										sx={{ mt: "0.2rem", mb: "0.2rem" }}
-										startIcon={<AddIcon />}
-										onClick={() => {
-											//Set a new empty Preset
-											setNewPreset(["Meaningfull Name", []]);
-
-											//And activate the component
-											setAddingPreset(true);
-
-											//If the Effects Tab is open, close it.
-											if (openEffectsSettings) {
-												handleOpenEffectsSettings();
-											}
-
-											//If the Selection Tab is open, close it.
-											if (openSelectionSettings) {
-												handleOpenSelectionSettings();
-											}
-										}}
+									<Tooltip
+										title={
+											"Create a new Preset with a personalized name and configuration"
+										}
+										placement="left"
 									>
-										Add Preset
-									</Button>
+										<Button
+											size="small"
+											sx={{ mt: "0.2rem", mb: "0.2rem" }}
+											startIcon={<AddIcon />}
+											onClick={() => {
+												//Set a new empty Preset
+												setNewPreset(["Meaningfull Name", []]);
+												//And activate the component
+												setAddingPreset(true);
+												//If the Effects Tab is open, close it.
+												if (openEffectsSettings) {
+													handleOpenEffectsSettings();
+												}
+												//If the Selection Tab is open, close it.
+												if (openSelectionSettings) {
+													handleOpenSelectionSettings();
+												}
+											}}
+										>
+											Add Preset
+										</Button>
+									</Tooltip>
 								)}
 
 								{/* Activate an "Add a Preset component" */}
@@ -511,17 +525,31 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 										onChange={registerChange}
 										name="image_information"
 									>
-										<FormControlLabel
-											value="hide"
-											control={<Radio />}
-											label="Hide"
-										/>
+										<Tooltip
+											title={
+												"Hide the title of the image in the Theater presentation"
+											}
+											placement="left"
+										>
+											<FormControlLabel
+												value="hide"
+												control={<Radio />}
+												label="Hide"
+											/>
+										</Tooltip>
 
-										<FormControlLabel
-											value="show"
-											control={<Radio />}
-											label="Show"
-										/>
+										<Tooltip
+											title={
+												"Always show the title of the image in the Theater presentation"
+											}
+											placement="top-start"
+										>
+											<FormControlLabel
+												value="show"
+												control={<Radio />}
+												label="Show"
+											/>
+										</Tooltip>
 									</RadioGroup>
 								</FormControl>
 
@@ -542,17 +570,24 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 										onChange={registerChange}
 										name="timer_visibility"
 									>
-										<FormControlLabel
-											value="constant"
-											control={<Radio />}
-											label="Constant"
-										/>
+										<Tooltip title={"Always show the timer"} placement="left">
+											<FormControlLabel
+												value="constant"
+												control={<Radio />}
+												label="Constant"
+											/>
+										</Tooltip>
 
-										<FormControlLabel
-											value="fade"
-											control={<Radio />}
-											label="Fade"
-										/>
+										<Tooltip
+											title={"Hide the timer after 2 seconds"}
+											placement="top-start"
+										>
+											<FormControlLabel
+												value="fade"
+												control={<Radio />}
+												label="Fade"
+											/>
+										</Tooltip>
 									</RadioGroup>
 								</FormControl>
 
@@ -572,35 +607,48 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 										onChange={registerChange}
 										name="timer_beeps"
 									>
-										<FormControlLabel
-											value={0}
-											control={<Radio />}
-											label="Deactivated"
-										/>
+										<Tooltip
+											title={"No beeps for the timer final seconds"}
+											placement="left"
+										>
+											<FormControlLabel
+												value={0}
+												control={<Radio />}
+												label="Deactivated"
+											/>
+										</Tooltip>
 
-										<FormControlLabel
-											value={3}
-											control={<Radio />}
-											label="3 Seconds"
-										/>
+										<Tooltip title={"Beeps for the last 3 seconds"} placement="left">
+											<FormControlLabel
+												value={3}
+												control={<Radio />}
+												label="3 Seconds"
+											/>
+										</Tooltip>
 
-										<FormControlLabel
-											value={5}
-											control={<Radio />}
-											label="5 Seconds"
-										/>
+										<Tooltip title={"Beeps for the last 5 seconds"} placement="left">
+											<FormControlLabel
+												value={5}
+												control={<Radio />}
+												label="5 Seconds"
+											/>
+										</Tooltip>
 
-										<FormControlLabel
-											value={10}
-											control={<Radio />}
-											label="10 Seconds"
-										/>
+										<Tooltip title={"Beeps for the last 10 seconds"} placement="left">
+											<FormControlLabel
+												value={10}
+												control={<Radio />}
+												label="10 Seconds"
+											/>
+										</Tooltip>
 
-										<FormControlLabel
-											value={15}
-											control={<Radio />}
-											label="15 Seconds"
-										/>
+										<Tooltip title={"Beeps for the last 15 seconds"} placement="left">
+											<FormControlLabel
+												value={15}
+												control={<Radio />}
+												label="15 Seconds"
+											/>
+										</Tooltip>
 									</RadioGroup>
 								</FormControl>
 
@@ -621,17 +669,21 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 										onChange={registerChange}
 										name="pause_controls"
 									>
-										<FormControlLabel
-											value={true}
-											control={<Radio />}
-											label="Allow"
-										/>
+										<Tooltip title={"Let you pause the session at any moment"} placement="left">
+											<FormControlLabel
+												value={true}
+												control={<Radio />}
+												label="Allow"
+											/>
+										</Tooltip>
 
-										<FormControlLabel
-											value={false}
-											control={<Radio />}
-											label="Don't Allow"
-										/>
+										<Tooltip title={"Can't pause the session for the whole duration"} placement="top-start">
+											<FormControlLabel
+												value={false}
+												control={<Radio />}
+												label="Don't Allow"
+											/>
+										</Tooltip>
 									</RadioGroup>
 								</FormControl>
 							</Box>
