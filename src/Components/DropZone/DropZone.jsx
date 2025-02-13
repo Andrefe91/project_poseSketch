@@ -91,12 +91,12 @@ function DropZone() {
 			<aside>
 				<ul className="fileList">
 					{validImages.length > 0 && (
-						<li>🎉{validImages.length} images loaded and valid 🎉</li>
+						<li>🎉{validImages.length} Images loaded and valid 🎉</li>
 					)}
 
 					{invalidImages.length > 0 && (
 						<li>
-							{invalidImages.length} files are not valid (only PNG and JPG are
+							{invalidImages.length} Files are not valid (only PNG and JPG are
 							allowed)
 						</li>
 					)}

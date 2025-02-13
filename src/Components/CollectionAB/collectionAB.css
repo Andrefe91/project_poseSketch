@@ -1,5 +1,19 @@
-.navbar-button {
-    &:hover {
-        text-decoration: underline;
-    }
+.responsiveText {
+	margin: 0;
+	padding: 0;
+}
+
+AppBar .navbar_button {
+	margin: 0;
+	padding: 0;
+}
+
+.navbar_button:hover .responsiveText {
+	text-decoration: underline;
+}
+
+@media screen and (max-width: 480px) {
+	.responsiveText {
+		display: none;
+	}
 }

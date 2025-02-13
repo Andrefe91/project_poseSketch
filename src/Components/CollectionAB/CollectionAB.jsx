@@ -70,11 +70,13 @@ export default function CollectionAB() {
 								sx={{
 									fontWeight: 700,
 									color: "inherit",
+									padding: "0",
+									margin: "0",
 								}}
-								className="navbar-button"
+								className="navbar_button"
 								onClick={() => navigate("/")}
 							>
-								BACK
+								<p className="responsiveText">BACK</p>
 							</Button>
 						</Tooltip>
 
@@ -98,12 +100,14 @@ export default function CollectionAB() {
 								sx={{
 									fontWeight: 700,
 									color: "inherit",
+									padding: "0",
+									margin: "0",
 								}}
-								className="navbar-button"
-								startIcon={<SettingsIcon />}
+								className="navbar_button"
+								endIcon={<SettingsIcon />}
 								onClick={toggleDrawer}
 							>
-								Settings
+								<p className="responsiveText">Settings</p>
 							</Button>
 						</Tooltip>
 					</Box>
