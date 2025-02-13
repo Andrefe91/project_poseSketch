@@ -33,17 +33,18 @@ const rejectStyle = {
 };
 
 function DropZone() {
-    const { validImages, setValidImages, invalidImages, setInvalidImages } = useContext(imageContext)
+	const { validImages, setValidImages, invalidImages, setInvalidImages } =
+		useContext(imageContext);
 
-    //Pass the uploaded images to the wrapper component state
+	//Pass the uploaded images to the wrapper component state
 	const onDrop = useCallback((acceptedFiles, fileRejections) => {
-        acceptedFiles.forEach((file) => {
-            setValidImages((prevState) => [...prevState, file]);
-        })
+		acceptedFiles.forEach((file) => {
+			setValidImages((prevState) => [...prevState, file]);
+		});
 
-        fileRejections.forEach((file) => {
-            setInvalidImages((prevState) => [...prevState, file]);
-        })
+		fileRejections.forEach((file) => {
+			setInvalidImages((prevState) => [...prevState, file]);
+		});
 	});
 
 	const {
@@ -59,7 +60,7 @@ function DropZone() {
 		},
 	});
 
-    //Varible to store the styles
+	//Varible to store the styles
 	const style = useMemo(
 		() => ({
 			...baseStyle,
@@ -71,31 +72,35 @@ function DropZone() {
 	);
 
 	return (
-		<section>
-			<div {...getRootProps({ style })} className="test">
-				<input {...getInputProps()} />
+		<section className="dropZone_container">
+			<div {...getRootProps({ style })} className="dropZone">
+				<div className="backImage">
+					<input {...getInputProps()} />
+				</div>
 			</div>
 
 			<div>
 				{isDragAccept && <p>All files are valid</p>}
 				{isDragReject && <p>Some files are not images (.png or .jpg)</p>}
-				{!isDragActive && (
+				{/* {!isDragActive && (
 					<p>Drag and drop images here or click to select files</p>
-				)}
+				)} */}
 			</div>
 
-            {/* Baisc feedback about the loaded files */}
+			{/* Baisc feedback about the loaded files */}
 			<aside>
-				<h4>Files:</h4>
-				<ul>
-                    {validImages.length > 0 && (
-                        <li>{validImages.length} images are loaded and valid</li>
-                    )}
+				<ul className="fileList">
+					{validImages.length > 0 && (
+						<li>🎉{validImages.length} images loaded and valid 🎉</li>
+					)}
 
-                    {invalidImages.length > 0 && (
-                        <li>{invalidImages.length} files are not valid (only PNG and JPG are allowed)</li>
-                    )}
-                </ul>
+					{invalidImages.length > 0 && (
+						<li>
+							{invalidImages.length} files are not valid (only PNG and JPG are
+							allowed)
+						</li>
+					)}
+				</ul>
 			</aside>
 		</section>
 	);

@@ -216,7 +216,7 @@ function Faq() {
 							study sessions everytime the webpage loads, that would be not very
 							usefull and even somewhat frustrating, so im using a browser
 							function called LocalStorage to save your preferences{" "}
-							<i>locally</i>.
+							<i>locally</i> in your computer and nowhere else.
 						</p>
 					</div>
 
@@ -270,7 +270,7 @@ function Faq() {
 						<p>
 							As this is a passion and learning project, i can&apos;t promise
 							that i can add a given functionallity or option, but please feel
-							free to contact me. I will be more than glad to hear your ideas
+							free to contact me. I will be more than happy to hear your ideas
 							and suggestions.
 						</p>
 					</div>

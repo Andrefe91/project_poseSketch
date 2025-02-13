@@ -28,7 +28,7 @@ export default function HomePage() {
 						disabled={validImages.length === 0}
 						onClick={() => {navigate("collection")}}
 					>
-						Go to collection
+					To the collection
 					</Button>
 				</div>
 				<FootBar />

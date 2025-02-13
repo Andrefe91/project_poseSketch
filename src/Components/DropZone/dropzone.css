@@ -1,30 +1,84 @@
 .baseStyle {
-    display: 'flex';
-    flex-direction: 'column';
-    align-items: 'center';
-    padding: '20px';
-    border-width: 2;
-    border-radius: 2;
-    border-color: '#eeeeee';
-    border-style: 'dashed';
-    background-color: '#fafafa';
-    color: '#bdbdbd';
-    transition: 'border .3s ease-in-out'
+	display: "flex";
+	flex-direction: "column";
+	align-items: "center";
+	padding: "20px";
+	border-width: 2;
+	border-radius: 2;
+	border-color: "#eeeeee";
+	border-style: "dashed";
+	background-color: "#fafafa";
+	color: "#bdbdbd";
+	transition: "border .3s ease-in-out";
 }
 
 .activeStyle {
-    border-color: #2196f3;
+	border-color: #2196f3;
 }
 
 .acceptStyle {
-    border-color: #00e676;
+	border-color: #00e676;
 }
 
 .rejectStyle {
-    border-color: #ff1744;
+	border-color: #ff1744;
 }
 
-.test {
-    width: 25rem;
-    height: 10rem;
+.dropZone {
+	width: calc(min(25rem, 70vw));
+	height: calc(max(10rem, 30vh));
+	display: flex;
+    justify-content: center;
+}
+
+.backImage {
+	width: 100%;
+	height: 100%;
+
+	opacity: 0.15;
+
+	background-image: url("../../assets/icons/load_images.svg");
+	background-repeat: no-repeat;
+    background-position: center;
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.dropZone_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
+
+.fileList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+
+    padding: 0;
+}
+
+.fileList li {
+    list-style-type: none;
+}
+
+@media screen and (width < 580px) {
+	.backImage {
+		display: flex;
+        width: 100%;
+
+		opacity: 0.15;
+
+		background-image: url("../../assets/icons/add_images.svg");
+		background-repeat: no-repeat;
+		&:hover {
+			cursor: pointer;
+		}
+	}
 }
