@@ -26,7 +26,6 @@ export default function Theater() {
 	//Loaded images, obtained from a context
 	const { validImages } = useContext(imageContext);
 	//In case there are no images, redirect to HomePage
-	useEffect(() => {}, [validImages]);
 
 
 	//Get Options from settings
@@ -123,7 +122,7 @@ export default function Theater() {
 				}}
 			>
 				<TheaterTop
-					imageTitle={validImages[imagesOrder[imageIndex]].name}
+					imageTitle={validImages[imagesOrder[imageIndex]]?.name}
 					showTitle={showOptions}
 				/>
 
@@ -131,7 +130,7 @@ export default function Theater() {
 					sx={{
 						height: "100vh",
 						display: "flex",
-						flex:"1",
+						flex: "1",
 						flexDirection: "column",
 						justifyContent: "center",
 					}}
