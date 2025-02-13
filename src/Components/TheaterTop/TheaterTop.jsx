@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 //CSS
 import "./theaterTop.css";
 //Icons
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CancelIcon from '@mui/icons-material/Cancel';
 
 function TheaterTop({ imageTitle, showTitle }) {

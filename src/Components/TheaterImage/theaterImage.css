@@ -1,8 +1,8 @@
 .theater-image {
 	display: flex;
 	width: auto;
-	padding-top: 1rem;
-	padding-bottom: 1rem;
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
 	justify-content: center;
 	position: relative;
 }
@@ -10,7 +10,7 @@
 .theater-image img {
 	max-width: 100%;
 	height: auto;
-	max-height: calc(100vh - 7rem);
+	max-height: calc(80vh);
 	object-fit: contain;
 	border-radius: 1rem;
 	z-index: 5;
@@ -25,4 +25,10 @@
 	position: absolute;
 	filter: blur(3px) opacity(50%);
 	z-index: 1;
+}
+
+@media screen and (max-width: 580px) {
+	.theater-image img {
+		max-height: calc(75vh);
+	}
 }

@@ -131,6 +131,7 @@ export default function Theater() {
 					sx={{
 						height: "100vh",
 						display: "flex",
+						flex:"1",
 						flexDirection: "column",
 						justifyContent: "center",
 					}}

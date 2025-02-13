@@ -1,6 +1,6 @@
 .imageTitle-top {
 	display: flex;
-	height: 1rem;
+	height: 2rem;
 }
 
 .positionReference {
@@ -10,7 +10,7 @@
 .imageTitle-top > p {
 	font-size: 1.5rem;
 	color: white;
-	margin: 0;
+	margin: 0.25rem 0 0 0;
 	user-select: none;
 }
 
@@ -24,4 +24,10 @@
 
 #back-button:hover {
     transform: rotate(90deg);
+}
+
+@media screen and (max-width: 580px) {
+	.imageTitle-top > p {
+		font-size: 1.2rem;
+	}
 }
