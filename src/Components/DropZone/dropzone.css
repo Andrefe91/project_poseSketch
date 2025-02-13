@@ -52,6 +52,24 @@
 	align-items: center;
 	height: 100%;
 	width: 100%;
+
+	position: relative;
+}
+
+.dropZone_notice {
+	position: absolute;
+	top: 80%;
+	left: 0;
+	width: calc(min(25rem, 70vw));
+
+	/* outline: 1px solid rgba(71, 71, 71, 0.212); */
+	padding: 0.25rem;
+	border-radius: 1rem;
+}
+
+.dropZone_notice p {
+	text-align: center;
+	margin: 0;
 }
 
 .fileList {

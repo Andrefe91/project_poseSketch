@@ -79,12 +79,10 @@ function DropZone() {
 				</div>
 			</div>
 
-			<div>
+			<div className="dropZone_notice">
 				{isDragAccept && <p>All files are valid</p>}
 				{isDragReject && <p>Some files are not images (.png or .jpg)</p>}
-				{/* {!isDragActive && (
-					<p>Drag and drop images here or click to select files</p>
-				)} */}
+				{/* {!isDragActive && <p>Click or move files</p>} */}
 			</div>
 
 			{/* Baisc feedback about the loaded files */}
