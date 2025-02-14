@@ -22,13 +22,19 @@ export default function HomePage() {
 			<div className="container">
 				<StaticAppBar />
 				<div className="mainAction">
+					<div className="mainText">
+						<h1>Pose Player</h1>
+						<p>Your simple tool for Gesture Drawing practice</p>
+					</div>
 					<DropZone />
 					<Button
 						variant="contained"
 						disabled={validImages.length === 0}
-						onClick={() => {navigate("collection")}}
+						onClick={() => {
+							navigate("collection");
+						}}
 					>
-					To the collection
+						To the collection
 					</Button>
 				</div>
 				<FootBar />
