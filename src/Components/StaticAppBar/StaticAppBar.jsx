@@ -15,11 +15,11 @@ function StaticAppBar({ selected }) {
 			</div>
 
 			<div className="mainLinks">
-				<Link to={"/faq"} className={selected === "faq" ? "selected" : ""}>
-					<div>F.A.Q</div>
+				<Link to={"/faq"} className={selected === "faq" ? "selected" : ""} id="faq">
+					F.A.Q
 				</Link>
-				<Link to={"/about"} className={selected === "about" ? "selected" : ""}>
-					<div>About</div>
+				<Link to={"/about"} className={selected === "about" ? "selected" : ""} id="about">
+					About
 				</Link>
 			</div>
 		</div>

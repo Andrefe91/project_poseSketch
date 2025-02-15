@@ -12,11 +12,11 @@ function FootBar() {
 		<>
 			<footer className="footbar">
 				<div className="footbarText">
-					<p>Pose Player - 2025</p>
+					<p>2025 - Pose Player</p>
 				</div>
 
 				<div className="contact">
-					<p className="hide">Contact me: </p>
+					<p className="hide">Contact: </p>
 
 					<div className="contactIcons">
 						<a href="http://www.google.com">

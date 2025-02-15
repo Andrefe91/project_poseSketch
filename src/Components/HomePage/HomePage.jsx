@@ -24,7 +24,11 @@ export default function HomePage() {
 				<div className="mainAction">
 					<div className="mainText">
 						<h1>Pose Player</h1>
-						<p>Your simple tool for Gesture Drawing practice</p>
+						<p>Your simple tool for Gesture Drawing Practice</p>
+						<p id="normalText">
+							Locally load and display your practice pictures - no accounts, no
+							subscriptions, no data collection.
+						</p>
 					</div>
 					<DropZone />
 					<Button
