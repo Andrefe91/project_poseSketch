@@ -52,3 +52,16 @@
 .selected {
 	text-decoration: underline;
 }
+
+
+@media screen and (width < 580px) {
+	#about {
+		margin-left: 0.5rem;
+	}
+
+	.mainLinks a {
+		text-align: center;
+		width: 4rem;
+		padding: 0.2rem;
+	}
+}

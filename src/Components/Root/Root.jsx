@@ -22,6 +22,11 @@ const basic = createTheme({
 			main: "#00c8c8",
 		},
 	},
+	typography: {
+		fontFamily: "Roboto, serif",
+		fontSize: 16,
+        fontWeight: 400,
+	},
 });
 
 // Explore the cache to fetch the Settings, if not, set a new Cache.
