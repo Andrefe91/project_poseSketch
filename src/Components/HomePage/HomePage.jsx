@@ -12,7 +12,7 @@ import { imageContext } from "../../Context/imageContext";
 //Css
 import "./homepage.css";
 //Icons
-import StartIcon from '@mui/icons-material/Start';
+import StartIcon from "@mui/icons-material/Start";
 
 export default function HomePage() {
 	const { validImages } = useContext(imageContext); //Get the images from the context
@@ -40,6 +40,12 @@ export default function HomePage() {
 							navigate("collection");
 						}}
 						endIcon={<StartIcon />}
+						sx={{
+							"&.Mui-disabled": {
+								background: "#eaeaea",
+								color: "#c0c0c0",
+							},
+						}}
 					>
 						To the collection
 					</Button>

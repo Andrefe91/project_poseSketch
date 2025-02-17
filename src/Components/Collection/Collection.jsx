@@ -2,6 +2,7 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Fab, Typography, Box, Tooltip } from "@mui/material";
+import { toast } from "react-toastify";
 //Components
 import CollectionItem from "../CollectionItem/CollectionItem";
 import CollectionAB from "../CollectionAB/CollectionAB";
@@ -27,6 +28,11 @@ function Collection() {
 		<CollectionItem key={index} imageFile={file} number={index} />
 	));
 
+	function startSession() {
+		toast.dismiss();
+		navigate("/theater");
+	}
+
 	return (
 		<>
 			<div className="page-container">
@@ -43,7 +49,7 @@ function Collection() {
 						color="primary"
 						aria-label="start"
 						className="start-theater"
-						onClick={() => navigate("/theater")}
+						onClick={() => startSession()}
 						variant="extended"
 						sx={{ position: "fixed", bottom: "20px", right: "20px" }}
 					>

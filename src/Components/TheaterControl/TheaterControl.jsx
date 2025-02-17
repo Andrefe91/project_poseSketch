@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { PropTypes } from "prop-types";
 import { Button, ButtonGroup } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 //Hooks
 import useInterval from "../../Hooks/useInterval";
 //Components
@@ -35,11 +36,19 @@ function TheaterControl({
 	// Control the visibility of the timer
 	const [timerVisibility, setTimerVisibility] = useState(timerVisibilityOption);
 
+	//This function handles cancellation of the study session
+	const cancelStudyNotification = () =>
+		toast.info("Session Cancelled...", {
+			position: "bottom-center",
+			autoClose: 2500,
+			closeOnClick: true,
+			pauseOnHover: false,
+		});
+
 	// Set the timer for the current image
 	useInterval(() => {
 		setTimer(timer + 1);
 	}, timerInterval);
-
 
 	useEffect(() => {
 		// Set next image by timer
@@ -76,6 +85,7 @@ function TheaterControl({
 		switch (e.keyCode) {
 			case 27: // Escape Key
 				navigate("/collection"); // Navigate back to the collection
+				cancelStudyNotification(); // Notify the user that the session was cancelled
 				break;
 			case 39: // Right Arrow Key
 				handleNextImage();
@@ -153,6 +163,12 @@ function TheaterControl({
 							hideTimer();
 						}}
 						disabled={imageNumber === 1}
+						sx={{
+							"&.Mui-disabled": {
+								background: "#5b1818",
+								color: "#6b4747",
+							},
+						}}
 					>
 						<ArrowBackIosIcon />
 					</Button>

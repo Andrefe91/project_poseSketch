@@ -3,16 +3,27 @@ import React from "react";
 import { Container, IconButton } from "@mui/material";
 import { PropTypes } from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 //CSS
 import "./theaterTop.css";
 //Icons
-import CancelIcon from '@mui/icons-material/Cancel';
+import CancelIcon from "@mui/icons-material/Cancel";
 
 function TheaterTop({ imageTitle, showTitle }) {
 	const navigate = useNavigate();
 
+	//This function handles cancellation of the study session
+	const cancelStudyNotification = () =>
+		toast.info("Session Cancelled...", {
+			position: "bottom-center",
+			autoClose: 2500,
+			closeOnClick: true,
+			pauseOnHover: false,
+		});
+
 	function backToCollection() {
 		navigate("/collection");
+		cancelStudyNotification();
 	}
 
 	return (
@@ -26,9 +37,9 @@ function TheaterTop({ imageTitle, showTitle }) {
 			>
 				<div className="imageTitle-top">{showTitle && <p>{imageTitle}</p>}</div>
 
-				<div className="imageTitle-top" >
+				<div className="imageTitle-top">
 					<IconButton id="back-button" onClick={backToCollection}>
-						<CancelIcon color="primary"  fontSize="large" />{" "}
+						<CancelIcon color="primary" fontSize="large" />{" "}
 					</IconButton>
 				</div>
 			</Container>

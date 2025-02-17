@@ -2,6 +2,7 @@
 import React, { useContext, useMemo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Container } from "@mui/material";
+import { toast } from "react-toastify";
 //Context
 import { settingsContext } from "../../Context/settingsContext";
 import { imageContext } from "../../Context/imageContext";
@@ -25,8 +26,6 @@ export default function Theater() {
 	const { settings } = useContext(settingsContext);
 	//Loaded images, obtained from a context
 	const { validImages } = useContext(imageContext);
-	//In case there are no images, redirect to HomePage
-
 
 	//Get Options from settings
 	const showOptions =
@@ -52,8 +51,19 @@ export default function Theater() {
 		settings.options.study_format[settings.options.selected_study_format];
 	let [time, trackingText] = trackTimeOrder(timeBlocks, imageNumber);
 
+	//Notification for the end of the study session
+	const endOfStudyNotification = () =>
+		toast.success("🎉 Session Finished!", {
+			position: "bottom-center",
+			autoClose: 2500,
+			closeOnClick: true,
+			pauseOnHover: false,
+		});
+
+	//This function handles the end of the study session
 	function handleEndOfStudy() {
 		navigate("/collection");
+		endOfStudyNotification();
 	}
 
 	useEffect(() => {

@@ -90,6 +90,7 @@ export default function CollectionAB() {
 								color: "inherit",
 								textAlign: "center",
 								margin: "0.5rem",
+								userSelect: "none",
 							}}
 						>
 							COLLECTION
