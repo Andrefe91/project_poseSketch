@@ -27,7 +27,7 @@ export default function HomePage() {
 						<p>Your simple tool for Gesture Drawing Practice</p>
 						<p id="normalText">
 							Locally load and display your practice pictures - no accounts, no
-							subscriptions, no data collection.
+							subscriptions, no data tracking.
 						</p>
 					</div>
 					<DropZone />

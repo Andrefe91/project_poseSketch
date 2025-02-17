@@ -25,6 +25,7 @@ import {
 	DialogContent,
 	DialogContentText,
 } from "@mui/material";
+import { toast } from "react-toastify";
 
 //CSS
 import "./collection-drawer.css";
@@ -55,6 +56,16 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 	//Settings of the whole application, obtained from a context
 	const { settings, setSettings } = useContext(settingsContext);
 	const [updatedOptions, setUpdatedOptions] = useState(settings.options);
+
+	//Declaration for the Toast module (Save notification)
+	const saveNotification = () =>
+		toast.success("Settings Saved", {
+			position: "bottom-center",
+			autoClose: 2500,
+			hideProgressBar: true,
+			closeOnClick: true,
+			pauseOnHover: false,
+		});
 
 	//Reset the updatedOptions to the saved settings. This means that, unless the settings are "Saved"
 	//in the settings pannel, the object used in the panel will return to the previous saved state
@@ -132,6 +143,9 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 			...settings,
 			options: { ...updatedOptions },
 		});
+
+		//Notify the user that the settings have been saved
+		saveNotification();
 
 		//Close the drawer
 		toggleDrawerFunc(false);
@@ -618,7 +632,10 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 											/>
 										</Tooltip>
 
-										<Tooltip title={"Beeps for the last 3 seconds"} placement="left">
+										<Tooltip
+											title={"Beeps for the last 3 seconds"}
+											placement="left"
+										>
 											<FormControlLabel
 												value={3}
 												control={<Radio />}
@@ -626,7 +643,10 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 											/>
 										</Tooltip>
 
-										<Tooltip title={"Beeps for the last 5 seconds"} placement="left">
+										<Tooltip
+											title={"Beeps for the last 5 seconds"}
+											placement="left"
+										>
 											<FormControlLabel
 												value={5}
 												control={<Radio />}
@@ -634,7 +654,10 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 											/>
 										</Tooltip>
 
-										<Tooltip title={"Beeps for the last 10 seconds"} placement="left">
+										<Tooltip
+											title={"Beeps for the last 10 seconds"}
+											placement="left"
+										>
 											<FormControlLabel
 												value={10}
 												control={<Radio />}
@@ -642,7 +665,10 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 											/>
 										</Tooltip>
 
-										<Tooltip title={"Beeps for the last 15 seconds"} placement="left">
+										<Tooltip
+											title={"Beeps for the last 15 seconds"}
+											placement="left"
+										>
 											<FormControlLabel
 												value={15}
 												control={<Radio />}
@@ -669,7 +695,10 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 										onChange={registerChange}
 										name="pause_controls"
 									>
-										<Tooltip title={"Let you pause the session at any moment"} placement="left">
+										<Tooltip
+											title={"Let you pause the session at any moment"}
+											placement="left"
+										>
 											<FormControlLabel
 												value={true}
 												control={<Radio />}
@@ -677,7 +706,10 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 											/>
 										</Tooltip>
 
-										<Tooltip title={"Can't pause the session for the whole duration"} placement="top-start">
+										<Tooltip
+											title={"Can't pause the session for the whole duration"}
+											placement="top-start"
+										>
 											<FormControlLabel
 												value={false}
 												control={<Radio />}

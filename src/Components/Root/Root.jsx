@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material";
+import { ToastContainer, Flip } from "react-toastify";
 //Context
 import { imageContext } from "../../Context/imageContext";
 import { settingsContext } from "../../Context/settingsContext";
@@ -58,6 +59,7 @@ function Root() {
 
 	return (
 		<>
+			<ToastContainer transition={Flip}/>
 			<ThemeProvider theme={basic}>
 				<CssBaseline />
 				<settingsContext.Provider value={{ settings, setSettings }}>

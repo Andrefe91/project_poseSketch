@@ -5,6 +5,8 @@
 
 .container h2 {
     text-align: center;
+    color: #C80000;
+    text-decoration: underline;
 }
 
 .indexContainer {
