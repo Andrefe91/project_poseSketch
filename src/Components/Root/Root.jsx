@@ -22,6 +22,9 @@ const basic = createTheme({
 		secondary: {
 			main: "#00c8c8",
 		},
+		action: {
+			disabledBackground: "#7928286e"
+		}
 	},
 	typography: {
 		fontFamily: "Roboto, serif",
