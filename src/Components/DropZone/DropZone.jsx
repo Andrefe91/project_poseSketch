@@ -11,9 +11,9 @@ const baseStyle = {
 	flexDirection: "column",
 	alignItems: "center",
 	padding: "20px",
-	borderWidth: 2,
+	borderWidth: 3,
 	borderRadius: 2,
-	borderColor: "#c800006f",
+	borderColor: "#7777776e",
 	borderStyle: "dashed",
 	// backgroundColor: "#fafafa",
 	color: "#bdbdbd",
@@ -78,24 +78,21 @@ function DropZone() {
 					<input {...getInputProps()} />
 				</div>
 			</div>
-
-			<div className="dropZone_notice">
-				{isDragAccept && <p>All files are valid</p>}
-				{isDragReject && <p>Some files are not images (.png or .jpg)</p>}
-				{/* {!isDragActive && <p>Click or move files</p>} */}
-			</div>
-
 			{/* Baisc feedback about the loaded files */}
 			<aside>
 				<ul className="fileList">
 					{validImages.length > 0 && (
-						<li>🎉{validImages.length} Images loaded and valid 🎉</li>
+						<li>
+							🎉{validImages.length}{" "}
+							{validImages.length > 1 ? "Images" : "Image"} loaded and valid.
+						</li>
 					)}
 
 					{invalidImages.length > 0 && (
 						<li>
-							{invalidImages.length} Files are not valid (only PNG and JPG are
-							allowed)
+							{"🚨 " + invalidImages.length}{" "}
+							{invalidImages.length > 1 ? "Files are" : "File is"} not valid
+							(only PNG and JPG are allowed).
 						</li>
 					)}
 				</ul>
