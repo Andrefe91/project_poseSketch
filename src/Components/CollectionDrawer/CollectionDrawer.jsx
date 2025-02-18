@@ -721,7 +721,7 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 						</Collapse>
 					</List>
 
-					<Box sx={{ display: "flex", justifyContent: "flex-end", pr: "1rem" }}>
+					<Box sx={{ display: "flex", justifyContent: "flex-end", pr: "1rem", pb: "1rem" }}>
 						<Button
 							variant="contained"
 							disableElevation

@@ -2,7 +2,6 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Fab, Typography, Box, Tooltip } from "@mui/material";
-import { toast } from "react-toastify";
 //Components
 import CollectionItem from "../CollectionItem/CollectionItem";
 import CollectionAB from "../CollectionAB/CollectionAB";
@@ -29,7 +28,6 @@ function Collection() {
 	));
 
 	function startSession() {
-		toast.dismiss();
 		navigate("/theater");
 	}
 
@@ -42,7 +40,7 @@ function Collection() {
 				</Box>
 
 				<Tooltip
-					title={"Start the session in the Theater (Enter)"}
+					title={"Start the session in the Theater (Space Bar)"}
 					placement="top-start"
 				>
 					<Fab

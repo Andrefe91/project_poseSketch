@@ -59,6 +59,10 @@ function Faq() {
 							<li>Whats the random/sequential display feature?</li>
 						</HashLink>
 
+						<HashLink smooth to="#page_died">
+							<li>I uploaded a bunch of images and the page died, why?</li>
+						</HashLink>
+
 						<HashLink
 							smooth
 							to="#can_i_select_a_specific_number_of_images_for_a_session"
@@ -108,9 +112,9 @@ function Faq() {
 							What is <i>Pose Player</i>?
 						</h3>
 						<p>
-							It&apos;s a web application for artists to practice figure drawing
-							by uploading and organizing reference images, then creating
-							personalized practice sessions.
+							It&apos;s is a web application designed for artists to practice
+							figure drawing. It allows users to upload and organize reference
+							images, then create personalized practice sessions.
 						</p>
 					</div>
 
@@ -122,12 +126,12 @@ function Faq() {
 						</h3>
 
 						<p>
-							As an artist, i have always struggled with the lack of tools to
-							practice figure drawing. I have tried many webpages and some
-							desktop applications, but some of them felt cluncky or were
-							difficult to install. I wanted something simple, flexible, that
-							allowed me to use my own images, and that was not a subscription
-							service. So i decided to create it myself.
+							As an artist, I&apos;ve always struggled to find the right tools
+							for figure drawing practice. I&apos;ve tried various websites and
+							desktop applications, but many felt clunky or were difficult to
+							install. I wanted something simple, flexible, and capable of using
+							my own images—without requiring a subscription. So, I decided to
+							create it myself.
 						</p>
 					</div>
 
@@ -136,8 +140,9 @@ function Faq() {
 					<div className="question" id="how_do_i_upload_images">
 						<h3>How do i upload images?</h3>
 						<p>
-							Just click on the &quot;Upload Images&quot; field and select the
-							images you want to load or just pick and drop on the same field.
+							Simply click on the &quot;Upload Images&quot; field and select the
+							images you want to add. You can also drag and drop files into the
+							same field. Once uploaded, you can start your practice session.
 						</p>
 					</div>
 
@@ -147,9 +152,9 @@ function Faq() {
 						<h3>Can i organize my images?</h3>
 						<p>
 							Currently, all uploaded images are added to a single collection.
-							As this tool is designed to work locally on your computer we dont
-							store any image, reference or personal data, so an organization
-							tool would serve no purpose.
+							Since this tool is designed to work locally on your computer, we
+							don&apos;t store any images, references, or personal data, so an
+							organization tool wouldn&apos;t serve much purpose.
 						</p>
 					</div>
 
@@ -158,9 +163,9 @@ function Faq() {
 					<div className="question" id="how_does_the_timer_works">
 						<h3>How does the timer work?</h3>
 						<p>
-							The timer allows you to set a specific duration for each image to
-							be displayed during a practice session. This helps simulate the
-							time constraints of real-life sketching.
+							The timer lets you set a specific duration for each image in your
+							practice session, helping to simulate real-life sketching time
+							constraints.
 						</p>
 					</div>
 
@@ -169,10 +174,10 @@ function Faq() {
 					<div className="question" id="and_those_beeps">
 						<h3>And those beeps?</h3>
 						<p>
-							You can enable, disable or even modify the time of the beeps that
-							sound when the timer reaches 0. This is useful for those who want
-							to be alerted when the time has almost run out without having to
-							look at the timer all the time.
+							You can enable, disable, or even adjust the timing of beeps that
+							sound when the timer reaches zero. This feature is helpful for
+							those who want an audible alert without having to constantly check
+							the timer.
 						</p>
 					</div>
 
@@ -184,10 +189,22 @@ function Faq() {
 					>
 						<h3>Whats the random/sequential display feature?</h3>
 						<p>
-							This along with the timer control are the main reason for this
-							application to exist. You can choose to display images in a random
-							order or follow the sequence in which they were uploaded. This
-							flexibility helps keep your practice sessions dynamic.
+							This, along with the timer, is one of the core reasons Pose Player
+							exists. You can choose to display images in a random order or in
+							the sequence they were uploaded. This flexibility helps keep your
+							practice sessions dynamic.
+						</p>
+					</div>
+
+					<div className="question" id="page_died">
+						<h3>I uploaded a bunch of images and the page died, why?</h3>
+						<p>
+							Remember that everything is happening locally, so the
+							dozens/hundreds of high-resolution images you uploaded to the page
+							might have been too much for your browser to handle. Try reducing
+							the number of images or their size, or use a more powerful device.
+							I&apos;m working on improving the performance of the application,
+							so stay tuned for updates!
 						</p>
 					</div>
 
@@ -199,9 +216,9 @@ function Faq() {
 					>
 						<h3>Can i select a specific number of images for a session?</h3>
 						<p>
-							Currently, all the images uploaded makes the pool from wich the
-							selection tool takes the images. Im currently working to add
-							functionality to improve user interaction within the collection.
+							Currently, all uploaded images form a pool from which selections
+							are made. I&apos;m working on adding more functionality to improve
+							user interaction within the collection.
 						</p>
 					</div>
 
@@ -210,13 +227,13 @@ function Faq() {
 					<div className="question" id="is_my_data_saved">
 						<h3>Is my data saved? Tell me the truth...</h3>
 						<p>
-							No, but yes. We don&apos;t save any of your images or personal
-							information to a server, not even your preferences. However,
-							without any kind of save functionality you would have to construct
-							study sessions everytime the webpage loads, that would be not very
-							usefull and even somewhat frustrating, so im using a browser
-							function called LocalStorage to save your preferences{" "}
-							<i>locally</i> in your computer and nowhere else.
+							No—but also yes. We don&apos;t save your images or personal
+							information on a server, not even your preferences. However,
+							without some form of saving, you&apos;d have to rebuild your study
+							sessions every time the page loads, which would be frustrating. To
+							avoid this, the application uses a browser feature called{" "}
+							<b>LocalStorage</b> to save your preferences <i>locally</i> on
+							your computer and nowhere else.
 						</p>
 					</div>
 
@@ -225,11 +242,12 @@ function Faq() {
 					<div className="question" id="i_dont_believe_you">
 						<h3>I don&apos;t believe you, how can i trust you?</h3>
 						<p>
-							Honestly i don&apos;t blame you. Because of the current state of
-							the internet i made this tool as opensource and it will always be.
-							You can check the code on the Github repository, or if you are not
-							code oriented i made a video for you to easily follow and make
-							sure that we are not loading any of your images to a server.
+							I don&apos;t blame you! Given the state of the internet, I made
+							this tool open-source, and it always will be. You can check the
+							code on the GitHub repository. If you&apos;re not into coding,
+							I&apos;ve also created a video to show you exactly how it works—so
+							you can be sure that we&apos;re not uploading any of your images
+							to a server
 						</p>
 					</div>
 
@@ -241,12 +259,11 @@ function Faq() {
 							application?
 						</h3>
 						<p>
-							Unfortunately you can&apos;t, at least not at this time. I want to
-							add that functionality in the future but this application was
-							designed mainly for working locally on your computer and as result
-							it&apos;s a little rigid. I would have to rewrite half of it and
-							start collecting some personal data for that to work, wich is
-							another beast on it&apos;s own.
+							Unfortunately, not at this time. I&apos;d love to add that
+							functionality in the future, but this application was designed
+							primarily for local use. Implementing cloud integration would
+							require a significant rewrite and the collection of some personal
+							data, which is a whole different challenge.
 						</p>
 					</div>
 
@@ -255,8 +272,8 @@ function Faq() {
 					<div className="question" id="can_i_use_this_on_my_phone">
 						<h3>Can i use this on my phone?</h3>
 						<p>
-							Yes, you can. The application is responsive and should work on any
-							device. However, the experience is better on a desktop or tablet.
+							Yes! The application is responsive and should work on any device.
+							However, the best experience is on a desktop or tablet.
 						</p>
 					</div>
 
@@ -268,10 +285,10 @@ function Faq() {
 							Player, can you add it?
 						</h3>
 						<p>
-							As this is a passion and learning project, i can&apos;t promise
-							that i can add a given functionallity or option, but please feel
-							free to contact me. I will be more than happy to hear your ideas
-							and suggestions.
+							As this is a passion and learning project, I can&apos;t guarantee
+							that I&apos;ll be able to implement every request. However,
+							I&apos;d love to hear your ideas and suggestions, so feel free to
+							reach out!
 						</p>
 					</div>
 
@@ -280,14 +297,14 @@ function Faq() {
 					<div className="question" id="did_you_use_ai">
 						<h3>Did you use AI to create this?</h3>
 						<p>
-							This site is my personal learning project, wouldn&apos;t achieve
-							anything if i were to use AI instead. However i would also be a fool
-							not to use all the tools at my disposal, so i used some AI to help
-							me diagnose bugs and implementation problems. This page is
-							enterely created using React, Material-UI, HTML, CSS, and
-							Javascript. I also used some libraries like react-router and
-							react-dropzone. Believe me, the bugs you might find are enterely
-							my own fault.
+							This project is my personal learning experience, so I
+							wouldn&apos;t gain much by having AI build it for me. However,
+							I&apos;d be foolish not to use all the tools at my
+							disposal—I&apos;ve used AI to help diagnose bugs and help solve
+							implementation problems. That said, this site is entirely built
+							with React, Material-UI, HTML, CSS, and JavaScript, along with
+							libraries like react-router and react-dropzone. Any bugs you find
+							are entirely my own fault!
 						</p>
 					</div>
 
@@ -296,10 +313,10 @@ function Faq() {
 					<div className="question" id="i_have_more_questions">
 						<h3>I have more questions...</h3>
 						<p>
-							Please don&apos;t hesitate to ask. I will be glad to help you and
-							answer any questions you may have. Just use any of the contact
-							channels at the bottom of the page. I will be happy to help you
-							and even update this FAQ with your questions.
+							Please don&apos;t hesitate to ask! I&apos;d be happy to help and
+							answer any questions you have. Just use any of the contact
+							channels at the bottom of the page, and I might even update this
+							FAQ with your question.
 						</p>
 					</div>
 				</div>

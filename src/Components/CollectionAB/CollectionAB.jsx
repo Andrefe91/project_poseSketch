@@ -13,7 +13,7 @@ import CollectionDrawer from "../CollectionDrawer/CollectionDrawer";
 import "./collectionAB.css";
 //Icons
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsIcon from "@mui/icons-material/Settings";
 
 export default function CollectionAB() {
 	const [drawerState, setDrawerState] = useState(false);
@@ -25,6 +25,10 @@ export default function CollectionAB() {
 		} else {
 			setDrawerState(true);
 		}
+	}
+
+	function startStudy() {
+		navigate("/theater");
 	}
 
 	// Detect the keydown and act accordingly
@@ -44,10 +48,10 @@ export default function CollectionAB() {
 		} else {
 			switch (e.keyCode) {
 				case 32: // Space Key
-					navigate("/theater");
+					startStudy();
 					break;
 				case 13: //Enter Key
-					navigate("/theater");
+					startStudy();
 					break;
 				case 83: // s Key
 					toggleDrawer();

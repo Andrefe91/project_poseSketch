@@ -104,11 +104,11 @@ function TheaterControl({
 				hideTimer();
 				break;
 			// This case is creating a bug that i can't figure out at the moment
-			// case 32: //Space KeyBoard
-			// 	if (allowPause == "true") {
-			// 		handlePausePlay();
-			// 	}
-			// 	break;
+			case 32: //Space KeyBoard
+				if (allowPause == "true") {
+					handlePausePlay();
+				}
+				break;
 			case 40: //Down arrow key
 				if (allowPause == "true") {
 					handlePausePlay();

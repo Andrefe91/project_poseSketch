@@ -67,6 +67,7 @@ export default function Theater() {
 	}
 
 	useEffect(() => {
+
 		//If there are no images, redirect to the HomePage
 		if (validImages.length === 0) {
 			navigate("/");
