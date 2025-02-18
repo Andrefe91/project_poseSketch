@@ -3,11 +3,28 @@
 	justify-content: space-between;
 
 	width: calc(100% - 1rem);
-	height: 4rem;
+	min-height: 4rem;
 	padding-left: 1.5rem;
 	padding-right: 1rem;
 	font-weight: bold;
 	box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+}
+
+.logo a {
+	display: flex;
+}
+
+.logo img {
+	height: 2rem;
+}
+
+#small_logo {
+	display: none;
 }
 
 .staticappbar div {
@@ -63,5 +80,17 @@
 		text-align: center;
 		width: 4rem;
 		padding: 0.2rem;
+	}
+
+	.logo img {
+		height: 1.5rem;
+	}
+
+	#normal_logo {
+		display: none;
+	}
+
+	#small_logo {
+		display: flex;
 	}
 }

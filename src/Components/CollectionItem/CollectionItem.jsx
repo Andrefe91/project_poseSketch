@@ -1,12 +1,12 @@
 //Modules
-import { React, useState, useMemo } from "react";
+import { React } from "react";
 import { PropTypes } from "prop-types";
 import { Paper } from "@mui/material";
 import useImageURL from "../../Hooks/useImageURL";
 //Css
 import "./collectionitem.css";
 //Scripts
-import resizeImage from "../../scripts/resizeImage";
+// import resizeImage from "../../scripts/resizeImage";
 
 function CollectionItem({ imageFile, number }) {
 	// const [resizedImageURL, setResizedImageURL] = useState(null);
@@ -45,7 +45,7 @@ function CollectionItem({ imageFile, number }) {
 				<div className="background">
 					<div className="image-details">
 						<p>{imageName}</p>
-						<p>#{number + 1}</p>
+						<p><b>#{number + 1}</b></p>
 					</div>
 				</div>
 			</Paper>

@@ -85,11 +85,9 @@ export default function CollectionAB() {
 						</Tooltip>
 
 						<Typography
-							variant="h5"
 							noWrap
 							sx={{
 								flexGrow: 1,
-								fontFamily: "monospace",
 								fontWeight: 700,
 								color: "inherit",
 								textAlign: "center",

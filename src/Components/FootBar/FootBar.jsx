@@ -12,7 +12,7 @@ function FootBar() {
 		<>
 			<footer className="footbar">
 				<div className="footbarText">
-					<p>Pose Player</p>
+					<p>V 1.0.0</p>
 				</div>
 
 				<div className="contact">

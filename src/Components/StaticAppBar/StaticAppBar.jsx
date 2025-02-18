@@ -4,13 +4,17 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 //Css
 import "./Staticappbar.css";
+//Icons
+import PosePlayer from "../../assets/icons/pose_player_logo.svg"
+import SmallPosePlayer from "../../assets/icons/small_pose_player_logo.svg"
 
 function StaticAppBar({ selected }) {
 	return (
 		<div className="staticappbar">
 			<div className="logo">
 				<Link to={"/"}>
-					<h1>Logo</h1>
+					<img src={PosePlayer} id="normal_logo" alt="Pose Player Logo" />
+					<img src={SmallPosePlayer} id="small_logo" alt="Pose Player Logo" />
 				</Link>
 			</div>
 

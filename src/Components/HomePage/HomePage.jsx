@@ -14,6 +14,7 @@ import "./homepage.css";
 //Icons
 import StartIcon from "@mui/icons-material/Start";
 
+
 export default function HomePage() {
 	const { validImages } = useContext(imageContext); //Get the images from the context
 	const navigate = useNavigate(); //Get the navigation function from react-router-dom
@@ -25,8 +26,8 @@ export default function HomePage() {
 				<StaticAppBar />
 				<div className="mainAction">
 					<div className="mainText">
-						<h1>Pose Player</h1>
-						<p>Your simple tool for Gesture Drawing Practice</p>
+						<h1>Welcome,</h1>
+						<p>to your simple tool for Gesture Drawing Practice</p>
 						<p id="normalText">
 							Locally load and display your practice pictures - no accounts, no
 							subscriptions, no data tracking.
