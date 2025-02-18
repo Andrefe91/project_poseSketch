@@ -53,6 +53,33 @@ function AddPreset({ setAddingPreset, preset, setPreset, openDeleteDialog }) {
 		]);
 	}
 
+	//Handle total time calculation of preset
+	function calculateTotalTime(presetBody) {
+		let totalTime = 0;
+		let hours = 0;
+		let minutes = 0;
+		let seconds = 0;
+
+		presetBody.forEach((section) => {
+			totalTime += section[1] * (section[0] == "b" ? 1 : section[0]);
+		});
+
+		//Convert to hours, minutes and seconds
+		if (totalTime >= 3600) {
+			hours = Math.floor(totalTime / 3600);
+			totalTime = totalTime - hours * 3600;
+		}
+
+		if (totalTime >= 60) {
+			minutes = Math.floor(totalTime / 60);
+			totalTime = totalTime - minutes * 60;
+		}
+
+		seconds = totalTime;
+
+		return `${hours}h ${minutes}m ${seconds}s`;
+	}
+
 	//Handle change of the Preset Body
 	function handleChangePresetBody(e) {
 		setPresetBody(e);
@@ -116,7 +143,7 @@ function AddPreset({ setAddingPreset, preset, setPreset, openDeleteDialog }) {
 					</Box>
 
 					{/* Render in Dom the Preset sections */}
-					<Box>
+					<Box sx={{ mb: "0.5rem" }}>
 						{presetBody.map((section, index) => {
 							return (
 								<Box key={index} sx={{ mt: "0.5rem", mb: "0.5rem" }}>
@@ -131,7 +158,8 @@ function AddPreset({ setAddingPreset, preset, setPreset, openDeleteDialog }) {
 							);
 						})}
 					</Box>
-
+					<Box>{`Total study time: ${calculateTotalTime(presetBody)}`}</Box>
+					<Divider variant="inset" sx={{ mt: "0.5rem", mb: "0.5rem" }} />
 					<Box
 						sx={{
 							display: "flex",
