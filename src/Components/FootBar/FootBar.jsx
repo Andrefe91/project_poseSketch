@@ -19,16 +19,16 @@ function FootBar() {
 					<p className="hide">Contact: </p>
 
 					<div className="contactIcons">
-						<a href="http://www.google.com">
+						<a href="https://bsky.app/profile/poseplayer.bsky.social">
 							<img src={BlueSkyIcon} alt="BlueSky Icon" />
 						</a>
 
-						<a href="http://www.google.com">
+						<a href="https://discord.gg/2WkEVBY3">
 							<img src={Discord_Icon} alt="BlueSky Icon" />
 						</a>
 
-						<a href="http://www.google.com">
-							<img src={Github_Icon} alt="BlueSky Icon" />
+						<a href="https://github.com/Andrefe91/project_poseSketch">
+							<img src={Github_Icon} alt="Github Icon" />
 						</a>
 					</div>
 				</div>

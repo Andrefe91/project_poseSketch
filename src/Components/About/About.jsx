@@ -12,13 +12,13 @@ function About() {
 			<div className="container">
 				<StaticAppBar selected="about" />
 				<div className="about-container">
-					<h3>About Pose Player:</h3>
+					<h2>About Pose Player</h2>
 					<p>
 						Welcome to <i>Pose Player</i>, a simple yet powerful tool designed
 						for artists who want to improve their figure drawing skills. Whether
 						you re just starting or looking to refine your technique, our
 						platform makes it easy to create personalized practice sessions
-						tailored to your needs. Upload your favorite reference images,
+						tailored to your needs. Load your favorite reference images,
 						organize them into a collection, and use our practice tools to focus
 						on what matters most—enhancing your artistic skills. With features
 						like timed sessions, random or sequential image display, and

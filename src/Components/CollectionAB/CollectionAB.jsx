@@ -50,9 +50,6 @@ export default function CollectionAB() {
 				case 32: // Space Key
 					startStudy();
 					break;
-				case 13: //Enter Key
-					startStudy();
-					break;
 				case 83: // s Key
 					toggleDrawer();
 					break;

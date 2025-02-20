@@ -3,9 +3,13 @@
     padding: 1rem 1rem 1rem 1rem;
 }
 
+.about-container {
+    flex: 1;
+}
+
 .container h2 {
     text-align: center;
-    color: #C80000;
+    color: var(--main-color);
     text-decoration: underline;
 }
 
@@ -85,5 +89,9 @@
     .index li {
         padding: 0.3rem 0 0.3rem 0;
         list-style-type: circle;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }

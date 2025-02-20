@@ -113,7 +113,7 @@ function Faq() {
 						</h3>
 						<p>
 							It&apos;s is a web application designed for artists to practice
-							figure drawing. It allows users to upload and organize reference
+							figure drawing. It allows users to load and organize reference
 							images, then create personalized practice sessions.
 						</p>
 					</div>
@@ -142,7 +142,7 @@ function Faq() {
 						<p>
 							Simply click on the &quot;Upload Images&quot; field and select the
 							images you want to add. You can also drag and drop files into the
-							same field. Once uploaded, you can start your practice session.
+							same field. Once loaded, you can start your practice session.
 						</p>
 					</div>
 
@@ -151,7 +151,7 @@ function Faq() {
 					<div className="question" id="can_i_organize_my_images">
 						<h3>Can i organize my images?</h3>
 						<p>
-							Currently, all uploaded images are added to a single collection.
+							Currently, all loaded images are added to a single collection.
 							Since this tool is designed to work locally on your computer, we
 							don&apos;t store any images, references, or personal data, so an
 							organization tool wouldn&apos;t serve much purpose.
@@ -195,6 +195,8 @@ function Faq() {
 							practice sessions dynamic.
 						</p>
 					</div>
+
+					<Divider aria-hidden="true" variant="inset" flexItem />
 
 					<div className="question" id="page_died">
 						<h3>I uploaded a bunch of images and the page died, why?</h3>

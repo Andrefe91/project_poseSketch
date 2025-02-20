@@ -24,16 +24,16 @@ the following features:
 ### HomePage:
 
 - [x] Drop Zone Functionality trough the React DropZone package.
-- [ ] Styling
+- [X] Styling
 
 ### Collection:
 
 - [x] Collection Page for showing preview of all the images in the list.
 - [x] Basic Settings system in the Collection used for the Theater Display.
 
-#### Optional Settings to add:
+##### Optional Settings to add:
 
-- [ ] Flip Image by Vertical or Horizontal Axis for All images or at Random
+- [ ] Flip Image by Vertical Axis for All images or at Random
 
 ### Theater:
 
