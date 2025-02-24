@@ -1,6 +1,7 @@
 //Modules
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { PropTypes } from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -15,7 +16,7 @@ import "./collectionAB.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SettingsIcon from "@mui/icons-material/Settings";
 
-export default function CollectionAB() {
+export default function CollectionAB({ setShowAll }) {
 	const [drawerState, setDrawerState] = useState(false);
 	const navigate = useNavigate();
 
@@ -52,6 +53,9 @@ export default function CollectionAB() {
 					break;
 				case 83: // s Key
 					toggleDrawer();
+					break;
+				case 72: // h Key
+					setShowAll((showAll) => !showAll);
 					break;
 				default:
 					// console.log("Key:", e);
@@ -122,3 +126,7 @@ export default function CollectionAB() {
 		</>
 	);
 }
+
+CollectionAB.propTypes = {
+	setShowAll: PropTypes.func.isRequired,
+};
