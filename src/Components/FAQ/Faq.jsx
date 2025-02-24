@@ -251,6 +251,15 @@ function Faq() {
 							you can be sure that we&apos;re not uploading any of your images
 							to a server
 						</p>
+
+						<iframe
+							src="https://www.youtube.com/embed/lETcjkXf-as?si=_q2U2nZdyW7_9rAW"
+							title="YouTube video player"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							referrerPolicy="strict-origin-when-cross-origin"
+							allowfullscreen
+							className="video"
+						></iframe>
 					</div>
 
 					<Divider aria-hidden="true" variant="inset" flexItem />
