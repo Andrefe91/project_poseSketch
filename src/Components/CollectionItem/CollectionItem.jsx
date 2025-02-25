@@ -53,9 +53,10 @@ function CollectionItem({ imageFile, number, visibility }) {
 						{expand ? <ExpandLessIcon /> : <ExpandMoreIcon />}
 					</IconButton>
 				</div>
-				<div className={`image-display ${expand ? "" : "hide"}`}>
+
+				{expand && <div className="image-display">
 					<img src={imageURL} alt={imageName} />
-				</div>
+				</div>}
 
 				<div className="background">
 					<div className="image-details">

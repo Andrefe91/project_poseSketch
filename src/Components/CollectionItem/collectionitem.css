@@ -22,10 +22,6 @@
 	border-radius: 0.25rem;
 }
 
-.image-display.hide {
-	display: none;
-}
-
 .background {
 	/* position: absolute; */
 	background-color: rgba(255, 255, 255, 0.496);
