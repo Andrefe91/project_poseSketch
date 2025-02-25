@@ -61,7 +61,8 @@ function CollectionDrawer({ anchor, drawerState, toggleDrawerFunc }) {
 	const saveNotification = () =>
 		toast.success("Settings Saved", {
 			position: "bottom-center",
-			autoClose: 2500,
+			hideProgressBar: true,
+			autoClose: 1000,
 			closeOnClick: true,
 			pauseOnHover: false,
 		});

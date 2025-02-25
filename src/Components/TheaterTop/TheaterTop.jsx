@@ -16,7 +16,8 @@ function TheaterTop({ imageTitle, showTitle }) {
 	const cancelStudyNotification = () =>
 		toast.info("Session Cancelled...", {
 			position: "bottom-center",
-			autoClose: 2500,
+			hideProgressBar: true,
+			autoClose: 1000,
 			closeOnClick: true,
 			pauseOnHover: false,
 		});

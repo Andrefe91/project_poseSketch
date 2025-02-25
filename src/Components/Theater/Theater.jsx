@@ -55,7 +55,8 @@ export default function Theater() {
 	const endOfStudyNotification = () =>
 		toast.success("🎉 Session Finished!", {
 			position: "bottom-center",
-			autoClose: 2500,
+			hideProgressBar: true,
+			autoClose: 1000,
 			closeOnClick: true,
 			pauseOnHover: false,
 		});
