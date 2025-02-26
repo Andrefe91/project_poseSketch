@@ -1,10 +1,14 @@
 //Modules
 import React, { useCallback, useMemo, useContext } from "react";
 import { useDropzone } from "react-dropzone";
+import { IconButton } from "@mui/material";
+import { toast } from "react-toastify";
 //CSS
 import "./dropzone.css";
 //Context
 import { imageContext } from "../../Context/imageContext";
+//Icons
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const baseStyle = {
 	display: "flex",
@@ -71,6 +75,16 @@ function DropZone() {
 		[isDragActive, isDragReject, isDragAccept],
 	);
 
+	function displayNotification(text) {
+		toast.success(text, {
+			position: "bottom-center",
+			hideProgressBar: true,
+			autoClose: 1000,
+			closeOnClick: true,
+			pauseOnHover: false,
+		});
+	}
+
 	return (
 		<section className="dropZone_container">
 			<div {...getRootProps({ style })} className="dropZone">
@@ -84,7 +98,19 @@ function DropZone() {
 					{validImages.length > 0 && (
 						<li>
 							🎉{validImages.length}{" "}
-							{validImages.length > 1 ? "Images" : "Image"} loaded and valid.
+							{validImages.length > 1 ? "Images" : "Image"} loaded and valid
+							<IconButton
+								aria-label="delete"
+								size="small"
+								color="error"
+								className="deleteButton"
+								onClick={() => {
+									displayNotification("All images removed");
+									setValidImages([]);
+								}}
+							>
+								<DeleteIcon />
+							</IconButton>
 						</li>
 					)}
 
@@ -92,7 +118,19 @@ function DropZone() {
 						<li>
 							{"🚨 " + invalidImages.length}{" "}
 							{invalidImages.length > 1 ? "Files are" : "File is"} not valid
-							(only PNG and JPG are allowed).
+							(only PNG and JPG are allowed)
+							<IconButton
+								aria-label="delete"
+								size="small"
+								color="error"
+								className="deleteButton"
+								onClick={() => {
+									displayNotification("Invalid files removed");
+									setInvalidImages([]);
+								}}
+							>
+								<DeleteIcon />
+							</IconButton>
 						</li>
 					)}
 				</ul>

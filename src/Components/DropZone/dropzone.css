@@ -26,7 +26,7 @@
 
 .dropZone {
 	width: calc(min(25rem, 70vw));
-	height: calc(max(10rem, 30vh));
+	height: calc(max(10rem, 28vh));
 	display: flex;
     justify-content: center;
 }
@@ -85,6 +85,20 @@
 
 .fileList li {
     list-style-type: none;
+	border: 1px solid rgb(204, 204, 204);
+	border-radius: 2rem;
+	padding: 0.5rem;
+
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.4rem;
+}
+
+.fileList li .deleteButton {
+	margin-left: 0.5rem;
+	&:hover {
+		cursor: pointer;
+	}
 }
 
 @media screen and (width < 580px) {
