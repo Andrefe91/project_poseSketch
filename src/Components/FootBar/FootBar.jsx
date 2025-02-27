@@ -6,7 +6,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import "./footbar.css";
 //Icons
 import BlueSkyIcon from "../../assets/icons/BlueSky_Icon.svg";
-import Discord_Icon from "../../assets/icons/Discord_Icon.svg";
+// import Discord_Icon from "../../assets/icons/Discord_Icon.svg";
 import Github_Icon from "../../assets/icons/Github_Icon.svg";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
@@ -46,9 +46,9 @@ function FootBar() {
 							<img src={BlueSkyIcon} alt="BlueSky Icon" />
 						</a>
 
-						<a href="https://discord.gg/2WkEVBY3">
+						{/* <a href="https://discord.gg">
 							<img src={Discord_Icon} alt="BlueSky Icon" />
-						</a>
+						</a> */}
 
 						<a href="https://github.com/Andrefe91/project_poseSketch">
 							<img src={Github_Icon} alt="Github Icon" />
