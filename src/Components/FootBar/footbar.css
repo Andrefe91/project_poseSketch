@@ -20,11 +20,10 @@
 	align-items: center;
 	justify-content: space-around;
 
-    height: 3rem;
+    height: auto;
     margin-left: 0.2rem;
-    margin-right: 0.2rem;
+    margin-right: 0.5rem;
 	padding: 0.1rem;
-	width: 5rem;
 }
 
 .contactIcons a {
@@ -44,12 +43,8 @@
 
 }
 
-
-
 @media screen and (max-width: 520px) {
 	.hide {
 		display: none;
 	}
-
-
 }
