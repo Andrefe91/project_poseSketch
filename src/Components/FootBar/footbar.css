@@ -20,18 +20,13 @@
 	align-items: center;
 	justify-content: space-around;
 
-    height: 3rem;
+    height: auto;
     margin-left: 0.2rem;
-    margin-right: 0.2rem;
+    margin-right: 0.5rem;
 	padding: 0.1rem;
-	width: 5rem;
 }
 
-.contactIcons img {
-	max-width: 100%;
-	max-height: 100%;
-	object-fit: contain;
-}
+
 
 .contactIcons a {
 	display: flex;
@@ -50,20 +45,8 @@
 
 }
 
-
-
 @media screen and (max-width: 520px) {
 	.hide {
 		display: none;
-	}
-
-	.contactIcons {
-		width: auto; /* Allow the container to adjust width */
-		padding: 0.2rem; /* Adjust padding for smaller screens */
-	}
-
-	.contactIcons a {
-		height: 2rem; /* Reduce image size */
-		padding: 0.3rem; /* Adjust padding for links */
 	}
 }
