@@ -34,7 +34,7 @@ function FootBar() {
 						startIcon={<GitHubIcon />}
 						href="https://github.com/Andrefe91/project_poseSketch/blob/main/CHANGELOG.md"
 					>
-						{matchesSize && "Changelog"} (V1.0.0)
+						{matchesSize && "Changelog"} (V1.0.1)
 					</Button>
 				</div>
 
