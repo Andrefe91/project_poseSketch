@@ -1,3 +1,11 @@
+## Version 1.0.1 (2025-03-28)
+
+This release includes the following adjustments:
+
+- Correction to the Style of the AppBar, which was creating a visual bug on a small screen (cellphones).
+- Correction to the Style of the Foot Bar, which was creating a visual bug on the contact icons for medium screens (Tablets).
+
+
 ## Version 1.0.0 (2025-02-27)
 
 ### Web Application Release - Basic Styling & Complete Functionality

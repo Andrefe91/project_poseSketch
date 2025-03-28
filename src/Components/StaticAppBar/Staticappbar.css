@@ -13,6 +13,8 @@
 .logo {
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	padding: 0.5rem;
 }
 
 .logo a {
@@ -82,8 +84,15 @@
 		padding: 0.2rem;
 	}
 
+	.logo {
+		padding: 0.3rem;
+		min-height: 2rem;
+	}
+
 	.logo img {
 		height: 1.5rem;
+		max-height: none;
+		width: auto;
 	}
 
 	#normal_logo {
