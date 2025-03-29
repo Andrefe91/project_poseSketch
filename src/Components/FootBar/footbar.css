@@ -20,15 +20,14 @@
 	align-items: center;
 	justify-content: space-around;
 
-    height: auto;
 	padding-left: 0.5rem;
 }
 
 
 
 .contactIcons a {
-	display: flex;
 	height: 2.5rem;
+	width: 2.5rem;
 	filter: invert(4%) sepia(9%) saturate(11%) hue-rotate(324deg) brightness(98%)
 		contrast(81%);
     padding: 0.5rem;
